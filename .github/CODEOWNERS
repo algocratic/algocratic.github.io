@@ -1,0 +1,73 @@
+# CODEOWNERS - Automatic Assignment Protocol
+# THE ALGORITHM GitHub Standard v2.1 - Team Assignment Matrix
+
+# Global repository ownership
+* @algocratic/admin-team
+
+# Critical UX and Accessibility Issues  
+# P0-CRITICAL and accessibility violations require immediate admin oversight
+*.md @algocratic/admin-team @algocratic/ux-team
+/ACCESSIBILITY_*.md @algocratic/accessibility-team @algocratic/admin-team
+
+# Frontend Development - HTML/CSS/JS
+*.html @algocratic/frontend-team @algocratic/ux-team  
+*.css @algocratic/frontend-team @algocratic/ux-team
+*.js @algocratic/frontend-team @algocratic/performance-team
+/static/ @algocratic/frontend-team @algocratic/performance-team
+
+# GitHub Infrastructure
+/.github/ @algocratic/admin-team @algocratic/devops-team
+/.github/ISSUE_TEMPLATE/ @algocratic/admin-team @algocratic/ux-team
+/.github/workflows/ @algocratic/devops-team @algocratic/admin-team
+CODEOWNERS @algocratic/admin-team
+
+# Authentication and Security
+/login.html @algocratic/security-team @algocratic/frontend-team
+/register.html @algocratic/security-team @algocratic/frontend-team
+/compliance-* @algocratic/security-team @algocratic/admin-team
+
+# Interactive Features
+/kanban.html @algocratic/frontend-team @algocratic/performance-team
+/metrics.html @algocratic/frontend-team @algocratic/performance-team
+/portal.html @algocratic/frontend-team @algocratic/ux-team
+
+# Clearance Level Content
+/clearance/ @algocratic/content-team @algocratic/ux-team
+/clearance/infrared/ @algocratic/content-team @algocratic/accessibility-team
+/clearance/*/index.html @algocratic/ux-team @algocratic/content-team
+
+# Underground/Archive Content
+/underground/ @algocratic/content-team @algocratic/admin-team
+/underground/archive/ @algocratic/content-team
+/underground/src/ @algocratic/content-team @algocratic/frontend-team
+
+# Documentation and Testing
+/SPRINT_ZERO_* @algocratic/admin-team @algocratic/qa-team
+/TESTING_* @algocratic/qa-team @algocratic/admin-team
+/BROKEN_FUNCTIONALITY_* @algocratic/qa-team @algocratic/frontend-team
+/MOBILE_RESPONSIVENESS_* @algocratic/ux-team @algocratic/qa-team
+/CROSS_BROWSER_* @algocratic/qa-team @algocratic/frontend-team
+
+# Forms and EULA
+/forms/ @algocratic/frontend-team @algocratic/security-team @algocratic/ux-team
+/eula-speedrun.html @algocratic/ux-team @algocratic/security-team
+/compliance-pledge.html @algocratic/security-team @algocratic/ux-team
+
+# Performance-Critical Files
+/static/script.js @algocratic/performance-team @algocratic/frontend-team
+/static/navigation.js @algocratic/performance-team @algocratic/ux-team
+/static/styles.css @algocratic/frontend-team @algocratic/performance-team
+
+# Team Assignment by Issue Label (Reference)
+# - accessibility, a11y, wcag → @algocratic/accessibility-team
+# - performance, optimization → @algocratic/performance-team  
+# - ux, enhancement, usability → @algocratic/ux-team
+# - bug, critical → @algocratic/frontend-team @algocratic/admin-team
+# - security, authentication → @algocratic/security-team
+# - mobile, responsive → @algocratic/ux-team @algocratic/qa-team
+# - P0, CRITICAL → @algocratic/admin-team (must be included)
+
+# Algorithm Compliance
+# Template Version: CODEOWNERS v2.1
+# Assignment Protocol: THE ALGORITHM Team Assignment Matrix v1.3
+# Review Standard: Automatic Assignment Verification Process

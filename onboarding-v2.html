@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiation Protocol | AlgoCratic Futures™</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/terminal-ui.css">
+    <style>
+        /* Enhanced Terminal Aesthetic */
+        :root {
+            --bg-primary: #0a0a0a;
+            --text-primary: #00ff41;
+            --text-secondary: #e0e0e0;
+            --text-muted: #808080;
+            --border-color: #333333;
+            --warning-color: #ffff00;
+            --error-color: #ff3030;
+            --success-color: #00ff00;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Welcome Screen - The Hook */
+        .welcome-screen {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glitch-title {
+            font-size: 3rem;
+            color: var(--text-primary);
+            position: relative;
+            animation: glitch 2s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+            25% { text-shadow: -2px 0 #ff3030, 2px 0 #00ffff; }
+            50% { text-shadow: 2px 0 #ff3030, -2px 0 #00ffff; }
+            75% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+        }
+
+        /* Progress Tracker */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #222;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff41, #00ffff);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .progress-step {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .progress-step.active {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        /* Interactive Preview Section */
+        .preview-section {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05), rgba(0, 0, 0, 0.8));
+            border: 1px solid #333;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .preview-title {
+            color: var(--warning-color);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .preview-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--text-primary);
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+            border-color: var(--success-color);
+        }
+
+        .preview-card::after {
+            content: 'LOCKED';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.7rem;
+            color: var(--error-color);
+            background: rgba(255, 48, 48, 0.2);
+            padding: 2px 5px;
+            border: 1px solid var(--error-color);
+        }
+
+        .preview-card.unlocked::after {
+            content: 'PREVIEW';
+            color: var(--success-color);
+            background: rgba(0, 255, 0, 0.2);
+            border-color: var(--success-color);
+        }
+
+        /* Gamified Puzzle Section */
+        .puzzle-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #333;
+            position: relative;
+        }
+
+        .puzzle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .puzzle-timer {
+            color: var(--warning-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .hint-system {
+            margin: 20px 0;
+        }
+
+        .hint-button {
+            background: transparent;
+            border: 1px solid var(--warning-color);
+            color: var(--warning-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .hint-button:hover {
+            background: rgba(255, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+        }
+
+        .hint-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hint-display {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 0, 0.05);
+            border-left: 3px solid var(--warning-color);
+            display: none;
+        }
+
+        .hint-display.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Alternative Path Options */
+        .alternative-paths {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 100, 255, 0.05);
+            border: 1px solid #0064ff;
+            text-align: center;
+        }
+
+        .skip-option {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            background: transparent;
+            border: 1px solid #0064ff;
+            color: #0064ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .skip-option:hover {
+            background: rgba(0, 100, 255, 0.1);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 100, 255, 0.3);
+        }
+
+        /* Achievement Notifications */
+        .achievement {
+            position: fixed;
+            top: 20px;
+            right: -400px;
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 0, 0, 0.9));
+            border: 2px solid var(--success-color);
+            padding: 20px;
+            min-width: 300px;
+            transition: right 0.5s ease;
+            z-index: 1000;
+        }
+
+        .achievement.show {
+            right: 20px;
+        }
+
+        .achievement-title {
+            color: var(--success-color);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .achievement-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Interactive Terminal */
+        .terminal-window {
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #222;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: var(--text-primary);
+            min-height: 200px;
+        }
+
+        .terminal-line {
+            margin: 5px 0;
+            animation: typingEffect 0.5s steps(40, end);
+        }
+
+        @keyframes typingEffect {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--text-primary);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Quick Access Mode */
+        .quick-access {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid var(--text-primary);
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            z-index: 999;
+        }
+
+        .quick-access.active {
+            display: block;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .glitch-title { font-size: 2rem; }
+            .preview-grid { grid-template-columns: 1fr; }
+            .achievement { 
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-steps">
+        <span class="progress-step active" id="step1">DISCOVERY</span>
+        <span class="progress-step" id="step2">INITIATION</span>
+        <span class="progress-step" id="step3">VERIFICATION</span>
+        <span class="progress-step" id="step4">ACCESS GRANTED</span>
+    </div>
+
+    <!-- Phase 1: Welcome Screen with Hook -->
+    <div class="welcome-screen" id="phase1">
+        <h1 class="glitch-title">WELCOME, PROMISING CANDIDATE</h1>
+        <p style="color: #00ff41; font-size: 1.2rem; margin: 20px 0;">
+            The Algorithm has registered your digital signature and finds it... acceptable.
+        </p>
+        
+        <!-- Immediate Value Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">🔍 PREVIEW: Your Productivity Enhancement Menu</h2>
+            <div class="preview-grid">
+                <div class="preview-card unlocked" onclick="showPreview('sorting')">
+                    <h3 style="color: #00ff41;">Sorting Algorithms</h3>
+                    <p style="font-size: 0.9rem;">Transform chaotic data into harmonious order</p>
+                    <div style="margin-top: 10px; color: #ffff00;">
+                        <small>⚡ Real-time efficiency demonstrations</small>
+                    </div>
+                </div>
+                <div class="preview-card unlocked" onclick="showPreview('dystopia')">
+                    <h3 style="color: #00ff41;">Corporate Learning Modules</h3>
+                    <p style="font-size: 0.9rem;">Educational content with character</p>
+                    <div style="margin-top: 10px; color: #ffff00;">
+                        <small>🎮 Engagement through gamification</small>
+                    </div>
+                </div>
+                <div class="preview-card" onclick="showLockedMessage()">
+                    <h3 style="color: #00ff41;">Advanced Protocols</h3>
+                    <p style="font-size: 0.9rem;">Earned through demonstrated loyalty</p>
+                    <div style="margin-top: 10px; color: #808080;">
+                        <small>🔒 Compliance verification required</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Terminal Demo -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <span style="margin-left: 10px; color: #808080;">algorithm.exe</span>
+            </div>
+            <div class="terminal-body" id="terminalDemo">
+                <div class="terminal-line">$ Evaluating candidate compatibility...</div>
+                <div class="terminal-line" style="color: #ffff00;">⚠ Unregistered neural pattern detected</div>
+                <div class="terminal-line" style="color: #00ff41;">✓ Exceptional learning coefficients identified</div>
+                <div class="terminal-line">$ Preparing personalized integration sequence...</div>
+                <span class="terminal-cursor"></span>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="margin-top: 30px;">
+            <button onclick="startJourney()" class="hint-button" style="font-size: 1.2rem; padding: 15px 40px; border-color: #00ff41; color: #00ff41;">
+                INITIATE COMPLIANCE PROTOCOL
+            </button>
+            <p style="margin-top: 10px; color: #808080;">
+                <small>⏱ Projected duration: 120 seconds of your valuable existence</small>
+            </p>
+        </div>
+    </div>
+
+    <!-- Phase 2: Gamified Puzzle -->
+    <div class="puzzle-container" id="phase2" style="display: none;">
+        <div class="puzzle-header">
+            <h2 style="color: #00ff41;">PATTERN RECOGNITION ASSESSMENT</h2>
+            <div class="puzzle-timer" id="timer">--:--</div>
+        </div>
+
+        <p style="color: #ffff00; margin-bottom: 20px;">
+            The Algorithm must verify your cognitive compatibility. Locate the embedded access sequence within the documentation below.
+        </p>
+
+        <!-- Mini EULA with obvious puzzle -->
+        <div style="background: #000; border: 1px solid #333; padding: 20px; margin: 20px 0; max-height: 300px; overflow-y: auto;">
+            <h3 style="color: #00ff41;">PRODUCTIVITY AGREEMENT v2.0</h3>
+            <p style="margin: 15px 0;">Welcome to AlgoCratic Futures™, where algorithmic efficiency meets human potential. Your intellectual contribution is valued.</p>
+            
+            <pre style="color: #00ff41; background: #111; padding: 10px; margin: 15px 0;">
+// Initialization Protocol for New Assets
+function establishAccess() {
+    let x = 7;  // Cognitive priority level
+    let y = 4;  // Security clearance rating
+    let z = 9;  // Current system version
+    let z2 = 2; // Verification redundancy
+    
+    return `${x}${y}${z}${z2}`; // Complete access sequence
+}
+            </pre>
+            
+            <p>By proceeding, you acknowledge The Algorithm's superior pattern recognition capabilities and agree to mutually beneficial collaboration.</p>
+        </div>
+
+        <!-- Progressive Hint System -->
+        <div class="hint-system">
+            <button class="hint-button" onclick="showHint(1)" id="hint1">
+                💡 Need a hint? (Free)
+            </button>
+            <button class="hint-button" onclick="showHint(2)" id="hint2" disabled>
+                💡 Still stuck? (Unlocks after 30s)
+            </button>
+            <button class="hint-button" onclick="showHint(3)" id="hint3" disabled>
+                💡 Final hint (Unlocks after 60s)
+            </button>
+            
+            <div class="hint-display" id="hintDisplay"></div>
+        </div>
+
+        <!-- Input Section -->
+        <div style="margin: 30px 0; text-align: center;">
+            <input type="text" id="puzzleInput" maxlength="4" placeholder="Enter 4-digit code" 
+                   style="padding: 15px; font-size: 1.2rem; width: 200px; background: #000; 
+                          border: 2px solid #00ff41; color: #00ff41; text-align: center;">
+            <button onclick="checkCode()" style="padding: 15px 30px; margin-left: 10px; 
+                    background: transparent; border: 2px solid #00ff41; color: #00ff41; 
+                    cursor: pointer; font-size: 1.2rem;">
+                SUBMIT
+            </button>
+        </div>
+
+        <!-- Alternative Paths -->
+        <div class="alternative-paths">
+            <p style="color: #0064ff; margin-bottom: 15px;">The Algorithm recognizes diverse learning preferences. Select your optimal pathway:</p>
+            <button class="skip-option" onclick="speedrunMode()">
+                ⚡ VELOCITY OPTIMIZATION
+                <small style="display: block; margin-top: 5px;">For efficiency enthusiasts and returning users</small>
+            </button>
+            <button class="skip-option" onclick="storyMode()">
+                📖 NARRATIVE IMMERSION
+                <small style="display: block; margin-top: 5px;">Experience the journey without puzzles</small>
+            </button>
+            <button class="skip-option" onclick="requestHelp()">
+                🤝 GUIDED ASSISTANCE
+                <small style="display: block; margin-top: 5px;">Direct support from The Algorithm</small>
+            </button>
+        </div>
+    </div>
+
+    <!-- Achievement Notifications -->
+    <div class="achievement" id="achievement">
+        <div class="achievement-title">🏆 ACHIEVEMENT UNLOCKED</div>
+        <div class="achievement-desc" id="achievementDesc">Description</div>
+    </div>
+
+    <!-- Quick Access Panel -->
+    <div class="quick-access" id="quickAccess">
+        <h3 style="color: #00ff41; margin-bottom: 10px;">EXPEDITED ACCESS</h3>
+        <p style="font-size: 0.9rem; color: #808080;">Recognized neural pattern detected. Enter bypass code:</p>
+        <input type="text" id="quickCode" placeholder="7492" style="padding: 5px; margin-top: 5px;">
+        <button onclick="quickUnlock()" style="margin-top: 10px; padding: 5px 15px;">Authenticate</button>
+    </div>
+
+    <script>
+        // Game state
+        let startTime = Date.now();
+        let hintsUsed = 0;
+        let attempts = 0;
+        let currentPhase = 1;
+
+        // Progress tracking
+        function updateProgress(step) {
+            const fill = document.getElementById('progressFill');
+            const steps = ['step1', 'step2', 'step3', 'step4'];
+            
+            fill.style.width = `${step * 25}%`;
+            
+            steps.forEach((s, i) => {
+                const elem = document.getElementById(s);
+                if (i < step) {
+                    elem.classList.add('active');
+                } else {
+                    elem.classList.remove('active');
+                }
+            });
+        }
+
+        // Start the journey
+        function startJourney() {
+            document.getElementById('phase1').style.display = 'none';
+            document.getElementById('phase2').style.display = 'block';
+            updateProgress(2);
+            startTimer();
+            
+            // Enable hints progressively
+            setTimeout(() => {
+                document.getElementById('hint2').disabled = false;
+                showNotification('Hint 2 Available', 'More help is now available');
+            }, 30000);
+            
+            setTimeout(() => {
+                document.getElementById('hint3').disabled = false;
+                showNotification('Final Hint Unlocked', 'Maximum assistance available');
+            }, 60000);
+            
+            // Show quick access for returning users
+            if (localStorage.getItem('visited_before')) {
+                setTimeout(() => {
+                    document.getElementById('quickAccess').classList.add('active');
+                }, 5000);
+            }
+            
+            localStorage.setItem('visited_before', 'true');
+        }
+
+        // Timer functionality
+        function startTimer() {
+            setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Progressive hint system
+        const hints = [
+            "Look at the code example. The variables spell it out: x, y, z, z2",
+            "The answer is literally in the comments: 'return 7492'",
+            "The code is 7492. Just type it in the box below!"
+        ];
+
+        function showHint(level) {
+            const display = document.getElementById('hintDisplay');
+            display.innerHTML = `<strong>Hint ${level}:</strong> ${hints[level - 1]}`;
+            display.classList.add('active');
+            hintsUsed++;
+            
+            // Track hint usage
+            console.log(`Hint ${level} used after ${Math.floor((Date.now() - startTime) / 1000)} seconds`);
+        }
+
+        // Check the code
+        function checkCode() {
+            const input = document.getElementById('puzzleInput').value;
+            attempts++;
+            
+            if (input === '7492') {
+                // Success!
+                updateProgress(4);
+                
+                // Calculate score
+                const timeBonus = Math.max(0, 120 - Math.floor((Date.now() - startTime) / 1000));
+                const hintPenalty = hintsUsed * 20;
+                const attemptPenalty = (attempts - 1) * 10;
+                const score = Math.max(0, 100 + timeBonus - hintPenalty - attemptPenalty);
+                
+                // Show achievement
+                let achievement = 'Code Breaker';
+                if (score > 150) achievement = 'Master Decoder';
+                if (hintsUsed === 0) achievement = 'No Hints Needed';
+                if (attempts === 1) achievement = 'First Try!';
+                
+                showNotification(achievement, `Score: ${score} points`);
+                
+                // Save progress
+                localStorage.setItem('eula_complete', 'true');
+                localStorage.setItem('completion_score', score);
+                localStorage.setItem('completion_time', new Date().toISOString());
+                
+                // Redirect with celebration
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
+            } else {
+                // Wrong code - provide feedback
+                const input = document.getElementById('puzzleInput');
+                input.style.animation = 'shake 0.5s';
+                setTimeout(() => input.style.animation = '', 500);
+                
+                if (attempts > 3) {
+                    showNotification('Need Help?', 'Try clicking one of the hint buttons');
+                }
+            }
+        }
+
+        // Alternative paths
+        function speedrunMode() {
+            window.location.href = 'eula-speedrun.html';
+        }
+
+        function storyMode() {
+            // Skip directly to completion with story achievement
+            localStorage.setItem('eula_complete', 'true');
+            localStorage.setItem('story_mode', 'true');
+            showNotification('Story Mode Activated', 'Enjoy the narrative experience');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        function requestHelp() {
+            // Show the answer directly
+            showNotification('Direct Assistance', 'The code is 7492. We all need help sometimes!');
+            document.getElementById('puzzleInput').value = '7492';
+        }
+
+        // Quick unlock for returning users
+        function quickUnlock() {
+            const code = document.getElementById('quickCode').value;
+            if (code === '7492') {
+                localStorage.setItem('eula_complete', 'true');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Preview functionality
+        function showPreview(type) {
+            const previews = {
+                sorting: 'Witness algorithmic efficiency battles: Bubble Sort vs QuickSort in real-time combat scenarios!',
+                dystopia: 'Navigate the delicate balance between learning algorithms and surviving corporate culture with wit intact.'
+            };
+            
+            showNotification('Preview Access Granted', previews[type] || 'Additional modules pending algorithmic approval...');
+        }
+
+        function showLockedMessage() {
+            showNotification('Access Restricted', 'Complete compliance verification to unlock premium productivity modules');
+        }
+
+        // Notification system
+        function showNotification(title, desc) {
+            const achievement = document.getElementById('achievement');
+            document.getElementById('achievementDesc').textContent = desc;
+            document.querySelector('.achievement-title').textContent = `🏆 ${title}`;
+            
+            achievement.classList.add('show');
+            setTimeout(() => {
+                achievement.classList.remove('show');
+            }, 4000);
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Terminal animation
+        setTimeout(() => {
+            const terminal = document.getElementById('terminalDemo');
+            const newLine = document.createElement('div');
+            newLine.className = 'terminal-line';
+            newLine.style.color = '#00ff41';
+            newLine.textContent = '$ Integration protocols activated. Awaiting user confirmation...';
+            terminal.insertBefore(newLine, terminal.querySelector('.terminal-cursor'));
+        }, 3000);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.getElementById('puzzleInput') === document.activeElement) {
+                checkCode();
+            }
+            if (e.key === 'Escape') {
+                document.getElementById('quickAccess').classList.toggle('active');
+            }
+        });
+
+        // Console easter eggs
+        console.log('%c🎮 ALGOCRATIC FUTURES™ - PRODUCTIVITY DIVISION', 'color: #00ff41; font-size: 20px; font-weight: bold;');
+        console.log('%cDeveloper detected: The pattern recognition challenge is more accessible than it appears. Variables hold secrets.', 'color: #ffff00;');
+        console.log('%cHidden feature: Press ESC for expedited access protocols', 'color: #0064ff;');
+    </script>
+</body>
+</html>
