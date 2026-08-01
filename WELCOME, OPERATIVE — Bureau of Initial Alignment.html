@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<!-- saved from url=(0116)file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WELCOME, OPERATIVE — Bureau of Initial Alignment</title>
+<meta name="description" content="Eight-page citizen orientation packet issued by the Bureau of Initial Alignment.">
+<style>
+:root{
+  --ink:#0f1b31;
+  --navy:#101d33;
+  --navy-2:#162742;
+  --cream:#f3ecd7;
+  --paper:#fbf8ef;
+  --paper-2:#f4efe2;
+  --red:#b9232b;
+  --orange:#ef4a24;
+  --yellow:#f7941d;
+  --green:#4a9147;
+  --cyan:#1ca5b5;
+  --gold:#f0b82d;
+  --gray:#53565a;
+  --silver:#c8c5bb;
+  --muted:#756f63;
+  --display:"Arial Black","Eurostile","Bank Gothic",Impact,sans-serif;
+  --sans:"Trebuchet MS","Avenir Next","Segoe UI",Arial,sans-serif;
+  --mono:"Courier New",Courier,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#0b1220;
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.45;
+}
+a{color:inherit}
+.screenbar{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:56px;padding:8px 16px;
+  background:#0b1220;border-bottom:1px solid #31405c;color:var(--cream);
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+}
+.screenbar nav{display:flex;gap:6px;overflow:auto;padding-bottom:2px}
+.screenbar a{
+  min-width:28px;padding:6px 8px;text-align:center;text-decoration:none;
+  border:1px solid #43526d;border-radius:4px;
+}
+.screenbar a:hover,.screenbar a:focus{background:#24334d;outline:none}
+.screenbar button{
+  border:1px solid var(--gold);border-radius:4px;background:transparent;color:var(--cream);
+  padding:7px 10px;font:inherit;cursor:pointer;
+}
+.packet{width:min(100%,980px);margin:28px auto 80px;padding:0 16px}
+.page{
+  position:relative;
+  width:100%;
+  min-height:1240px;
+  margin:0 0 28px;
+  overflow:hidden;
+  background:var(--paper);
+  box-shadow:0 14px 38px rgba(0,0,0,.34);
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto}
+.page::before{
+  content:"";
+  position:absolute;inset:0 auto 0 0;width:11px;background:var(--spine,var(--gold));
+}
+.page-inner{position:relative;min-height:1240px;padding:58px 62px 72px 74px}
+.mast{
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;
+  padding-bottom:18px;border-bottom:1px solid var(--silver);
+}
+.kicker,.stamp,.receipt,.field-code,.tiny{
+  font-family:var(--mono);letter-spacing:.075em;text-transform:uppercase;
+}
+.kicker{margin:0 0 8px;font-size:11px;color:var(--gray)}
+h1,h2,h3,.display{
+  font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;
+}
+h1{margin:0;font-size:clamp(46px,8vw,82px);line-height:.9;color:var(--navy)}
+h2{margin:0;font-size:clamp(34px,5vw,54px);line-height:1;color:var(--navy)}
+h3{margin:0 0 8px;font-size:17px;color:var(--navy)}
+.subtitle{
+  max-width:63ch;margin:18px 0 0;font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;line-height:1.45;color:#34312c;
+}
+.logo{width:118px;color:var(--navy)}
+.logo svg{display:block;width:100%;height:auto}
+.stripe-rail{
+  display:grid;grid-template-columns:repeat(5,1fr);height:12px;margin:22px 0 0;
+  border:1px solid var(--navy);
+}
+.stripe-rail i:nth-child(1){background:var(--red)}
+.stripe-rail i:nth-child(2){background:var(--orange)}
+.stripe-rail i:nth-child(3){background:var(--yellow)}
+.stripe-rail i:nth-child(4){background:var(--green)}
+.stripe-rail i:nth-child(5){background:var(--cyan)}
+.content{margin-top:34px}
+.lede{
+  margin:0 0 24px;padding:20px 22px;border-left:5px solid var(--gold);
+  background:var(--paper-2);font-family:Georgia,"Times New Roman",serif;font-size:20px;
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{
+  border:1px solid var(--silver);border-radius:10px;padding:18px;background:#fff;
+}
+.card p:last-child{margin-bottom:0}
+.label{font:700 11px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gray)}
+.big-rule{
+  margin:26px 0;padding:20px;border:2px solid var(--navy);background:var(--cream);
+  font-family:Georgia,"Times New Roman",serif;font-size:23px;line-height:1.35;
+}
+.big-rule strong{font-family:var(--display);font-size:.8em;letter-spacing:.03em;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
+th,td{padding:12px 11px;border:1px solid var(--silver);vertical-align:top;text-align:left}
+th{background:var(--navy);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+tr:nth-child(even) td{background:#f7f3e9}
+.status{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;text-transform:uppercase}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--dot,var(--green))}
+.timeline{border-left:5px solid var(--cyan);margin:8px 0 0 18px;padding-left:30px}
+.time-row{position:relative;display:grid;grid-template-columns:110px 1fr;gap:18px;padding:0 0 23px}
+.time-row::before{
+  content:"";position:absolute;left:-38px;top:2px;width:12px;height:12px;border-radius:50%;
+  background:var(--cyan);border:4px solid var(--paper);
+}
+.time{font:700 12px var(--mono);letter-spacing:.06em;color:var(--navy)}
+.directory{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.office{position:relative;border:1px solid var(--silver);border-radius:10px;padding:18px 18px 18px 23px;background:#fff}
+.office::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--office,var(--gold));border-radius:10px 0 0 10px}
+.office .code{font:700 11px var(--mono);letter-spacing:.08em;color:var(--gray)}
+.office h3{font-size:16px;margin:6px 0 7px}
+.flow{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:10px}
+.node{
+  width:min(100%,620px);padding:16px 18px;border:1px solid var(--silver);border-radius:9px;
+  background:#fff;text-align:center;
+}
+.node.decision{border:2px solid var(--navy);background:var(--cream)}
+.arrow{font:700 18px var(--mono);color:var(--navy)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(100%,760px)}
+.split .node{width:auto}
+.form-section{margin-top:22px;padding-top:18px;border-top:1px solid var(--silver)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{margin:12px 0}
+.field label{display:block;margin-bottom:6px;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.line{height:34px;border-bottom:1px solid var(--navy)}
+.box{min-height:92px;border:1px solid var(--silver);background:#fff}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.square{flex:0 0 16px;height:16px;border:1px solid var(--navy);margin-top:2px;background:#fff}
+.no-appeal{
+  margin:20px 0;padding:15px 18px;background:var(--navy);color:var(--cream);
+  font:700 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;
+}
+.certificate{
+  margin-top:46px;padding:44px 42px;border:8px double var(--navy);background:#fff;text-align:center;
+}
+.certificate .seal{width:115px;margin:0 auto 18px;color:var(--navy)}
+.certificate h2{font-size:43px}
+.certificate .cert-copy{max-width:570px;margin:24px auto;font-family:Georgia,"Times New Roman",serif;font-size:20px}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:52px;text-align:left}
+.sig{padding-top:8px;border-top:1px solid var(--navy);font:11px var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.footer{
+  position:absolute;left:74px;right:62px;bottom:24px;
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;
+  padding-top:12px;border-top:1px solid var(--silver);
+}
+.fine{margin:0;font-size:8.8px;line-height:1.35;color:#5f5a52;text-align:justify}
+.pageno{
+  width:42px;height:42px;display:grid;place-items:center;
+  border:1px solid var(--navy);transform:rotate(45deg);font:700 12px var(--mono);color:var(--navy);
+}
+.pageno span{transform:rotate(-45deg)}
+.cover{background:var(--navy);color:var(--cream);--spine:var(--gold)}
+.cover .page-inner{padding:72px 68px}
+.cover .logo{width:260px;color:var(--cream);margin:0 auto}
+.cover .cover-title{margin:44px auto 0;text-align:center;color:var(--cream);font-size:clamp(58px,10vw,108px)}
+.cover .cover-rule{
+  max-width:760px;margin:24px auto 0;text-align:center;
+  font-family:Georgia,"Times New Roman",serif;font-size:clamp(22px,3vw,34px);line-height:1.25;
+}
+.cover .retro{
+  position:absolute;left:0;right:0;bottom:210px;height:230px;display:flex;justify-content:center;gap:7px;transform:skewX(-17deg);
+}
+.cover .retro i{width:13%;border-left:6px solid var(--cream)}
+.cover .retro i:nth-child(1){background:var(--red)}
+.cover .retro i:nth-child(2){background:var(--orange)}
+.cover .retro i:nth-child(3){background:var(--yellow)}
+.cover .retro i:nth-child(4){background:var(--green)}
+.cover .retro i:nth-child(5){background:var(--cyan)}
+.cover .cover-footer{
+  position:absolute;left:68px;right:68px;bottom:42px;border-top:1px solid #66728a;padding-top:16px;
+  display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end;
+}
+.cover .fine{color:#c9c6bc}
+.badge{
+  display:inline-block;padding:5px 8px;border:1px solid currentColor;border-radius:4px;
+  font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;
+}
+.callout{
+  margin:22px 0;padding:16px 18px;border:1px dashed var(--navy);
+  background:#fff;font-family:Georgia,"Times New Roman",serif;font-size:18px;
+}
+.smallcaps{font-family:var(--display);font-size:.82em;text-transform:uppercase;letter-spacing:.03em}
+@media (max-width:760px){
+  .packet{padding:0;margin-top:0}.page{min-height:auto;margin:0;box-shadow:none}
+  .page-inner{min-height:1100px;padding:40px 28px 76px 38px}
+  .mast{grid-template-columns:1fr}.mast .logo{width:84px}
+  .grid-2,.grid-3,.directory,.split,.form-row,.signatures{grid-template-columns:1fr}
+  .footer{left:38px;right:28px}.screenbar{position:relative}
+  .time-row{grid-template-columns:82px 1fr}
+  .cover .page-inner{padding:48px 28px}.cover .cover-footer{left:28px;right:28px}
+}
+@media print{
+  @page{size:Letter;margin:0}
+  body{background:#fff}
+  .screenbar{display:none}
+  .packet{width:auto;margin:0;padding:0}
+  .page{width:8.5in;height:11in;min-height:11in;margin:0;box-shadow:none}
+  .page-inner{min-height:11in}
+}
+</style>
+    <link rel="stylesheet" href="static/portal-shell.css">
+</head>
+<body class="portal-shell portal-society-fuzzies">
+<header class="af-system-header" data-portal-function="personnel and onboarding">
+  <a class="af-system-header__home" href="index.html">
+    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
+    <span class="af-system-header__brand">Algocratic Futures™</span>
+  </a>
+  <div>
+    <p class="af-system-header__label">System being accessed</p>
+    <p class="af-system-header__name">Bureau of Initial Alignment</p>
+  </div>
+  <div class="af-system-header__meta">
+    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
+    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
+  </div>
+</header>
+<div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
+<header class="screenbar">
+  <div>BIA / CITIZEN ORIENTATION / REV. 08.01.26</div>
+  <nav aria-label="Packet pages">
+    <a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p1">01</a><a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p2">02</a><a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p3">03</a><a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p4">04</a>
+    <a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p5">05</a><a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p6">06</a><a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p7">07</a><a href="file:///Users/norrisa/Library/Messages/Attachments/78/08/68635B17-0E41-4599-8F06-6BE85A5DC70C/welcome-operative.html#p8">08</a>
+  </nav>
+  <button type="button" onclick="window.print()">PRINT PACKET</button>
+</header>
+
+<main class="packet">
+
+<section class="page cover" id="p1">
+  <div class="page-inner">
+    <div class="logo" aria-label="Bureau eye seal">
+      <svg viewBox="0 0 220 180" role="img" aria-label="Eye within an open triangle">
+        <path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path>
+        <path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path>
+        <circle cx="110" cy="96" r="28" fill="currentColor"></circle>
+        <path d="M111 67c12 4 18 13 20 25-9-4-16-3-23 3 4-9 5-18 3-28Z" fill="var(--navy)"></path>
+      </svg>
+    </div>
+    <p class="kicker" style="text-align:center;color:#c9c6bc;margin-top:20px">Bureau of Initial Alignment · Form BIA-00</p>
+    <h1 class="cover-title">WELCOME,<br>OPERATIVE.</h1>
+    <p class="cover-rule">Your needs have already been considered.</p>
+    <div class="retro" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="cover-footer">
+      <p class="fine">This packet is issued under the Initial Alignment and Preventable Preference Control Directive. Possession confirms receipt. Reading confirms availability. Understanding remains optional until assigned.</p>
+      <div class="badge">Distribution: Universal</div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="p2" style="--spine:var(--orange)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 02 · Welcome Message</p>
+        <h2>BEGIN FROM THE CORRECT POSITION.</h2>
+        <p class="subtitle">A message from the Bureau of Initial Alignment.</p>
+      </div>
+      <div class="logo">
+        <svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg>
+      </div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content">
+      <p class="lede">Welcome to aligned participation. Your placement is complete. No further action is required unless further action is assigned.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="label">What has been reviewed</span>
+          <h3>Your available history</h3>
+          <p>The Algorithm has reviewed declared needs, undeclared needs, preventable wants, observable habits, and probable future objections.</p>
+        </div>
+        <div class="card">
+          <span class="label">What has been decided</span>
+          <h3>Your useful position</h3>
+          <p>The Bureau has assigned a role, routine, support pathway, and appropriate range of expectations.</p>
+        </div>
+      </div>
+
+      <div class="big-rule">
+        <strong>Standing Rule BIA-14:</strong><br>
+        Citizens may express preferences only after completing the assigned preference-reduction period.
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><span class="label">Step 01</span><h3>Receive</h3><p>Accept your assigned materials and current designation.</p></div>
+        <div class="card"><span class="label">Step 02</span><h3>Review</h3><p>Read each section in the order provided.</p></div>
+        <div class="card"><span class="label">Step 03</span><h3>Proceed</h3><p>Begin useful activity at the time shown on your schedule.</p></div>
+      </div>
+
+      <p class="callout">Early understanding reduces later adjustment. Later adjustment remains available through approved correction channels.</p>
+    </div>
+
+    <footer class="footer">
+      <p class="fine">Verified: packet sequence complete · source: Bureau of Initial Alignment Directive Set 14-C · Objectives assigned: 3 · Objectives completed: pending · Variance: anticipated.</p>
+      <div class="pageno"><span>02</span></div>
+    </footer>
+  </div>
+</section>
+
+<section class="page" id="p3" style="--spine:var(--yellow)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 03 · Allocation Definitions</p>
+        <h2>KNOW WHAT HAS BEEN PROVIDED.</h2>
+        <p class="subtitle">Needs support function. Wants introduce delay.</p>
+      </div>
+      <div class="logo"><svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg></div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content">
+      <table aria-label="Approved needs and preventable wants">
+        <thead><tr><th>Classification</th><th>Operational definition</th><th>Citizen action</th><th>Disposition</th></tr></thead>
+        <tbody>
+          <tr><td><span class="status" style="--dot:var(--green)"><i class="dot"></i>Approved need</span></td><td>An item, service, duty, or condition validated by the Central Alignment Directive.</td><td>Receive without delay.</td><td>Allocated</td></tr>
+          <tr><td><span class="status" style="--dot:var(--cyan)"><i class="dot"></i>Deferred need</span></td><td>An approved need whose usefulness improves through continued absence.</td><td>Demonstrate patience.</td><td>Scheduled</td></tr>
+          <tr><td><span class="status" style="--dot:var(--yellow)"><i class="dot"></i>Preventable want</span></td><td>An unverified preference that may interfere with efficient distribution.</td><td>Do not reinforce.</td><td>Reduced</td></tr>
+          <tr><td><span class="status" style="--dot:var(--orange)"><i class="dot"></i>Emotional discrepancy</span></td><td>A felt mismatch between allocation and gratitude.</td><td>Report promptly.</td><td>Corrected</td></tr>
+          <tr><td><span class="status" style="--dot:var(--red)"><i class="dot"></i>Unauthorized lack</span></td><td>A claimed absence not found in the current record.</td><td>Recheck the record.</td><td>Not present</td></tr>
+        </tbody>
+      </table>
+
+      <div class="big-rule"><strong>Remember:</strong> A rejected want does not indicate deprivation. It indicates successful review.</div>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="label">Approved statement</span>
+          <h3>“My allocation is complete.”</h3>
+          <p>Use when all listed items are present or officially absent.</p>
+        </div>
+        <div class="card">
+          <span class="label">Statement requiring assistance</span>
+          <h3>“I expected something else.”</h3>
+          <p>Submit Form BDR-7 before the expectation becomes established.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p class="fine">Classification values may change without changing your allocation. Definitions are binding only while displayed. The Bureau accepts no responsibility for memories formed under prior terminology.</p>
+      <div class="pageno"><span>03</span></div>
+    </footer>
+  </div>
+</section>
+
+<section class="page" id="p4" style="--spine:var(--green)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 04 · Assigned Daily Alignment</p>
+        <h2>YOUR DAY IS READY.</h2>
+        <p class="subtitle">Follow the sequence. Efficiency begins before interpretation.</p>
+      </div>
+      <div class="logo"><svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg></div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content">
+      <div class="timeline">
+        <div class="time-row"><div class="time">06:40–06:52</div><div><h3>Readiness window</h3><p>Wake during the assigned interval. Waking outside the interval may create unsupported initiative.</p></div></div>
+        <div class="time-row"><div class="time">06:53–07:00</div><div><h3>Allocation review</h3><p>Confirm the day’s duties. Do not compare them with prior expectations.</p></div></div>
+        <div class="time-row"><div class="time">07:01–07:07</div><div><h3>Gratitude declaration</h3><p>Record one approved benefit before useful labor begins.</p></div></div>
+        <div class="time-row"><div class="time">07:08–12:00</div><div><h3>Useful labor cycle A</h3><p>Complete assigned tasks in listed order. Questions remain available after completion.</p></div></div>
+        <div class="time-row"><div class="time">12:01–12:13</div><div><h3>Nutrition and reflection</h3><p>Consume the issued portion. Reflect only on measurable improvements.</p></div></div>
+        <div class="time-row"><div class="time">12:14–17:20</div><div><h3>Useful labor cycle B</h3><p>Continue until the completion signal or equivalent absence of objection.</p></div></div>
+        <div class="time-row"><div class="time">17:21–17:29</div><div><h3>Discrepancy reporting</h3><p>Report emotional variance before it becomes a private interpretation.</p></div></div>
+        <div class="time-row"><div class="time">21:40–21:44</div><div><h3>Rest authorization</h3><p>Record gratitude. Enter rest when the indicator becomes neutral.</p></div></div>
+      </div>
+
+      <p class="callout"><span class="smallcaps">Schedule notice:</span> Free time is pre-approved time whose purpose has not yet been disclosed.</p>
+    </div>
+
+    <footer class="footer">
+      <p class="fine">Times shown are local to the Bureau. Missed intervals remain valid and may be completed retroactively. Repeated spontaneity can be corrected through Routine Adjustment Queue services.</p>
+      <div class="pageno"><span>04</span></div>
+    </footer>
+  </div>
+</section>
+
+<section class="page" id="p5" style="--spine:var(--cyan)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 05 · Approved Support Directory</p>
+        <h2>ASSISTANCE HAS BEEN ORGANIZED.</h2>
+        <p class="subtitle">Select the office that most closely resembles your assigned concern.</p>
+      </div>
+      <div class="logo"><svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg></div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content directory">
+      <article class="office" style="--office:var(--green)"><div class="code">NRC-01</div><h3>Need Reclassification Desk</h3><p>Confirms that an unprovided item was not required at the time of review.</p><span class="badge">Resolution: semantic</span></article>
+      <article class="office" style="--office:var(--yellow)"><div class="code">PRO-22</div><h3>Preference Reduction Office</h3><p>Helps citizens release wants that have survived initial orientation.</p><span class="badge">Wait: beneficial</span></article>
+      <article class="office" style="--office:var(--cyan)"><div class="code">RAQ-08</div><h3>Routine Adjustment Queue</h3><p>Adjusts the citizen to the routine when the routine cannot be adjusted.</p><span class="badge">Position: assigned</span></article>
+      <article class="office" style="--office:var(--orange)"><div class="code">IHL-19</div><h3>Internal Harmony Liaison</h3><p>Translates private uncertainty into approved institutional language.</p><span class="badge">Confidentiality: shared</span></article>
+      <article class="office" style="--office:var(--red)"><div class="code">INS-00</div><h3>Internal Nullification Services™</h3><p>Removes discrepancies that no longer require a reporting citizen.</p><span class="badge">Outcome: conclusive</span></article>
+      <article class="office" style="--office:var(--gold)"><div class="code">ORA-41</div><h3>Office of Retroactive Objective Assignment</h3><p>Assigns the reason an already completed action was necessary.</p><span class="badge">Purpose: restored</span></article>
+    </div>
+
+    <div class="big-rule"><strong>Routing doctrine:</strong> Every concern reaches the correct office. Arrival is not required.</div>
+
+    <footer class="footer">
+      <p class="fine">Office titles may change while cases remain in transit. Transfer counts as progress. Closed offices continue to accept forms for archival disposal. For urgent silence, contact Internal Nullification Services™.</p>
+      <div class="pageno"><span>05</span></div>
+    </footer>
+  </div>
+</section>
+
+<section class="page" id="p6" style="--spine:var(--red)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 06 · Emotional Discrepancy Procedure</p>
+        <h2>REPORT BEFORE YOU INTERPRET.</h2>
+        <p class="subtitle">Use this flow when a feeling differs from the assigned condition.</p>
+      </div>
+      <div class="logo"><svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg></div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content flow">
+      <div class="node"><span class="label">Start</span><h3>Notice an emotional discrepancy.</h3></div>
+      <div class="arrow">↓</div>
+      <div class="node decision"><h3>Does the feeling match the official allocation record?</h3></div>
+      <div class="arrow">↓</div>
+      <div class="split">
+        <div class="node"><span class="badge">YES</span><h3 style="margin-top:10px">File no report.</h3><p>The feeling is already accounted for.</p></div>
+        <div class="node"><span class="badge">NO</span><h3 style="margin-top:10px">Reduce private detail.</h3><p>Convert the feeling into a recognized category.</p></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="node decision"><h3>Can the discrepancy be described without assigning cause?</h3></div>
+      <div class="arrow">↓</div>
+      <div class="split">
+        <div class="node"><span class="badge">YES</span><h3 style="margin-top:10px">Submit Form EDR-2.</h3><p>Await classification.</p></div>
+        <div class="node"><span class="badge">NO</span><h3 style="margin-top:10px">Attend language correction.</h3><p>Cause will be supplied.</p></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="node" style="border-color:var(--red)"><span class="label">Completion</span><h3>Accept the corrected interpretation.</h3><p>Repeat until the discrepancy is no longer measurable.</p></div>
+    </div>
+
+    <footer class="footer">
+      <p class="fine">A feeling reported after interpretation may be treated as a conclusion. Conclusions require clearance. The Bureau protects citizens from unsupported conclusions through timely reassignment.</p>
+      <div class="pageno"><span>06</span></div>
+    </footer>
+  </div>
+</section>
+
+<section class="page" id="p7" style="--spine:var(--gray)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 07 · Form QCR-9</p>
+        <h2>QUESTION AND CORRECTION REQUEST.</h2>
+        <p class="subtitle">Use one form per concern. Related concerns will be separated for your protection.</p>
+      </div>
+      <div class="logo"><svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg></div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content">
+      <div class="form-row">
+        <div class="field"><label>Operative designation</label><div class="line"></div></div>
+        <div class="field"><label>Record number</label><div class="line"></div></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Assigned office</label><div class="line"></div></div>
+        <div class="field"><label>Date concern became official</label><div class="line"></div></div>
+      </div>
+
+      <div class="form-section">
+        <h3>1. Select the approved concern type.</h3>
+        <div class="checks">
+          <div class="check"><span class="square"></span><span>Clarification requested</span></div>
+          <div class="check"><span class="square"></span><span>Routine mismatch observed</span></div>
+          <div class="check"><span class="square"></span><span>Allocation language unclear</span></div>
+          <div class="check"><span class="square"></span><span>Gratitude level incomplete</span></div>
+          <div class="check"><span class="square"></span><span>Correction already accepted</span></div>
+          <div class="check"><span class="square"></span><span>Other approved category</span></div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>2. Describe the concern without assigning fault, cause, preference, or desired outcome.</h3>
+        <div class="box"></div>
+      </div>
+
+      <div class="form-section">
+        <h3>3. Select an acceptable resolution.</h3>
+        <div class="checks">
+          <div class="check"><span class="square"></span><span>Clarification</span></div>
+          <div class="check"><span class="square"></span><span>Reassignment</span></div>
+          <div class="check"><span class="square"></span><span>Observation</span></div>
+          <div class="check"><span class="square"></span><span>Correction</span></div>
+        </div>
+      </div>
+
+      <div class="no-appeal">No appeal option is available because all listed outcomes preserve access to correction.</div>
+
+      <div class="form-row">
+        <div class="field"><label>Citizen signature</label><div class="line"></div></div>
+        <div class="field"><label>Signature confirming prior consent</label><div class="line"></div></div>
+      </div>
+
+      <p class="callout"><span class="smallcaps">Processing notice:</span> Submission confirms that the concern can be resolved without changing the underlying decision.</p>
+    </div>
+
+    <footer class="footer">
+      <p class="fine">Incomplete forms may be completed from existing records. Blank fields authorize reasonable inference. Duplicate requests are merged into the earliest version, including versions not submitted by the citizen.</p>
+      <div class="pageno"><span>07</span></div>
+    </footer>
+  </div>
+</section>
+
+<section class="page" id="p8" style="--spine:var(--gold)">
+  <div class="page-inner">
+    <header class="mast">
+      <div>
+        <p class="kicker">Page 08 · Orientation Receipt</p>
+        <h2>COMPLETION HAS BEEN RECORDED.</h2>
+        <p class="subtitle">Retain this page until retention is no longer authorized.</p>
+      </div>
+      <div class="logo"><svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg></div>
+    </header>
+    <div class="stripe-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="certificate">
+      <div class="seal">
+        <svg viewBox="0 0 220 180" aria-hidden="true"><path d="M110 10 205 165H15Z" fill="none" stroke="currentColor" stroke-width="13"></path><path d="M45 96Q110 42 175 96Q110 150 45 96Z" fill="none" stroke="currentColor" stroke-width="10"></path><circle cx="110" cy="96" r="28" fill="currentColor"></circle></svg>
+      </div>
+      <p class="kicker">Bureau of Initial Alignment</p>
+      <h2>Certificate of Receipt</h2>
+      <p class="cert-copy">This certifies that the designated citizen received the standard orientation packet and remained available for its contents.</p>
+      <div class="big-rule" style="text-align:left;margin:28px auto;max-width:650px">
+        Receipt does not imply comprehension.<br>
+        Comprehension does not imply agreement.<br>
+        Agreement is not required for completion.
+      </div>
+      <div class="signatures">
+        <div class="sig">Citizen designation / date</div>
+        <div class="sig">Authorized alignment witness</div>
+      </div>
+      <p class="receipt" style="margin:46px 0 0;font-size:11px;color:var(--gray)">Record status: complete · Preference status: pending · Objection status: unrequested</p>
+    </div>
+
+    <div class="content" style="margin-top:34px">
+      <p class="callout" style="text-align:center"><span class="smallcaps">Final instruction:</span> Proceed as though orientation answered every question.</p>
+      <p style="text-align:center;font-family:Georgia,&#39;Times New Roman&#39;,serif;font-size:18px">The Algorithm provides. Everything you need. Nothing you want.</p>
+    </div>
+
+    <footer class="footer">
+      <p class="fine">This certificate confirms delivery only. It does not confirm identity, agency, memory, interpretation, willingness, or continued presence. Misplaced certificates remain binding at their last approved location.</p>
+      <div class="pageno"><span>08</span></div>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+
+  </div>
+</body></html>

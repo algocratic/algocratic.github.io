@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A crosswalk between the canonical PRISM progression and the Algocratic Futures Design System, aligning clearance semantics with audience complexity.">
+  <title>PRISM × Design System Crosswalk · Algocratic Futures</title>
+  <link rel="stylesheet" href="../../Algocratic%20Futures%20Design%20System/styles.css">
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--surface-tint, #faf9f6);
+      color: var(--text-body, #0d1b2a);
+      font-family: var(--font-doc-sans, "Source Sans 3", system-ui, sans-serif);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    a { text-underline-offset: 3px; }
+    a:focus-visible { outline: 3px solid var(--af-gold, #f0b82d); outline-offset: 3px; }
+    .page {
+      width: min(calc(100% - 32px), 1000px);
+      margin: 24px auto;
+      background: var(--surface-page, #fff);
+      border: 1px solid var(--border-hairline, #e2e1dd);
+      box-shadow: var(--shadow-card, 0 1px 2px rgba(13, 27, 42, .06));
+    }
+    .masthead { padding: clamp(24px, 5vw, 52px); padding-bottom: 28px; }
+    .identity { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .identity img { width: 154px; height: auto; display: block; }
+    .stamp { margin-left: auto; text-align: right; font-family: var(--font-mono, monospace); font-size: 11px; line-height: 1.55; color: var(--text-secondary, #53565a); }
+    .eyebrow { margin: 0 0 10px; color: var(--prism-green, #2f9e44); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3 { color: var(--text-heading, #16305f); }
+    h1 { margin: 0; max-width: 18ch; font-family: var(--font-doc-serif, Georgia, serif); font-size: clamp(38px, 7vw, 64px); line-height: 1.02; letter-spacing: -.018em; }
+    h1 .x { color: var(--af-gold, #f0b82d); font-style: italic; }
+    .thesis { max-width: 66ch; margin: 18px 0 0; color: var(--text-secondary, #53565a); font-family: var(--font-doc-serif, Georgia, serif); font-size: clamp(18px, 2.4vw, 21px); line-height: 1.48; }
+    .prism-rail { height: 8px; background: var(--prism-rail); }
+    main { padding: 12px clamp(24px, 5vw, 52px) 48px; }
+    section { padding-top: 36px; }
+    h2 { margin: 0 0 14px; font-family: var(--font-display, sans-serif); font-size: clamp(19px, 3vw, 24px); font-weight: 400; letter-spacing: .02em; line-height: 1.3; text-transform: uppercase; }
+    h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+    p { max-width: 72ch; }
+    .lede { font-size: 17px; }
+    .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .lens {
+      padding: 20px;
+      border: 1px solid var(--border-hairline, #e2e1dd);
+      border-radius: var(--radius-lg, 12px);
+      background: var(--surface-page, #fff);
+      box-shadow: var(--shadow-card);
+    }
+    .lens.warm { border-left: 5px solid var(--prism-orange, #e8590c); }
+    .lens.cool { border-left: 5px solid var(--prism-indigo, #3f3ca6); }
+    .lens p { margin: 0; color: var(--text-secondary, #53565a); }
+    .hinge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 14px 0;
+      padding: 12px 15px;
+      border-top: 1px dashed var(--border-hairline, #e2e1dd);
+      border-bottom: 1px dashed var(--border-hairline, #e2e1dd);
+      font-weight: 600;
+      color: var(--text-secondary, #53565a);
+    }
+    .hinge::before { content: ""; flex: 0 0 12px; width: 12px; height: 12px; border-radius: 50%; background: var(--prism-green, #2f9e44); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border-hairline, #e2e1dd); border-radius: var(--radius-md, 9px); }
+    table { width: 100%; border-collapse: collapse; min-width: 780px; font-size: 14px; }
+    caption { padding: 12px 14px; text-align: left; color: var(--text-secondary, #53565a); font-family: var(--font-mono, monospace); font-size: 11px; }
+    th { padding: 11px 12px; background: var(--af-navy, #16305f); color: #fff; text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    td { padding: 12px; border-top: 1px solid var(--border-hairline, #e2e1dd); vertical-align: top; }
+    tbody tr:hover { background: var(--surface-tint, #faf9f6); }
+    .band { display: inline-block; min-width: 104px; padding: 4px 8px; border-radius: var(--radius-sm, 6px); color: #fff; font-weight: 600; font-size: 11px; letter-spacing: .055em; text-align: center; }
+    .band.yellow { color: #3a2d00; }
+    .band.edge { border: 2px dashed rgba(255, 255, 255, .72); }
+    .rule-list { display: grid; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
+    .rule-list li { position: relative; padding: 14px 16px 14px 46px; border: 1px solid var(--border-hairline, #e2e1dd); border-radius: var(--radius-md, 9px); background: var(--surface-page, #fff); }
+    .rule-list li::before { content: attr(data-rule); position: absolute; top: 15px; left: 14px; color: var(--text-secondary, #53565a); font-family: var(--font-mono, monospace); font-size: 11px; }
+    .rule-list strong { color: var(--text-heading, #16305f); }
+    .decision { padding: 20px 22px; border: 1px solid var(--prism-green, #2f9e44); border-left-width: 5px; border-radius: var(--radius-md, 9px); background: #f4fbf6; }
+    .decision p { margin: 0; }
+    .receipts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .receipt { padding-top: 13px; border-top: 1px solid var(--border-hairline, #e2e1dd); }
+    .receipt h3 { font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .receipt p, .receipt ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--text-secondary, #53565a); }
+    .receipt p { padding-left: 0; }
+    code { font-family: var(--font-mono, monospace); font-size: .88em; }
+    footer { padding: 24px clamp(24px, 5vw, 52px); background: var(--af-charcoal, #363e4a); color: var(--af-cream, #f2ecd9); }
+    .fine-print { margin: 0; max-width: none; color: #c8cbd0; font-size: 11px; font-style: italic; line-height: 1.55; }
+    .footer-stamp { margin: 12px 0 0; font-family: var(--font-mono, monospace); font-size: 11px; }
+    @media (max-width: 680px) {
+      .page { width: 100%; margin: 0; border-inline: 0; }
+      .identity { align-items: flex-start; }
+      .identity img { width: 124px; }
+      .lens-grid, .receipts { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; margin: 0; border: 0; box-shadow: none; }
+      .prism-rail, .band, .hinge::before, th, footer { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      section, .lens, .decision, .receipt, tr { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header class="masthead">
+      <div class="identity">
+        <img src="../../Algocratic%20Futures%20Design%20System/assets/brand/AF_Logo_Eye.svg" alt="Algocratic Futures">
+        <div class="stamp">CHARTER ARTIFACT 01<br>teacherbot@green<br>2026-08-01 16:56 EDT</div>
+      </div>
+      <p class="eyebrow">PRISM cross-reference · audience alignment</p>
+      <h1>PRISM <span class="x">×</span> DESIGN SYSTEM</h1>
+      <p class="thesis">A semantic contract for matching conceptual decision space to the people expected to navigate it. Color indicates capability, ownership, and audience complexity; it is not ornament.</p>
+    </header>
+    <div class="prism-rail" aria-label="PRISM spectrum from infrared through ultraviolet"></div>
+
+    <main>
+      <section aria-labelledby="finding">
+        <h2 id="finding">Cross-reference finding</h2>
+        <p class="lede">The canonical PRISM framework and the Algocratic Futures Design System agree on one ladder with two measurement lenses. Below GREEN, progression describes increasingly complex making. Above GREEN, progression describes increasingly broad coordination and organizational ownership. GREEN is the hinge: an independently shipped and operated product.</p>
+        <div class="lens-grid">
+          <article class="lens warm">
+            <h3>Warm bands · makers</h3>
+            <p>INFRARED through YELLOW use Bloom’s taxonomy to describe cognitive complexity: remember, understand, apply, analyze, and evaluate. The audience moves from guided micro-tasks to ambiguous feature work, architecture, debugging, and mentorship.</p>
+          </article>
+          <article class="lens cool">
+            <h3>Cool bands · orchestrators</h3>
+            <p>BLUE through ULTRAVIOLET use scope of ownership: process, project, program, organization, and field. They do not claim to extend Bloom’s taxonomy beyond “create.” The joys of becoming managerial class are sometimes declined.</p>
+          </article>
+        </div>
+        <div class="hinge">GREEN · Bloom: create · owns a deployed product end-to-end · job-ready ship-it pivot</div>
+        <p>For portal authors, “clearance” therefore names the complexity and scope a reader is being asked to hold. It supports orientation and progressive disclosure; it does not withhold public content or imply institutional rank.</p>
+      </section>
+
+      <section aria-labelledby="bands">
+        <h2 id="bands">The nine-band decision map</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>Canonical order, hex values, PRISM roles, governing lens, and portal audience treatment.</caption>
+            <thead>
+              <tr><th>Band</th><th>PRISM meaning</th><th>Lens</th><th>Portal audience treatment</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="band edge" style="background:var(--prism-infrared)">INFRARED</span></td><td>New intern · owns a guided micro-task</td><td>Bloom · remember</td><td>State terms, setup, and next action. One decision at a time.</td></tr>
+              <tr><td><span class="band" style="background:var(--prism-red)">RED</span></td><td>Junior developer · owns one defined feature</td><td>Bloom · understand → apply</td><td>Show the complete workflow with a bounded outcome and visible checkpoints.</td></tr>
+              <tr><td><span class="band" style="background:var(--prism-orange)">ORANGE</span></td><td>Developer · owns a feature set under ambiguity</td><td>Bloom · apply → analyze</td><td>Expose tradeoffs, alternatives, and the evidence behind a local design decision.</td></tr>
+              <tr><td><span class="band yellow" style="background:var(--prism-yellow)">YELLOW</span></td><td>Senior developer / tech lead · owns a complex system; mentors</td><td>Bloom · analyze → evaluate</td><td>Present system interactions, review criteria, failure modes, and technical rationale.</td></tr>
+              <tr><td><span class="band" style="background:var(--prism-green)">GREEN</span></td><td>Shipping engineer · owns a deployed product end-to-end</td><td>Bloom · create</td><td>Provide an executable whole: intent, implementation, operation, verification, and limits.</td></tr>
+              <tr><td><span class="band" style="background:var(--prism-blue)">BLUE</span></td><td>Team lead / Scrum master · owns team process and delivery</td><td>Scope · process</td><td>Surface roles, handoffs, working agreements, blockers, and retrospective evidence.</td></tr>
+              <tr><td><span class="band" style="background:var(--prism-indigo)">INDIGO</span></td><td>Project manager · owns scope, timeline, and risk</td><td>Scope · project</td><td>Surface dependencies, milestones, risk, stakeholder decisions, and acceptance gates.</td></tr>
+              <tr><td><span class="band" style="background:var(--prism-violet)">VIOLET</span></td><td>Program / engineering manager · owns a portfolio</td><td>Scope · program</td><td>Connect cross-team constraints, portfolio priorities, governance, and cumulative outcomes.</td></tr>
+              <tr><td><span class="band edge" style="background:var(--prism-ultraviolet)">ULTRAVIOLET</span></td><td>Director / principal · owns an organization; shapes the field</td><td>Scope · field</td><td>Frame strategy, system-wide effects, institutional consequences, and unresolved horizons.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="rules">
+        <h2 id="rules">Exact semantic design rules</h2>
+        <ol class="rule-list">
+          <li data-rule="01"><strong>PRISM colors are semantic, never decorative.</strong> Use a band only when the element communicates that band’s competency, clearance, ownership, or audience-complexity meaning.</li>
+          <li data-rule="02"><strong>Preserve the lens change.</strong> INFRARED–YELLOW are graded by Bloom’s cognitive lens; GREEN is “create” and independent delivery; BLUE–ULTRAVIOLET are graded by ownership scope.</li>
+          <li data-rule="03"><strong>Preserve the anatomy.</strong> A ladder rung contains band and role, scope, lens/course tags, and the evidence bank (“Module Zero +”). Place the GREEN hinge between BLUE and GREEN.</li>
+          <li data-rule="04"><strong>Mark the invisible ends.</strong> INFRARED and ULTRAVIOLET use dashed borders. An open or hovered rung may receive a gold left spine.</li>
+          <li data-rule="05"><strong>Order the ladder by increasing ownership.</strong> In the canonical vertical display, ULTRAVIOLET is at the top and INFRARED at the bottom. A spectrum rail may run infrared → ultraviolet when its directional label makes that reading explicit.</li>
+          <li data-rule="06"><strong>Bank evidence.</strong> Each level names observable artifacts, not personality traits. Module Zero recurs across courses, so evidence accumulates in a living competency record.</li>
+          <li data-rule="07"><strong>Design for the audience; do not gate the audience.</strong> Higher-complexity pages receive summaries, prerequisites, definitions, source trails, and progressive disclosure. Clearance is an orientation device, not access control.</li>
+          <li data-rule="08"><strong>Keep GRAY outside the spectrum.</strong> GRAY (<code>#53565A</code>) means Gather Required Aesthetic Yields, the collaboration band; it is not a tenth PRISM clearance rung.</li>
+          <li data-rule="09"><strong>Use the document family for PRISM editorial work.</strong> Source Serif 4 and Source Sans 3 form the PRISM house style. Michroma is a substitute display face, ALL CAPS only and never body copy. JetBrains Mono carries stamps, sources, IDs, and counts.</li>
+          <li data-rule="10"><strong>Keep surfaces disciplined.</strong> Paper documents use white / <code>#FAF9F6</code>, navy headings, silver hairlines, and one sparse gold glint. Cards are flat, lightly rounded, and nearly shadowless; motion is restrained.</li>
+          <li data-rule="11"><strong>Use real marks.</strong> Use supplied brand assets rather than drawn replacements. Do not use emoji. Status uses dots, counts, or mono strings; utility icons, if introduced, must be flagged as an extension.</li>
+          <li data-rule="12"><strong>Make rigor carry the joke.</strong> The institutional voice may be deadpan and dystopian, but claims, receipts, limitations, and accessibility remain sincere. “INCONCLUSIVE” is not “PASS.”</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="application">
+        <h2 id="application">Portal application decision</h2>
+        <div class="decision">
+          <p>Every revised portal page should declare or visibly imply its intended PRISM audience, lead with the smallest useful summary, and disclose the next layer of complexity with headings, links, or native disclosure controls. Band color may reinforce that declaration, but typography, labeling, and structure must communicate the same meaning without color.</p>
+        </div>
+        <p>This aligns conceptual decision space with real-world audience complexity while keeping locally reviewed pages public and directly inspectable. The crosswalk describes presentation and information architecture; it does not confer credentials, restrict files, or claim that one kind of work is intrinsically superior to another.</p>
+      </section>
+
+      <section aria-labelledby="receipts">
+        <h2 id="receipts">Receipts</h2>
+        <div class="receipts">
+          <article class="receipt">
+            <h3>Sources reviewed</h3>
+            <ul>
+              <li><a href="../../the-prism.html">Canonical PRISM framework</a>, Angela Westmoreland, M.Ed., FTCC.</li>
+              <li><a href="../../Algocratic%20Futures%20Design%20System/readme.md">Algocratic Futures Design System README</a>.</li>
+              <li><a href="../../Algocratic%20Futures%20Design%20System/styles.css">Design-system stylesheet entry</a> and token files.</li>
+              <li>Design-system brand, color, type, spacing, component, document-kit, and Teacherbot guidance present on disk.</li>
+            </ul>
+          </article>
+          <article class="receipt">
+            <h3>Verification</h3>
+            <p><code>verified: 2026-08-01 16:56 EDT</code></p>
+            <p>Cross-referenced canonical PRISM content against the complete supplied design-system folder. Static HTML uses only relative local links; webfonts may enhance typography when network access is available.</p>
+          </article>
+          <article class="receipt">
+            <h3>Assumptions</h3>
+            <ul>
+              <li>“Audience complexity” includes both cognitive demand and ownership scope, depending on which side of GREEN the content occupies.</li>
+              <li>Clearance labels orient public readers; they do not implement authorization.</li>
+              <li>Course placements in PRISM remain generic placeholders unless separately aligned.</li>
+            </ul>
+          </article>
+          <article class="receipt">
+            <h3>Known limits</h3>
+            <ul>
+              <li>This artifact does not repair portal navigation, build, hosting, or deployment.</li>
+              <li>The true Zekton/Nulshock-class display face is unavailable; Michroma remains the documented substitute.</li>
+              <li>This crosswalk proposes portal treatments; later review will determine page-by-page application.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="fine-print">Filed by the Office of Chromatic Scope Reconciliation™, whose findings remain binding only where they are legible, attributable, and not being used to decorate a login screen. Variance is permitted when documented. For more information, please read this charter.</p>
+      <p class="footer-stamp">teacherbot@green · FROZEN CONTRACT ITERATION · 2026-08-01</p>
+    </footer>
+  </article>
+</body>
+</html>

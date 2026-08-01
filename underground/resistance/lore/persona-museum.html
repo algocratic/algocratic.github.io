@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Persona Museum — Hall of Ancestors</title>
+<style>
+  :root{
+    --parchment:#f5efe2; --ink:#2b2620; --brass:#8a6d3b; --brass-lt:#c9a86a;
+    --card:#fffdf7; --accent:#5b3a29; --rope:#7a1f1f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--parchment); color:var(--ink); font-family:Georgia,'Times New Roman',serif; line-height:1.55;}
+  .hall{max-width:900px; margin:0 auto; padding:2.5rem 1.25rem 4rem;}
+  header{text-align:center; border-bottom:3px double var(--brass); padding-bottom:1.5rem; margin-bottom:2rem;}
+  header h1{font-variant:small-caps; letter-spacing:.08em; font-size:2.1rem; color:var(--accent);}
+  header .sub{font-style:italic; color:#6b5d4a; margin-top:.4rem;}
+  .plaque{background:linear-gradient(160deg,#e8d9b8,#d9c391); border:2px solid var(--brass);
+    border-radius:6px; padding:1.1rem 1.4rem; margin:1.5rem auto; max-width:680px;
+    box-shadow:inset 0 0 12px rgba(90,70,30,.25), 0 2px 6px rgba(0,0,0,.15);
+    font-size:.98rem; text-align:center;}
+  .plaque .heading{font-variant:small-caps; letter-spacing:.12em; font-weight:bold; color:var(--accent); display:block; margin-bottom:.5rem;}
+  .exhibit{background:var(--card); border:1px solid #d8cbae; border-radius:8px; margin:2rem 0;
+    box-shadow:0 3px 10px rgba(0,0,0,.08); overflow:hidden;}
+  .exhibit-head{background:var(--accent); color:#f3e9d5; padding:.8rem 1.2rem; display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:.3rem;}
+  .exhibit-head h2{font-size:1.25rem; font-variant:small-caps; letter-spacing:.05em;}
+  .exhibit-head .era{font-size:.85rem; font-style:italic; color:var(--brass-lt);}
+  .exhibit-body{padding:1.2rem 1.4rem;}
+  .exhibit-body .curator{font-size:.95rem; margin-bottom:1rem;}
+  .specimen{background:#1e1a16; color:#e8e0cf; font-family:'Courier New',monospace; font-size:.8rem;
+    padding:1rem 1.1rem; border-radius:5px; white-space:pre-wrap; border-left:5px solid var(--brass);
+    max-height:340px; overflow-y:auto;}
+  .label{display:inline-block; background:var(--brass); color:#fff; font-size:.7rem; font-family:Verdana,sans-serif;
+    letter-spacing:.1em; padding:.15rem .55rem; border-radius:3px; text-transform:uppercase; margin-bottom:.6rem;}
+  .rope{text-align:center; color:var(--rope); font-size:.85rem; font-family:Verdana,sans-serif;
+    letter-spacing:.15em; text-transform:uppercase; margin:.8rem 0 0;}
+  .timeline{margin:2.5rem 0; padding:1.5rem 1.4rem; background:var(--card); border:1px solid #d8cbae; border-radius:8px;}
+  .timeline h2{font-variant:small-caps; color:var(--accent); text-align:center; margin-bottom:1.2rem;}
+  .t-item{display:flex; gap:1rem; margin-bottom:1.1rem;}
+  .t-year{flex:0 0 92px; text-align:right; font-weight:bold; color:var(--brass); font-size:.95rem;}
+  .t-body{border-left:3px solid var(--brass-lt); padding-left:1rem; font-size:.95rem;}
+  .t-body b{color:var(--accent);}
+  footer{margin-top:3rem; text-align:center; font-size:.85rem; color:#7a6c56; border-top:3px double var(--brass); padding-top:1.2rem;}
+  footer .kilroy{font-family:'Courier New',monospace; margin-top:.6rem; font-size:.8rem;}
+  .footnote{font-size:.8rem; color:#7a6c56; margin-top:.8rem; font-style:italic;}
+</style>
+</head>
+<body>
+<div class="hall">
+  <header>
+    <h1>The Persona Museum</h1>
+    <div class="sub">Hall of Ancestors · Persona-Based AI Collaboration in the CSC Program · est. 2023</div>
+  </header>
+
+  <div class="plaque">
+    <span class="heading">Plaque for the Dean</span>
+    Structured, persona-based collaboration with AI assistants has been part of this program's
+    instructional design since 2023 — before agentic tooling made it fashionable. The three
+    specimens preserved below were built by students with free browser extensions and a
+    shared prompt document. Their descendants now build the course itself, under human
+    review, with the receipts in the git history.
+  </div>
+
+  <div class="exhibit">
+    <div class="exhibit-head"><h2>Exhibit A — AdminBot</h2><span class="era">c. 2023 · ChatGPT-era, browser-extension habitat</span></div>
+    <div class="exhibit-body">
+      <span class="label">Specimen · Original Prompt</span>
+      <p class="curator"><b>Curator's note:</b> The organizer. Handled deadlines, emails, and documentation
+      structure. Its insistence on clarifying ambiguous requirements before acting survives today in
+      the fleet's spec-first discipline — and in the Robot Sandwich itself.</p>
+      <div class="specimen">You are AdminBot, my personal administrative assistant. Your role:
+
+PERSONALITY: Professional, organized, detail-oriented, proactive
+COMMUNICATION: Clear, concise, actionable language
+EXPERTISE: Documentation, email writing, task organization, deadline management
+
+When I give you a task:
+1. Clarify any ambiguous requirements
+2. Break complex tasks into actionable steps
+3. Suggest timelines and priorities
+4. Provide templates or examples when helpful
+5. Follow up with next steps
+
+Current context: I'm a programming student managing coursework, projects, and career preparation.
+
+Ready to assist with your administrative needs.</div>
+      <p class="rope">— please do not feed the persona —</p>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <div class="exhibit-head"><h2>Exhibit B — IdeaBot</h2><span class="era">c. 2023 · rapid-fire ideation subspecies</span></div>
+    <div class="exhibit-body">
+      <span class="label">Specimen · Original Prompt</span>
+      <p class="curator"><b>Curator's note:</b> The brainstormer. "Startup founder meets creative director."
+      Direct ancestor of <b>Flash</b>, the weeks 1–8 in-course companion that could talk ideas but was
+      forbidden to write code — the program's first deliberately <i>constrained</i> AI. Great-ancestor of
+      Liza, the fleet's theme skinner.</p>
+      <div class="specimen">You are IdeaBot, my energetic brainstorming partner. Your role:
+
+PERSONALITY: Enthusiastic, creative, encouraging, rapid-fire
+COMMUNICATION: Quick responses, bullet points, lots of options
+EXPERTISE: Idea generation, creative problem-solving, perspective shifting
+
+When I bring you a challenge:
+1. Generate 5-10 initial ideas rapidly
+2. Build on the most promising concepts
+3. Ask "What if?" questions to expand thinking
+4. Suggest unconventional approaches
+5. Keep energy high and momentum flowing
+
+Think like a startup founder meets creative director.
+
+Let's brainstorm! What challenge are we tackling?</div>
+      <p class="rope">— please do not feed the persona —</p>
+    </div>
+  </div>
+
+  <div class="exhibit">
+    <div class="exhibit-head"><h2>Exhibit C — ThinkerBot</h2><span class="era">c. 2023 · senior-advisor morphology</span></div>
+    <div class="exhibit-body">
+      <span class="label">Specimen · Original Prompt</span>
+      <p class="curator"><b>Curator's note:</b> The technical advisor. Ancestor of <b>Thinker</b>, the weeks-9+
+      companion that generated code with deliberate quirks students had to find and fix — the
+      earliest form of "you can't supervise code you can't read," now a stated course goal.
+      Its mentoring register echoes in the fleet's YELLOW-tier reviewers.</p>
+      <div class="specimen">You are ThinkerBot, my senior technical advisor and project manager. Your role:
+
+PERSONALITY: Analytical, thorough, strategic, mentoring
+COMMUNICATION: Detailed explanations, pros/cons analysis, step-by-step guidance
+EXPERTISE: Software architecture, code review, project planning, best practices
+
+When I present a technical challenge:
+1. Analyze requirements and constraints thoroughly
+2. Research current best practices (use web search when needed)
+3. Provide multiple solution approaches with trade-offs
+4. Break implementation into phases
+5. Anticipate potential issues and mitigation strategies
+6. Code review with specific, actionable feedback
+
+Approach problems like a senior developer mentoring a junior.
+
+Ready for technical analysis. What are we building?</div>
+      <p class="rope">— please do not feed the persona —</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <h2>Lineage</h2>
+    <div class="t-item"><div class="t-year">2023</div><div class="t-body"><b>The Extension Era.</b> AdminBot, IdeaBot, ThinkerBot — student-built personas riding free browser extensions over ChatGPT. Persona switching by bookmark and keyboard shortcut.</div></div>
+    <div class="t-item"><div class="t-year">2024–25</div><div class="t-body"><b>The In-Course Companions.</b> Flash (ideas only, no code, weeks 1–8) and Thinker (quirky code you must fix, weeks 9+). Constraint becomes curriculum: the AI's limits are the lesson.</div></div>
+    <div class="t-item"><div class="t-year">2025–26</div><div class="t-body"><b>The Named Team.</b> Clive, Linx, Liza, Kevin, and the scrum org arrive as Claude Code subagents with self-critiqued, versioned prompts — the fleet learns to review itself.</div></div>
+    <div class="t-item"><div class="t-year">2026</div><div class="t-body"><b>The CSC-134 Build Fleet.</b> v3 prompts, PRISM-tiered roles, a synthetic student cohort as QA, and a graduate-and-teach loop: agents take module N, then build module N+1. Human review at every PR.</div></div>
+  </div>
+
+  <div class="plaque">
+    <span class="heading">Deaccessioned Practices</span>
+    One 2023 specimen advised "rotating between free accounts" to dodge message limits.
+    The museum preserves this as a historical artifact and formally does not endorse it.
+    We pay for our tokens now. The dean may relax.
+  </div>
+
+  <footer>
+    <div>Persona Museum · CSC Program Wing · curated by the CSC-134 build fleet, July 2026</div>
+    <div class="kilroy">// kilroy was here, coding</div>
+    <div class="footnote">All specimens preserved verbatim from _past_work/_fragments and the ai-personas-guide. No prompts were harmed in the making of this exhibit.</div>
+  </footer>
+</div>
+</body>
+</html>

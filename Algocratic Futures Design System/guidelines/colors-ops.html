@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x160" name="Ops palette (dark)" subtitle="Teacherbot dashboard surfaces, inks, series & status colors" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;font-family:var(--font-sans);background:var(--ops-bg);color:var(--ops-ink);padding:14px 16px}
+.row{display:flex;gap:8px;margin-bottom:10px}
+.p{flex:1;border:1px solid var(--ops-line);border-radius:6px;padding:8px 10px;font-family:var(--font-mono);font-size:9.5px}
+.d{display:flex;gap:14px;align-items:center;font-size:11.5px;color:var(--ops-ink-2)}
+.d span{display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%}
+.sw{width:10px;height:10px;border-radius:2px}</style></head><body>
+<div class="row">
+<div class="p" style="background:var(--ops-bg)">bg #0F1115</div>
+<div class="p" style="background:var(--ops-panel)">panel #161A21</div>
+<div class="p" style="background:var(--ops-panel-2)">panel-2 #1C212A</div>
+<div class="p" style="color:var(--ops-ink)">ink #E7EBF2</div>
+<div class="p" style="color:var(--ops-ink-2)">ink-2 #A7B0C0</div>
+<div class="p" style="color:var(--ops-ink-3)">ink-3 #6F7889</div>
+</div>
+<div class="d">
+<span><i class="dot" style="background:var(--ops-crit)"></i>critical</span>
+<span><i class="dot" style="background:var(--ops-warn)"></i>warning</span>
+<span><i class="dot" style="background:var(--ops-ok)"></i>ok</span>
+<span style="margin-left:14px"><i class="sw" style="background:var(--ops-series-1)"></i>series-1</span>
+<span><i class="sw" style="background:var(--ops-series-2)"></i>series-2</span>
+<span style="margin-left:14px;padding:3px 8px;background:var(--ops-urgent-wash);border-radius:4px;color:var(--ops-ink)">urgent row wash</span>
+</div></body></html>

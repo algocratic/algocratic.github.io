@@ -189,8 +189,24 @@
             display: none;
         }
     </style>
+    <link rel="stylesheet" href="static/portal-shell.css">
 </head>
-<body>
+<body class="portal-shell portal-society-bancho">
+<header class="af-system-header" data-portal-function="security and access">
+  <a class="af-system-header__home" href="index.html">
+    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
+    <span class="af-system-header__brand">Algocratic Futures™</span>
+  </a>
+  <div>
+    <p class="af-system-header__label">System being accessed</p>
+    <p class="af-system-header__name">Compliance Verification</p>
+  </div>
+  <div class="af-system-header__meta">
+    <span class="af-system-header__clearance">BANCHO · RED</span>
+    <span class="af-system-header__receipt">teacherbot@green · security and access</span>
+  </div>
+</header>
+<div class="af-terminal-frame" data-society="bancho" data-semantic-clearance="RED">
     <div class="scanline"></div>
     
     <div class="compliance-container">
@@ -389,5 +405,6 @@
         console.log('%cHint: Look for the xyzzy function and examine the variable assignments...', 'color: #ffff00;');
         console.log('%cThe pattern is x, y, z, z - four variables, four digits.', 'color: #ffff00;');
     </script>
+  </div>
 </body>
 </html>
