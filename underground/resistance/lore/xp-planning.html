@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XP Planning Packet | The Underground</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #020202;
+            color: #7dffb6;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+        .terminal {
+            max-width: 860px;
+            margin: 0 auto;
+            border: 1px solid #2f8f5f;
+            padding: 24px;
+            box-shadow: 0 0 16px rgba(125, 255, 182, 0.2);
+            background: radial-gradient(circle at top, rgba(18, 68, 39, 0.25), transparent 70%);
+        }
+        h1, h2, h3 {
+            color: #b8ffcf;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .tag {
+            display: inline-block;
+            border: 1px solid #2f8f5f;
+            padding: 4px 8px;
+            margin: 6px 0 12px;
+            font-size: 0.9em;
+            color: #9fffbb;
+        }
+        .token-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+        .token-list li {
+            border: 1px dashed #2f8f5f;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
+        }
+        a {
+            color: #7dffb6;
+        }
+        .note {
+            border-left: 2px solid #2f8f5f;
+            padding-left: 12px;
+            margin: 12px 0;
+            color: #c1ffd6;
+        }
+        code {
+            color: #ffef8c;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="tag">Recovered from a binder labeled: STE100 / NO PROCESS THEATER</div>
+        <h1>XP PLANNING PACKET</h1>
+        <p>We do not need a grand system. We need a plan that a tired student can read at midnight and still use.</p>
+        <p>This packet is the underground answer to the question: “How do we teach students how to plan without turning them into consultants?”</p>
+
+        <h2>1. The rule</h2>
+        <ol>
+            <li>Pick one tiny value.</li>
+            <li>Write it as a card.</li>
+            <li>Make the card testable.</li>
+            <li>Put the card on the board.</li>
+            <li>Do the smallest slice that proves the value.</li>
+            <li>Show the result, then change the plan.</li>
+        </ol>
+
+        <h2>2. Invariant tokens</h2>
+        <ul class="token-list">
+            <li>📌 One card, one value, one job.</li>
+            <li>🧪 Done means proof, not vibes.</li>
+            <li>⏱️ Time box it. Stop at the wall.</li>
+            <li>🔁 Inspect, adapt, and replan.</li>
+            <li>🧠 No big design up front. Sketch enough.</li>
+            <li>🪜 Split the work into visible steps.</li>
+        </ul>
+
+        <h2>3. The lesson plan for students</h2>
+        <ol>
+            <li><strong>Warm-up:</strong> Ask, “What is the smallest useful thing?”</li>
+            <li><strong>Card writing:</strong> Each student writes three cards in plain language.</li>
+            <li><strong>Planning game:</strong> Sort cards by value and risk. Keep the board honest.</li>
+            <li><strong>Estimate:</strong> Use sizes like <code>S / M / L</code> or <code>1 / 2 / 4 / 8</code> ideal hours.</li>
+            <li><strong>Proof line:</strong> Every card gets one sentence that says how we will know it is done.</li>
+            <li><strong>Show and adapt:</strong> Build one slice, demo it, then update the plan.</li>
+        </ol>
+        <p class="note">This teaches planning by making students plan a real slice, then change the plan after they see the work.</p>
+
+        <h2>4. What we leave behind</h2>
+        <ul>
+            <li>A story card for each small promise.</li>
+            <li>A proof line for each card.</li>
+            <li>A short risk note.</li>
+            <li>A tiny release plan for the next visible demo.</li>
+            <li>A one-line retro note for what changed.</li>
+        </ul>
+
+        <h2>5. GameFAQs-style help</h2>
+        <ul>
+            <li><strong>Q:</strong> The request is vague. <strong>A:</strong> Write the smallest useful card and ask for proof.</li>
+            <li><strong>Q:</strong> The plan is wrong. <strong>A:</strong> Good. Change it before it becomes a ritual.</li>
+            <li><strong>Q:</strong> How many cards do we plan? <strong>A:</strong> Enough for one slice, not the whole empire.</li>
+            <li><strong>Q:</strong> What if the task is too big? <strong>A:</strong> Break it until the card is small enough to touch.</li>
+        </ul>
+
+        <h2>6. Found artifacts</h2>
+        <ul>
+            <li><a href="xp-planning-notes.txt">Field note: “Do not write essays. Write cards.”</a></li>
+            <li><a href="story-card-sample.txt">Sample card from the old kiosk</a></li>
+            <li><a href="planning-incident.txt">Incident report: the fake 404 trap and what the class missed</a></li>
+        </ul>
+
+        <h2>7. The lesson</h2>
+        <p>Students learn planning by doing it in public, with blunt limits and visible evidence. The plan is not sacred. It is a tool that gets corrected by reality.</p>
+    </div>
+</body>
+</html>
