@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automated Testing Plan — Algocratic Futures Portal Charter</title>
+  <link rel="stylesheet" href="../../Algocratic%20Futures%20Design%20System/styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    html { background: var(--af-paper-2); color: var(--af-ink); }
+    body {
+      margin: 0;
+      font-family: var(--font-doc-sans);
+      font-size: var(--text-body-size);
+      line-height: var(--leading-body);
+    }
+    .prism-rail { height: 8px; background: var(--prism-rail); }
+    .page { width: min(calc(100% - 32px), var(--page-max)); margin: 0 auto; }
+    header { padding: var(--space-8) 0 var(--space-7); border-bottom: 1px solid var(--af-silver); }
+    .eyebrow, .stamp, dt, th, .gate-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      letter-spacing: var(--track-caps);
+      text-transform: uppercase;
+    }
+    .eyebrow { margin: 0 0 var(--space-3); color: var(--prism-green); font-weight: 700; }
+    h1, h2, h3 { color: var(--af-navy); line-height: var(--leading-tight); }
+    h1 {
+      max-width: 18ch;
+      margin: 0;
+      font-family: var(--font-doc-serif);
+      font-size: var(--text-display);
+      font-weight: 600;
+      letter-spacing: -.02em;
+    }
+    h2 {
+      margin: var(--space-9) 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--af-navy);
+      font-family: var(--font-doc-serif);
+      font-size: var(--text-h2);
+    }
+    h3 { margin: 0 0 var(--space-2); font-size: var(--text-h3); }
+    p, ul, ol { max-width: var(--measure); }
+    a { color: var(--link); text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
+    a:focus-visible { outline: 3px solid var(--af-gold); outline-offset: 3px; }
+    .lede {
+      max-width: 66ch;
+      margin: var(--space-5) 0 0;
+      font-family: var(--font-doc-serif);
+      font-size: 19px;
+      color: var(--af-slate);
+    }
+    .stamp {
+      display: inline-block;
+      margin-top: var(--space-5);
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--prism-green);
+      border-left-width: 5px;
+      color: var(--prism-green);
+      font-weight: 700;
+      background: #f1faf3;
+    }
+    .summary-grid, .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin: var(--space-5) 0;
+    }
+    .card, .gate {
+      padding: var(--space-5);
+      border: 1px solid var(--af-silver);
+      border-left: 4px solid var(--prism-green);
+      border-radius: var(--radius-xs);
+      background: var(--af-paper);
+      box-shadow: var(--shadow-card);
+    }
+    .card p, .gate p { margin: 0; }
+    .gate-label { display: block; margin-bottom: var(--space-2); color: var(--prism-green); font-weight: 700; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--af-silver); }
+    table { width: 100%; min-width: 720px; border-collapse: collapse; background: var(--af-paper); }
+    th, td { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--af-silver); text-align: left; vertical-align: top; }
+    th { color: var(--af-navy); background: var(--af-paper-2); }
+    tr:last-child td { border-bottom: 0; }
+    code { font-family: var(--font-mono); font-size: .9em; background: var(--af-paper-2); }
+    .sequence { counter-reset: phase; padding: 0; list-style: none; }
+    .sequence li { position: relative; max-width: var(--measure); margin: 0 0 var(--space-4); padding-left: 44px; }
+    .sequence li::before {
+      counter-increment: phase;
+      content: counter(phase, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-family: var(--font-mono);
+      color: var(--prism-green);
+      font-weight: 700;
+    }
+    .notice { margin: var(--space-6) 0; padding: var(--space-4) var(--space-5); border-left: 5px solid var(--af-gold); background: #fff9e8; }
+    dl { display: grid; grid-template-columns: 150px 1fr; gap: var(--space-2) var(--space-5); max-width: 780px; }
+    dt { color: var(--af-slate); }
+    dd { margin: 0; }
+    footer { margin-top: var(--space-10); padding: var(--space-6) 0 var(--space-8); border-top: 1px solid var(--af-silver); color: var(--af-slate); font-size: var(--text-small); }
+    footer p { margin: 0; }
+    @media (max-width: 680px) {
+      .summary-grid, .gate-grid { grid-template-columns: 1fr; }
+      dl { grid-template-columns: 1fr; gap: 0; }
+      dd { margin-bottom: var(--space-3); }
+      header { padding-top: var(--space-7); }
+    }
+    @media print {
+      html { background: white; }
+      .page { width: auto; margin: 0 18mm; }
+      .card, .gate { break-inside: avoid; box-shadow: none; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <div class="prism-rail" aria-hidden="true"></div>
+  <div class="page">
+    <header>
+      <p class="eyebrow">GREEN · Charter packet · Proposed test architecture</p>
+      <h1>Automated Testing Plan</h1>
+      <p class="lede">A staged quality system for static portal pages: first make every revised artifact independently reviewable from disk, then earn confidence in structure, access, meaning, and presentation.</p>
+      <p class="stamp" aria-label="Approved by teacherbot at green clearance">teacherbot@green · frozen iteration</p>
+    </header>
+
+    <main>
+      <section aria-labelledby="mandate">
+        <h2 id="mandate">Mandate and present boundary</h2>
+        <p>This document proposes an automated testing stack; it does not install, configure, or run that stack. For this iteration, “the site works” means an external reviewer can open each revised page directly from the repository filesystem and inspect its content. A web server, build step, deployment, and working legacy portal navigation are not acceptance requirements.</p>
+        <div class="summary-grid">
+          <article class="card">
+            <h3>In scope</h3>
+            <p>Revised charter and portal pages, their relative local dependencies, document semantics, visible content, accessibility, design-system use, and representative rendering.</p>
+          </article>
+          <article class="card">
+            <h3>Explicitly deferred</h3>
+            <p>Repair of unrelated portal routes, production deployment, application behavior, the agent kernel, and implementation of this testing proposal.</p>
+          </article>
+        </div>
+        <aside class="notice"><strong>Review rule:</strong> portal pages may be reviewed during this pass. Incidental findings are recorded for later reading; they do not expand this iteration’s remediation scope.</aside>
+      </section>
+
+      <section aria-labelledby="principles">
+        <h2 id="principles">Test principles</h2>
+        <ul>
+          <li><strong>Local-first:</strong> all revised pages open via <code>file://</code>; internal page, stylesheet, image, and document references resolve without a server.</li>
+          <li><strong>Layered evidence:</strong> fast deterministic checks run before browser checks, so failures identify the smallest useful cause.</li>
+          <li><strong>Semantic color:</strong> PRISM colors are checked as capability, clearance, ownership, or audience-complexity signals—not decoration.</li>
+          <li><strong>No invisible success:</strong> CI produces human-readable summaries and machine-readable artifacts even when a gate fails.</li>
+          <li><strong>Progressive enforcement:</strong> the initial baseline records legacy defects; hard gates apply to revised files and regressions unless the contract later broadens scope.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="stack">
+        <h2 id="stack">Proposed stack</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Layer</th><th>Proposed tool</th><th>Checks</th><th>Initial policy</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Markup</td><td>Nu HTML Checker (<code>vnu.jar</code>)</td><td>HTML syntax, nesting, duplicate IDs, obsolete or invalid attributes</td><td>Hard gate on revised HTML</td></tr>
+              <tr><td>Links and assets</td><td>Custom Node script using standards-based URL resolution</td><td>Relative targets, fragments, case-sensitive paths, stylesheet and media existence, forbidden absolute local paths</td><td>Hard gate on revised pages; legacy results reported</td></tr>
+              <tr><td>Content integrity</td><td>Node assertions with an explicit page manifest</td><td>Required title, language, viewport, visible heading, charter navigation, sources, timestamp, assumptions, known limits, and approval stamp</td><td>Hard gate on charter packet</td></tr>
+              <tr><td>Accessibility</td><td>Playwright + axe-core</td><td>Automated WCAG 2.2 AA signals, document landmarks, heading structure, names, contrast, keyboard focus, zoom/reflow smoke tests</td><td>Zero serious or critical violations; documented review for lower severities</td></tr>
+              <tr><td>Design system</td><td>Node assertions + Playwright computed-style checks</td><td>Canonical stylesheet link, token use, editorial typography, semantic GREEN stamp, PRISM rail, focus visibility, no unapproved clearance-color decoration</td><td>Hard gate for required invariants; visual review supplements judgment</td></tr>
+              <tr><td>Browser rendering</td><td>Playwright</td><td>Chromium, Firefox, and WebKit; console errors, missing resources, overflow, readable layout, local navigation</td><td>Hard gate on agreed smoke journeys</td></tr>
+              <tr><td>Visual regression</td><td>Playwright screenshots</td><td>Stable page regions at desktop and mobile widths; print preview by targeted snapshot where practical</td><td>Advisory during baseline, hard after approved snapshots</td></tr>
+              <tr><td>CI orchestration</td><td>GitHub Actions with pinned Node LTS and pinned dependencies</td><td>Repeatable installation, layer ordering, result aggregation, artifact retention</td><td>Required before tests become an acceptance system</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Tool choices are proposals, not dependencies added by this iteration. Exact versions are pinned when implementation begins and reviewed on a scheduled maintenance cadence.</p>
+      </section>
+
+      <section aria-labelledby="journeys">
+        <h2 id="journeys">Critical review journeys</h2>
+        <ol class="sequence">
+          <li><strong>Open from disk.</strong> Load each revised HTML file directly, with no local server and network disabled. The page remains readable even if hosted webfonts are unavailable.</li>
+          <li><strong>Traverse the charter packet.</strong> Follow relative links from the charter index to the PRISM crosswalk, agent-kernel plan, plan ASSAY, automated-testing plan, and review findings; return without a broken target.</li>
+          <li><strong>Inspect sources and limits.</strong> A reviewer can identify provenance, timestamp, assumptions, known limits, status, and the <code>teacherbot@green</code> stamp on every charter artifact.</li>
+          <li><strong>Use without a pointer.</strong> Keyboard navigation exposes a visible focus indicator, logical focus order, and no keyboard trap.</li>
+          <li><strong>Read across viewports.</strong> At 360×800, 768×1024, and 1440×900, text remains legible, tables remain reachable, and the page does not create unintended horizontal document overflow.</li>
+          <li><strong>Review legacy pages without scope creep.</strong> Crawl agreed portal pages in report-only mode and write findings for later interpretation, without making their defects fail this iteration.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="gates">
+        <h2 id="gates">Acceptance gates</h2>
+        <div class="gate-grid">
+          <article class="gate"><span class="gate-label">Gate 01 · Disk</span><h3>Locally complete</h3><p>Every revised page and required local asset exists; relative links and fragments resolve from disk. External sources are labeled and do not prevent core reading.</p></article>
+          <article class="gate"><span class="gate-label">Gate 02 · Structure</span><h3>Valid and identifiable</h3><p>Revised HTML passes the validator and supplies language, unique title, viewport metadata, one clear page heading, ordered headings, and appropriate landmarks.</p></article>
+          <article class="gate"><span class="gate-label">Gate 03 · Integrity</span><h3>Contract fields present</h3><p>Each charter page exposes its sources, timestamp, assumptions, known limits, deliverable state, and <code>teacherbot@green</code> stamp.</p></article>
+          <article class="gate"><span class="gate-label">Gate 04 · Access</span><h3>No severe automated barriers</h3><p>No serious or critical axe violations; keyboard and 200% zoom smoke reviews pass. Automated checks never replace a recorded human review.</p></article>
+          <article class="gate"><span class="gate-label">Gate 05 · System</span><h3>Design language traceable</h3><p>The canonical design-system stylesheet resolves; required document tokens and semantic PRISM treatments are detectable; unsupported decorative clearance color is absent.</p></article>
+          <article class="gate"><span class="gate-label">Gate 06 · Render</span><h3>Representative browsers stable</h3><p>Critical journeys pass in current Playwright Chromium, Firefox, and WebKit projects at mobile, tablet, and desktop widths with no uncaught errors.</p></article>
+          <article class="gate"><span class="gate-label">Gate 07 · Evidence</span><h3>Failure is reviewable</h3><p>CI reports the failing file, rule, severity, reproduction command, and relevant artifact. Screenshots, traces, and reports are retained for the agreed review window.</p></article>
+          <article class="gate"><span class="gate-label">Gate 08 · Scope</span><h3>Legacy breakage contained</h3><p>Known surrounding portal failures and incidental review findings appear in a non-blocking report. New regressions in revised files remain blocking.</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="conformance">
+        <h2 id="conformance">Design-system conformance model</h2>
+        <p>Automated conformance is intentionally narrow. It can prove that pages load the canonical stylesheet, use approved custom properties, expose required typography and focus states, and reserve PRISM color for declared semantic elements. It cannot determine whether a metaphor is appropriate, a page is genuinely comprehensible to its intended audience, or a color choice communicates the correct organizational meaning.</p>
+        <p>Those questions require a human review using the PRISM/design-system crosswalk. The reviewer records the intended audience rung, the page’s cognitive and ownership demands, observed mismatches, and a disposition: accept, revise in a later iteration, or escalate for negotiation.</p>
+      </section>
+
+      <section aria-labelledby="ci">
+        <h2 id="ci">CI sequence and reporting</h2>
+        <ol class="sequence">
+          <li><strong>Discover change scope.</strong> Compare revised paths to the base revision and combine them with the explicit charter manifest.</li>
+          <li><strong>Run deterministic checks.</strong> Validate markup, resolve local targets, and enforce content and design-system invariants.</li>
+          <li><strong>Run browser checks.</strong> Execute accessibility and journey tests across the browser matrix, then capture diagnostics on failure.</li>
+          <li><strong>Publish one receipt.</strong> Produce a Markdown job summary plus JUnit, axe JSON, link results, screenshots, and Playwright traces as artifacts.</li>
+          <li><strong>Separate signal.</strong> Mark revised-page gate failures as blocking; list legacy observations under “deferred portal findings” without changing the result.</li>
+        </ol>
+        <p>Pull requests receive a concise gate table and links to artifacts. Main-branch runs retain a longitudinal baseline so newly introduced failures can be distinguished from recorded legacy conditions. Secrets, user data, and absolute developer paths must not appear in artifacts.</p>
+      </section>
+
+      <section aria-labelledby="manual">
+        <h2 id="manual">Required human review</h2>
+        <p>The future implementation must use the <a href="../../clearance/indigo/docs/accessibility-test-framework.md">INDIGO accessibility test framework</a> for run manifests, evidence fields, manual review, and honest terminal status.</p>
+        <ul>
+          <li>Read the page at its declared PRISM audience level and assess cognitive load, prerequisites, and organizational scope.</li>
+          <li>Confirm meaning is not communicated by color alone and that GREEN denotes independent delivery rather than decoration.</li>
+          <li>Inspect keyboard flow, 200% zoom, print behavior, and a screen-reader landmark/heading summary.</li>
+          <li>Confirm satirical voice does not obscure operational instructions, status, provenance, or known limits.</li>
+          <li>File portal observations for a later pass; do not remediate incidental legacy findings during this iteration.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="delivery">
+        <h2 id="delivery">Implementation sequence</h2>
+        <ol class="sequence">
+          <li><strong>Baseline:</strong> define the page manifest, validate revised files, crawl agreed legacy pages in report-only mode, and approve initial screenshots.</li>
+          <li><strong>Gate:</strong> add link, content-integrity, axe, keyboard, and browser journey checks; make revised-page regressions blocking.</li>
+          <li><strong>Conform:</strong> encode stable design-system invariants and add the human PRISM review form; keep subjective judgments outside automated pass/fail logic.</li>
+          <li><strong>Operate:</strong> schedule dependency updates, baseline review, flaky-test quarantine with expiry, artifact retention review, and periodic assistive-technology checks.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="record">
+        <h2 id="record">Document record</h2>
+        <dl>
+          <dt>Status</dt><dd>Plan only; frozen charter iteration; testing stack not implemented.</dd>
+          <dt>Stamp</dt><dd><code>teacherbot@green</code></dd>
+          <dt>Timestamp</dt><dd><time datetime="2026-08-01T16:55:49-04:00">2026-08-01 16:55:49 EDT</time></dd>
+          <dt>Sources</dt><dd><a href="../../Algocratic%20Futures%20Design%20System/styles.css">Algocratic Futures Design System stylesheet</a>; <a href="../../the-prism.html">canonical PRISM source</a>; frozen portal-charter contract.</dd>
+          <dt>Assumptions</dt><dd>The charter index and named companion pages will exist beside this file; reviewers have filesystem access; modern browser fallbacks can render the document if remote fonts are unavailable; GitHub Actions remains the intended CI environment.</dd>
+          <dt>Known limits</dt><dd>No tests or dependencies are installed here. Existing portal navigation and deployment may remain broken. Automated accessibility checks are incomplete by nature. Browser support versions, retention duration, exact manifest, and review ownership remain implementation decisions.</dd>
+        </dl>
+      </section>
+    </main>
+
+    <footer>
+      <p>Algocratic Futures™ · Quality Assurance Office · Alignment is measurable only after the measurement plan survives review.</p>
+    </footer>
+  </div>
+</body>
+</html>

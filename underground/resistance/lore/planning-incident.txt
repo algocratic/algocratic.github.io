@@ -1,0 +1,11 @@
+[INCIDENT REPORT / UNDERGROUND]
+Subject: Fake 404 route discovered during a student sprint
+
+Observation:
+A trap page was placed at a likely 404 entry point. The bot reported it immediately. No student noticed the suspicious path before the end of the year.
+
+Lesson:
+The class did not fail because the trap was clever. The class failed because no one wrote a card for "verify the route we are about to trust." 
+
+Corrective action:
+Every plan now includes one card for verification, one card for evidence, and one card for a backup path.

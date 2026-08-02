@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Agent-Organization Kernel Implementation Plan | Algocratic Futures</title>
+  <link rel="stylesheet" href="../../Algocratic%20Futures%20Design%20System/styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--af-ink);
+      background: var(--af-paper-2);
+      font-family: var(--font-doc-sans);
+      font-size: var(--text-body-size);
+      line-height: var(--leading-body);
+    }
+    a { color: var(--link); text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
+    .rail { height: 8px; background: var(--prism-rail); }
+    .page { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .masthead { padding: 48px 0 38px; border-bottom: 1px solid var(--af-silver); }
+    .eyebrow, .stamp, .tag, .receipt, th, dt {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .eyebrow { margin: 0 0 12px; color: var(--af-slate); }
+    h1, h2, h3 {
+      color: var(--af-navy);
+      margin-top: 0;
+      line-height: var(--leading-tight);
+    }
+    h1 {
+      max-width: 860px;
+      margin-bottom: 18px;
+      font-family: var(--font-display);
+      font-size: clamp(29px, 5vw, 50px);
+      letter-spacing: var(--track-display);
+      text-transform: uppercase;
+    }
+    h2 {
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--af-silver);
+      font-family: var(--font-display);
+      font-size: 19px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+    h3 { font-size: 18px; }
+    .lede { max-width: 790px; margin: 0; font-family: var(--font-doc-serif); font-size: 20px; line-height: 1.55; }
+    .receipt { margin-top: 22px; color: var(--af-slate); line-height: 1.7; }
+    .stamp {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 9px;
+      color: #fff;
+      background: var(--prism-green);
+      border: 1px solid #267f38;
+      border-radius: 6px;
+    }
+    .local-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--af-silver);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+    main { padding: 38px 0 64px; }
+    section { margin: 0 0 46px; scroll-margin-top: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card {
+      padding: 19px 21px;
+      background: var(--af-paper);
+      border: 1px solid var(--af-silver);
+      border-radius: 9px;
+      box-shadow: var(--shadow-card);
+    }
+    .card > :last-child { margin-bottom: 0; }
+    .spine-green { border-left: 5px solid var(--prism-green); }
+    .spine-blue { border-left: 5px solid var(--prism-blue); }
+    .spine-indigo { border-left: 5px solid var(--prism-indigo); }
+    .spine-violet { border-left: 5px solid var(--prism-violet); }
+    .tag { display: block; margin-bottom: 8px; color: var(--af-slate); }
+    code, pre { font-family: var(--font-mono); }
+    code { font-size: .9em; }
+    pre {
+      overflow-x: auto;
+      margin: 16px 0;
+      padding: 17px 19px;
+      color: var(--af-cream);
+      background: var(--af-charcoal);
+      border-left: 5px solid var(--af-gold);
+      border-radius: 7px;
+      line-height: 1.55;
+    }
+    table { width: 100%; border-collapse: collapse; background: var(--af-paper); }
+    th, td { padding: 11px 12px; border: 1px solid var(--af-silver); text-align: left; vertical-align: top; }
+    th { color: #fff; background: var(--af-navy); }
+    ul, ol { padding-left: 22px; }
+    li + li { margin-top: 5px; }
+    dl { display: grid; grid-template-columns: minmax(130px, .5fr) 2fr; gap: 8px 18px; margin: 0; }
+    dt { color: var(--af-navy); font-weight: 700; }
+    dd { margin: 0; }
+    .callout {
+      padding: 17px 20px;
+      background: #fff9e8;
+      border: 1px solid #e6ce86;
+      border-left: 5px solid var(--af-gold);
+      border-radius: 7px;
+    }
+    .status-list { list-style: none; padding: 0; }
+    .status-list li { position: relative; padding-left: 19px; }
+    .status-list li::before { content: ""; position: absolute; top: .65em; left: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--prism-green); }
+    footer { padding: 26px 0 42px; border-top: 1px solid var(--af-silver); color: var(--af-slate); }
+    .fine-print { max-width: 900px; font-size: 11.5px; line-height: 1.5; }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      dl { grid-template-columns: 1fr; gap: 3px; }
+      dd + dt { margin-top: 9px; }
+      th, td { padding: 8px; font-size: 13px; }
+    }
+    @media print {
+      .local-nav { display: none; }
+      body { background: #fff; }
+      .page { width: 100%; }
+      .card, pre, table { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="rail" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="page">
+      <p class="eyebrow">Algocratic Futures™ · simulated corporation charter · plan 01</p>
+      <h1>Agent-Organization Kernel Implementation Plan</h1>
+      <p class="lede">A bounded plan for implementing the smallest deterministic coordination kernel that can drive a finite workflow to completion, detected deadlock, bounded failure, or a justified and recorded refusal.</p>
+      <div class="stamp">Frozen authority · teacherbot@green</div>
+      <p class="receipt">Issued: <time datetime="2026-08-01T17:00:52-04:00">2026-08-01 17:00 EDT</time> · status: planned, not implemented · agent range: 1–9 · review mode: static file on disk</p>
+    </div>
+  </header>
+
+  <div class="page">
+    <nav class="local-nav" aria-label="On this page">
+      <a href="index.html">Charter index</a>
+      <a href="#boundary">Claim boundary</a>
+      <a href="#model">Kernel model</a>
+      <a href="#workflow">Workflow and failure</a>
+      <a href="#modules">Modules</a>
+      <a href="#organization">PRISM mapping</a>
+      <a href="#tests">Test strategy</a>
+      <a href="#sequence">Sequence</a>
+      <a href="#acceptance">Acceptance</a>
+    </nav>
+
+    <main>
+      <section id="boundary">
+        <h2>01 · Objective and claim boundary</h2>
+        <div class="grid">
+          <div class="card spine-green">
+            <span class="tag">Implementable objective</span>
+            <h3>Completion or an explicit terminal account</h3>
+            <p>Build a deterministic, simulator-first kernel for one to nine agents operating on finite directed workflow graphs. Every admitted run must finish as <code>COMPLETED</code>, <code>REFUSED</code>, <code>DEADLOCKED</code>, <code>FAILED</code>, or <code>BOUND_EXCEEDED</code>.</p>
+          </div>
+          <div class="card">
+            <span class="tag">Exclusions</span>
+            <h3>No unrestricted organization hiding inside</h3>
+            <p>The kernel does not add open-ended planning, natural-language negotiation, mutable graphs, global knowledge by default, distributed consensus, or guarantees during an unbounded network partition. Ten or more agents are outside this iteration.</p>
+          </div>
+        </div>
+        <p class="callout"><strong>This document is a plan.</strong> It describes the proposed kernel and its verification obligations; it does not implement the kernel or claim that any test currently passes.</p>
+      </section>
+
+      <section id="model">
+        <h2>02 · Deterministic kernel model</h2>
+        <p>The protocol separates message syntax, transition logic, task contracts, transport, and evidence. One accepted token in one state may select at most one guarded transition. Ambiguous transition tables fail validation before a run begins.</p>
+        <pre><code>STATES: IDLE, OFFERED, COMMITTED, RUNNING,
+        DONE, REFUSED, FAILED, RECOVERING
+
+TOKENS: OFFER, ACCEPT, REJECT, START, RESULT, FAIL,
+        ACK, TIMEOUT, RECOVER, AMEND, CANCEL
+
+IF valid(token, state, contract, sender, receiver)
+THEN apply_transition_and_emit
+ELSE refuse_and_record</code></pre>
+        <div class="grid">
+          <div class="card">
+            <span class="tag">Transition definition</span>
+            <p>Every row declares current state, accepted token, guard, action, next state, emitted token, precondition, postcondition, refusal reason, and record event.</p>
+          </div>
+          <div class="card">
+            <span class="tag">Local view</span>
+            <p>An agent reads its state, contract, owned tasks, direct neighbors, addressed messages, relevant record entries, and configured bounds. Full-graph access requires an explicit role grant.</p>
+          </div>
+        </div>
+        <h3>Task and evidence schemas</h3>
+        <table>
+          <thead><tr><th>Artifact</th><th>Required fields</th><th>Invariant</th></tr></thead>
+          <tbody>
+            <tr><td>Task contract</td><td><code>task_id</code>, owner, predecessors, pre/postconditions, input/output schemas, retry and timeout limits, refusal conditions, amendment authority</td><td><code>DONE</code> requires all postconditions; refusal and failure remain distinct.</td></tr>
+            <tr><td>Refusal</td><td>Agent, task, state, token, failed guard, contract clause, bounded reason code, sequence, prior-record hash</td><td>Free text may explain but may not be the sole reason.</td></tr>
+            <tr><td>Event record</td><td>Sequence, run, agent, task, event, prior/next state, token, reason, contract hash, prior-record hash, record hash</td><td>Append-only hash chain; missing, reordered, or mismatched records fail replay.</td></tr>
+          </tbody>
+        </table>
+        <p>Initial refusal codes include <code>INVALID_TOKEN</code>, <code>INVALID_STATE</code>, <code>PRECONDITION_FAILED</code>, <code>POSTCONDITION_FAILED</code>, <code>OWNERSHIP_CONFLICT</code>, <code>RETRY_LIMIT</code>, <code>TIMEOUT_LIMIT</code>, <code>FAILURE_BOUND</code>, <code>MISSING_DEPENDENCY</code>, <code>UNAUTHORIZED_AMENDMENT</code>, <code>INVALID_CONTRACT</code>, and <code>DEADLOCK_DETECTED</code>.</p>
+      </section>
+
+      <section id="workflow">
+        <h2>03 · Workflow, ownership, amendment, and failure model</h2>
+        <div class="grid">
+          <div class="card spine-blue">
+            <span class="tag">Admitted workflow class</span>
+            <h3>Finite directed graphs</h3>
+            <ul>
+              <li>One start node, one or more terminal nodes, finite task nodes, explicit edges.</li>
+              <li>Immutable graph during execution, explicit contracts and one active owner per task.</li>
+              <li>Acyclic graphs first; bounded cycles only after every acyclic obligation passes.</li>
+              <li>Readiness requires all required predecessors to complete.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="tag">Asynchronous communication</span>
+            <h3>Adversity, but bounded</h3>
+            <ul>
+              <li>Delay, reorder, duplicate, and drop messages within configured limits.</li>
+              <li>Crash-stop an agent; optionally restart it when recovery is enabled.</li>
+              <li>Configure maximum failed agents, dropped messages, delay, retries, and recovery transitions.</li>
+              <li>Exceeding any bound ends in a recorded <code>BOUND_EXCEEDED</code> outcome.</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Ownership and amendment discipline</h3>
+        <p>Ownership transfers require both <code>OWNER_RELEASED</code> and <code>OWNER_ACCEPTED</code> events; concurrent active ownership is refused. Amendments require an authorized <code>AMEND</code> token before affected work starts and record the old and new contract hashes, authority, clauses changed, reason code, and sequence. Completed tasks and unrecorded amendments are immutable.</p>
+        <h3>Recovery and deadlock</h3>
+        <p>Message identifiers make handling idempotent. Duplicates are recorded and ignored after their first effect. Recovery replays the authoritative record to restore agent state and may cover one dropped message, duplicated message, reordered pair, crash, restart, and ownership transfer within configured bounds.</p>
+        <p>Deadlock exists only when unfinished work remains, no valid transition is enabled, no permitted message is in transit, and no remaining timeout or recovery action can make progress. The detector waits for configured delay bounds, then records blocked tasks and failed guards before returning <code>DEADLOCKED</code>.</p>
+      </section>
+
+      <section id="modules">
+        <h2>04 · Proposed implementation modules</h2>
+        <table>
+          <thead><tr><th>Module</th><th>Responsibility</th></tr></thead>
+          <tbody>
+            <tr><td><code>model</code></td><td>Immutable states, tokens, schemas, graph types, bounds, and terminal statuses.</td></tr>
+            <tr><td><code>contract_validator</code></td><td>Validate task clauses, ownership, amendments, graph class, and deterministic transition tables.</td></tr>
+            <tr><td><code>transition_engine</code></td><td>Evaluate guards and produce exactly one transition effect or a structured refusal.</td></tr>
+            <tr><td><code>event_log</code></td><td>Maintain the authoritative append-only hash chain independently of runtime state.</td></tr>
+            <tr><td><code>message_bus</code></td><td>Provide deterministic asynchronous delivery plus bounded fault injection.</td></tr>
+            <tr><td><code>agent_runtime</code></td><td>Expose only the agent's permitted local view and apply transition effects.</td></tr>
+            <tr><td><code>workflow_engine</code> + <code>ownership</code></td><td>Determine readiness, offers, commitments, result validation, and exclusive transfers.</td></tr>
+            <tr><td><code>recovery</code> + <code>deadlock_detector</code></td><td>Replay state, enforce recovery bounds, and distinguish bounded delay from deadlock.</td></tr>
+            <tr><td><code>simulator</code></td><td>Run seeded scenarios without threads or processes; protocol logic stays transport-independent.</td></tr>
+            <tr><td><code>test_support</code></td><td>Generate graphs, inject failures, preserve seeds and traces, and compare model with runtime.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="organization">
+        <h2>05 · PRISM organizational mapping</h2>
+        <p>PRISM supplies an audience and ownership lens, not runtime permissions by color. INFRARED through YELLOW increase maker capability and cognitive complexity; GREEN is independent end-to-end delivery and the ship-it pivot. Above GREEN, BLUE through ULTRAVIOLET widen coordination and organizational ownership. The joys of becoming managerial class are sometimes declined.</p>
+        <table>
+          <thead><tr><th>PRISM scope</th><th>Kernel responsibility</th><th>Evidence banked</th></tr></thead>
+          <tbody>
+            <tr><td>INFRARED–YELLOW · maker progression</td><td>Implement and verify bounded units: schemas, guards, state rows, hashes, and scenario fixtures.</td><td>Valid local behavior and traceable task completion.</td></tr>
+            <tr><td>GREEN · shipping engineer</td><td>Own the executable simulator, documentation, repeatable suite, and end-to-end delivery.</td><td>A reproducible kernel baseline with honest limits.</td></tr>
+            <tr><td>BLUE · team coordination</td><td>Reconcile module interfaces, ownership-transfer semantics, and integration scenarios.</td><td>Cross-module workflow evidence.</td></tr>
+            <tr><td>INDIGO · project scope</td><td>Own the test matrix, failure budget, implementation sequence, and decision record.</td><td>Bounded project claims and acceptance traceability.</td></tr>
+            <tr><td>VIOLET · program scope</td><td>Compare implementations and coordinate later ASSAY and minimality experiments.</td><td>Cross-iteration findings without changing this kernel's evidence.</td></tr>
+            <tr><td>ULTRAVIOLET · organizational scope</td><td>Authorize changes to the charter, guarantee boundary, or research direction.</td><td>Recorded organizational amendments and field-level claims.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="tests">
+        <h2>06 · Test strategy</h2>
+        <div class="grid">
+          <div class="card"><span class="tag">Unit</span><p>Exercise every valid and invalid state-token pair, guard, refusal code, schema validator, hash link, timeout, retry, ownership transfer, duplicate, and amendment authorization.</p></div>
+          <div class="card"><span class="tag">Property</span><p>Prove one active owner, guarded transitions only, postconditions before completion, visible amendments/refusals, terminal status for every run, stable replay, and idempotent duplicates.</p></div>
+          <div class="card"><span class="tag">Model-based</span><p>Generate small graphs for one to nine agents, explore all enabled transitions within bounds, compare traces to the formal model, and report unreachable or exitless states and unused tokens.</p></div>
+          <div class="card"><span class="tag">Integration and replay</span><p>Cover linear, fork, join, parallel, transfer, retry, bounded cycle, deadlock, refusal, amendment, crash/restart, and delivery faults; rebuild deleted runtime state from each saved log.</p></div>
+        </div>
+        <h3>Required agent-count matrix</h3>
+        <table>
+          <thead><tr><th>Agents</th><th>Required graph forms and stressors</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Three-task linear completion, invalid-token refusal, bounded retry.</td></tr>
+            <tr><td>2</td><td>Handoff, dual-event ownership transfer, dropped acceptance.</td></tr>
+            <tr><td>3</td><td>Fork, join, one failed agent, unauthorized amendment.</td></tr>
+            <tr><td>5</td><td>Parallel branches, delayed and duplicated messages.</td></tr>
+            <tr><td>7</td><td>Mixed ownership, bounded recovery, reordered messages.</td></tr>
+            <tr><td>9</td><td>Fork, join, transfer, delay, one crash; largest initial stress graph.</td></tr>
+          </tbody>
+        </table>
+        <p>Every scenario uses a deterministic seed. Failures preserve the seed and complete event record. The baseline also includes a circular-dependency deadlock and a duplicate <code>RESULT</code> that completes exactly once.</p>
+        <h3>Minimality experiments</h3>
+        <p>After the baseline passes, remove one state, token, contract clause, graph primitive, or refusal code at a time; run the full suite; record the first property lost; then restore it. Classify each element as <code>REQUIRED</code>, <code>DERIVABLE</code>, <code>REDUNDANT</code>, or <code>UNDECIDED</code>. “Minimal” is permitted only when every retained element is required or formally derived—not merely because the source is short.</p>
+      </section>
+
+      <section id="sequence">
+        <h2>07 · Implementation sequence and deliverables</h2>
+        <ol>
+          <li>Write formal state, token, task-contract, event, and refusal definitions.</li>
+          <li>Define and mechanically validate the deterministic transition table.</li>
+          <li>Implement contract and graph validation, then the append-only record.</li>
+          <li>Implement the single-agent simulator and pass all one-agent tests.</li>
+          <li>Add seeded asynchronous messaging and two-agent ownership transfer.</li>
+          <li>Add three-agent fork/join, then bounded delivery and crash fault injection.</li>
+          <li>Add recovery, deadlock detection, and replay from an empty runtime.</li>
+          <li>Extend scenarios to five, seven, and nine agents.</li>
+          <li>Run destructive minimality experiments and document every lost property.</li>
+          <li>Publish specifications, evidence, assumptions, failures, and unresolved claims; ASSAY and SHIP occur in later authorized operations.</li>
+        </ol>
+        <p>Planned implementation artifacts are <code>docs/kernel-spec.md</code>, <code>docs/failure-model.md</code>, <code>docs/test-plan.md</code>, <code>docs/minimality-results.md</code>, <code>src/</code>, <code>tests/</code>, <code>examples/</code>, <code>artifacts/test-records/</code>, and a kernel <code>README.md</code>. Their repository location and language remain open decisions.</p>
+      </section>
+
+      <section id="acceptance">
+        <h2>08 · Acceptance gate</h2>
+        <ul class="status-list">
+          <li>Supported workflows execute with one to nine agents and every run records exactly one terminal status.</li>
+          <li>Every refusal uses a valid bounded reason code; every amendment is authorized and recorded.</li>
+          <li>Every task has at most one active owner and every completed task passes its postconditions.</li>
+          <li>Bounded failures recover or produce an explicit terminal account; deadlock is absent or detected.</li>
+          <li>Replay reproduces final state, and equal inputs plus seeds produce equal transition traces.</li>
+          <li>The full suite identifies the property lost after each destructive reduction.</li>
+          <li>Documentation states environmental assumptions and makes no guarantee outside the configured model.</li>
+        </ul>
+        <div class="grid">
+          <div class="card spine-indigo">
+            <span class="tag">Assumptions</span>
+            <ul>
+              <li>Use a deterministic simulator before threads or processes.</li>
+              <li>Use one authoritative append-only record initially.</li>
+              <li>Crash-stop is the first agent-failure model.</li>
+              <li>Time is represented by deterministic logical ticks or event sequence.</li>
+            </ul>
+          </div>
+          <div class="card spine-violet">
+            <span class="tag">Known limits and open decisions</span>
+            <ul>
+              <li>Programming language, test framework, and implementation repository path are not selected.</li>
+              <li>The first pass does not use real concurrent processes or claim distributed consensus.</li>
+              <li>Bounded cycles wait until all acyclic tests pass.</li>
+              <li>Formal support for minimality and the joint research foundations require later ASSAY.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources-title">
+        <h2 id="sources-title">09 · Sources and receipts</h2>
+        <dl>
+          <dt>Kernel source</dt><dd>Frozen proposed contract, “Implement and test the minimal agent-organization kernel,” supplied as the earlier kernel-contract attachment; reviewed 2026-08-01.</dd>
+          <dt>PRISM source</dt><dd><a href="../../the-prism.html">Canonical PRISM framework</a>, Angela Westmoreland, M.Ed., Fayetteville Technical Community College.</dd>
+          <dt>Visual source</dt><dd><a href="../../Algocratic%20Futures%20Design%20System/readme.md">Algocratic Futures™ Design System</a>, including paper-document tokens, typography, receipts, PRISM semantics, and card anatomy.</dd>
+          <dt>Contract stamp</dt><dd><code>teacherbot@green</code> · frozen and authorized for execution 2026-08-01.</dd>
+        </dl>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="page">
+      <p class="receipt">Document ID: AF-CHARTER-KERNEL-PLAN-01 · issued 2026-08-01 · classification: GREEN plan / cool-band organizational review</p>
+      <p class="fine-print">The Algorithm provides. Everything you need. Nothing you want. Completion is not inferred from enthusiasm; terminal status must be present in the authoritative record. Managerial clearance remains available to qualified operatives whether or not joy survives promotion.</p>
+    </div>
+  </footer>
+</body>
+</html>

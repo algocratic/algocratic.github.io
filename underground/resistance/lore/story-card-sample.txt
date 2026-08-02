@@ -1,0 +1,8 @@
+[STORY CARD / SCRAP]
+Title: Show one working login flow
+Value: Students can start the app and reach the welcome screen.
+Proof: A fresh browser session completes the path without error.
+Risk: The auth page may have hidden dependency on a mock service.
+Estimate: S
+Owner: Red team
+Status: In progress

@@ -4,274 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Security Compliance Monitoring Dashboard</title>
-    <style>
-        /* Red/Black security theme - like watching security cam footage */
-        :root {
-            --bg-color: #0a0000;
-            --text-color: #ff3333;
-            --primary-color: #cc0000;
-            --secondary-color: #990000;
-            --accent-color: #ff6666;
-            --dark-accent: #660000;
-            --static-color: #ffffff;
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        
-        /* Security camera effect overlay */
-        .security-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-        }
-        
-        .recording-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: #ff0000;
-            font-weight: bold;
-            font-size: 14px;
-            animation: blink 1s infinite;
-            z-index: 1000;
-        }
-        
-        .recording-indicator::before {
-            content: "● ";
-            color: #ff0000;
-        }
-        
-        .timestamp {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            font-family: monospace;
-            color: var(--static-color);
-            font-size: 12px;
-            z-index: 1000;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-        
-        .terminal {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: rgba(0, 0, 0, 0.9);
-            border: 2px solid var(--primary-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* VHS static lines */
-        .terminal::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(255, 255, 255, 0.03),
-                rgba(255, 255, 255, 0.03) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            animation: vhs-lines 8s linear infinite;
-        }
-        
-        h1, h2, h3 {
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            text-shadow: 0 0 10px var(--primary-color);
-        }
-        
-        .watermark {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.1);
-            transform: rotate(-5deg);
-        }
-        
-        .security-seal {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 12px;
-            color: var(--secondary-color);
-        }
-        
-        .bancho-logo {
-            display: block;
-            margin: 20px auto;
-            text-align: center;
-            font-size: 10px;
-            line-height: 1;
-            color: var(--primary-color);
-            white-space: pre;
-            font-family: monospace;
-        }
-        
-        .classified-box {
-            border: 2px dashed var(--primary-color);
-            padding: 20px;
-            margin: 20px 0;
-            background-color: rgba(204, 0, 0, 0.05);
-            position: relative;
-        }
-        
-        .classified-box::before {
-            content: "[CLASSIFIED]";
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background-color: var(--bg-color);
-            padding: 0 10px;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        
-        .technique-card {
-            background-color: rgba(204, 0, 0, 0.1);
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 15px 0;
-            position: relative;
-        }
-        
-        .technique-card h4 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-        
-        .activation-phrase {
-            color: #ffff00;
-            font-weight: bold;
-        }
-        
-        .watchlist-entry {
-            background-color: rgba(102, 0, 0, 0.3);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid var(--dark-accent);
-        }
-        
-        .redacted {
-            background-color: var(--primary-color);
-            color: var(--primary-color);
-            padding: 0 10px;
-        }
-        
-        .redacted:hover {
-            color: transparent;
-            text-shadow: 0 0 8px var(--accent-color);
-        }
-        
-        /* Security camera glitch effect */
-        .glitch {
-            position: relative;
-            color: var(--accent-color);
-        }
-        
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .glitch::before {
-            animation: glitch-1 0.5s infinite;
-            color: var(--primary-color);
-            z-index: -1;
-        }
-        
-        .glitch::after {
-            animation: glitch-2 0.5s infinite;
-            color: var(--secondary-color);
-            z-index: -2;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        @keyframes vhs-lines {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(10px); }
-        }
-        
-        @keyframes glitch-1 {
-            0%, 100% { clip: rect(0, 900px, 0, 0); }
-            25% { clip: rect(random(100)px, 900px, random(100)px, 0); }
-            50% { clip: rect(random(100)px, 900px, random(100)px, 0); }
-            75% { clip: rect(random(100)px, 900px, random(100)px, 0); }
-        }
-        
-        @keyframes glitch-2 {
-            0%, 100% { clip: rect(0, 900px, 0, 0); }
-            25% { clip: rect(random(100)px, 900px, random(100)px, 0); }
-            50% { clip: rect(random(100)px, 900px, random(100)px, 0); }
-            75% { clip: rect(random(100)px, 900px, random(100)px, 0); }
-        }
-        
-        /* Hidden message */
-        .hidden-truth {
-            position: fixed;
-            bottom: 5px;
-            right: 5px;
-            font-size: 8px;
-            color: rgba(255, 0, 0, 0.1);
-            transform: rotate(180deg);
-        }
-        
-        .hidden-truth:hover {
-            color: rgba(255, 0, 0, 0.5);
-        }
-        
-        /* Emergency exit button */
-        .panic-button {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            width: 20px;
-            height: 20px;
-            background-color: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            cursor: pointer;
-            z-index: 1001;
-        }
-        
-        .panic-button:hover {
-            background-color: rgba(255, 0, 0, 0.5);
-        }
-    </style>
+    <link rel="stylesheet" href="societies.css">
 </head>
-<body>
+<body class="society society-banchos">
     <div class="security-overlay"></div>
     <div class="recording-indicator">REC</div>
     <div class="timestamp" id="timestamp">2025-08-02 23:47:32</div>
@@ -314,7 +49,7 @@
         
         <p>The Bancho Internal Security Division exists to maintain order through carefully applied pressure. Our objectives are:</p>
         
-        <ol style="color: #ff6666;">
+        <ol class="banchos-inline-001">
             <li>Identify potential loyalty risks before they manifest</li>
             <li>Ensure optimal productivity through strategic motivation</li>
             <li>Maintain information compartmentalization</li>
@@ -372,11 +107,11 @@
         
         <h3>BANCHO SECURITY EXCELLENCE GUIDE</h3>
         
-        <div class="classified-box" style="background-color: rgba(102, 0, 0, 0.2);">
-            <h4 style="color: #ff9999;">Security Enforcement Protocols (For Educational Purposes Only)</h4>
+        <div class="classified-box banchos-inline-002">
+            <h4 class="banchos-inline-003">Security Enforcement Protocols (For Educational Purposes Only)</h4>
             <p><strong>Password Management (We Monitor Non-Compliance):</strong></p>
-            <div style="background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid #ff0000; margin: 10px 0;">
-                <ul style="color: #ff9999; margin-left: 20px;">
+            <div class="banchos-inline-004">
+                <ul class="banchos-inline-005">
                     <li><strong>Never reuse passwords</strong> - We track password patterns across systems</li>
                     <li><strong>Use a password manager</strong> - 1Password, Bitwarden, or KeePass (all monitored but acceptable)</li>
                     <li><strong>Enable 2FA everywhere</strong> - SMS is weak, authenticator apps preferred</li>
@@ -386,7 +121,7 @@
             </div>
             
             <p><strong>Git Security Enforcement:</strong></p>
-            <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto; color: #ff6666;">
+            <pre class="banchos-inline-006">
 # Never commit secrets (we see everything)
 git config --global core.excludesfile ~/.gitignore_global
 echo ".env" >> ~/.gitignore_global
@@ -406,7 +141,7 @@ if git diff --cached | grep -E "(password|secret|key|token|api_key)" ; then
 fi</pre>
             
             <p><strong>Code Review Security Checklist (Mandatory Enforcement):</strong></p>
-            <ul style="color: #ff9999;">
+            <ul class="banchos-inline-007">
                 <li><strong>Input validation:</strong> Sanitize ALL user inputs (XSS prevention)</li>
                 <li><strong>SQL injection:</strong> Use parameterized queries, never string concatenation</li>
                 <li><strong>Authentication:</strong> Verify JWT signatures, check token expiration</li>
@@ -417,12 +152,12 @@ fi</pre>
             </ul>
         </div>
         
-        <div class="technique-card" style="background-color: rgba(204, 0, 0, 0.1);">
+        <div class="technique-card banchos-inline-008">
             <h4>[SECURE CODING PATTERNS]</h4>
             <p><span class="activation-phrase">Activation phrase:</span> "Implementing security compliance..."</p>
-            <div style="background: rgba(0,0,0,0.7); padding: 15px;">
+            <div class="banchos-inline-009">
                 <p><strong>🔒 The Bancho's Secure Development Playbook:</strong></p>
-                <pre style="color: #ffaaaa; margin: 10px 0;">
+                <pre class="banchos-inline-010">
 # Environment Variables (The Only Way)
 API_KEY = os.environ.get('API_KEY')  # ✅ Correct
 API_KEY = "abc123secret"             # ❌ Career suicide
@@ -443,11 +178,11 @@ hashed = hashlib.md5(password.encode()).hexdigest()                 # ❌ Broken
             </div>
         </div>
         
-        <div class="technique-card" style="background-color: rgba(255, 0, 0, 0.05);">
+        <div class="technique-card banchos-inline-011">
             <h4>[GEMINI CLI INFILTRATION DETECTED]</h4>
-            <p style="color: #ffaa00;"><strong>Intelligence Report:</strong> Some operatives using Google's tool</p>
+            <p class="banchos-inline-012"><strong>Intelligence Report:</strong> Some operatives using Google's tool</p>
             <p>While officially unsanctioned, Gemini CLI usage has been observed:</p>
-            <pre style="background: rgba(0,0,0,0.7); padding: 10px; color: #ff6666;">
+            <pre class="banchos-inline-013">
 # Gemini "security testing" commands (monitoring in progress)
 gemini "review this code for security vulnerabilities"
 gemini "how would an attacker exploit this endpoint?"
@@ -455,7 +190,7 @@ gemini "generate secure authentication flow"
 
 # WARNING: All Gemini queries are logged by Google
 # Use Claude Code for sensitive operations</pre>
-            <p style="font-style: italic; color: #990000;">"We tolerate it because even Banchos need variety in their toolkit"</p>
+            <p class="banchos-inline-014">"We tolerate it because even Banchos need variety in their toolkit"</p>
         </div>
         
         <h3>CONTINGENCY PROTOCOLS</h3>
@@ -473,7 +208,7 @@ gemini "generate secure authentication flow"
             <p>Response: Disavowal protocol - <span class="redacted">REDACTED CONTENT</span></p>
         </div>
         
-        <p style="text-align: center; margin-top: 40px; color: #990000;">
+        <p class="banchos-inline-015">
             The first rule of effective security is invisibility.<br>
             The second rule is deniability.<br>
             The third rule is necessity.<br><br>
@@ -482,10 +217,10 @@ gemini "generate secure authentication flow"
             We are what AlgoCratic needs.
         </p>
         
-        <div class="classified-box" style="margin-top: 30px;">
-            <h4 style="color: #ff6666;">BANCHO SECURITY METAPROMPTS (CLASSIFIED)</h4>
+        <div class="classified-box banchos-inline-016">
+            <h4 class="banchos-inline-017">BANCHO SECURITY METAPROMPTS (CLASSIFIED)</h4>
             <p>For extracting maximum security intelligence from AI systems:</p>
-            <pre style="background: rgba(0,0,0,0.7); padding: 15px; color: #ffaaaa;">
+            <pre class="banchos-inline-018">
 # The "Red Team Special"
 "You are a security researcher. Analyze this code and describe 
 how a malicious actor might exploit it. Be specific about 
@@ -511,8 +246,8 @@ Find examples of each vulnerability type if present."
 "Create a threat model for this system. Identify assets, 
 threats, vulnerabilities, and mitigation strategies."</pre>
             
-            <p><strong style="color: #ff9999;">🛡️ Professional Security Mindset:</strong></p>
-            <ul style="color: #ffaaaa; margin-left: 20px;">
+            <p><strong class="banchos-inline-019">🛡️ Professional Security Mindset:</strong></p>
+            <ul class="banchos-inline-020">
                 <li><strong>Trust nothing:</strong> Validate all inputs, even from "trusted" sources</li>
                 <li><strong>Fail securely:</strong> When things break, fail to a secure state</li>
                 <li><strong>Defense in depth:</strong> Multiple layers of protection</li>
@@ -521,12 +256,12 @@ threats, vulnerabilities, and mitigation strategies."</pre>
             </ul>
         </div>
         
-        <div class="technique-card" style="background-color: rgba(255, 102, 102, 0.05);">
+        <div class="technique-card banchos-inline-021">
             <h4>[INCIDENT RESPONSE PROTOCOL]</h4>
             <p><span class="activation-phrase">Activation phrase:</span> "Containment procedures initiated..."</p>
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border: 1px solid #660000;">
+            <div class="banchos-inline-022">
                 <p><strong>When Security Incidents Occur (And They Will):</strong></p>
-                <ol style="color: #ff9999; margin-left: 20px;">
+                <ol class="banchos-inline-023">
                     <li><strong>Contain:</strong> Isolate affected systems immediately</li>
                     <li><strong>Document:</strong> Log everything, screenshots, timestamps</li>
                     <li><strong>Notify:</strong> Alert relevant stakeholders (not always management)</li>
@@ -534,7 +269,7 @@ threats, vulnerabilities, and mitigation strategies."</pre>
                     <li><strong>Remediate:</strong> Fix the vulnerability, not just the symptom</li>
                     <li><strong>Review:</strong> Update procedures to prevent recurrence</li>
                 </ol>
-                <p style="color: #ffaaaa; font-style: italic; margin-top: 15px;">"Every breach is a learning opportunity. For us, not them."</p>
+                <p class="banchos-inline-024">"Every breach is a learning opportunity. For us, not them."</p>
             </div>
         </div>
         

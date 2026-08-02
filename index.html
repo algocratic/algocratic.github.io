@@ -172,8 +172,24 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="static/portal-shell.css">
 </head>
-<body>
+<body class="portal-shell portal-society-fuzzies">
+<header class="af-system-header" data-portal-function="personnel and onboarding">
+  <a class="af-system-header__home" href="index.html">
+    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
+    <span class="af-system-header__brand">Algocratic Futures™</span>
+  </a>
+  <div>
+    <p class="af-system-header__label">System being accessed</p>
+    <p class="af-system-header__name">Citizen Entry System</p>
+  </div>
+  <div class="af-system-header__meta">
+    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
+    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
+  </div>
+</header>
+<div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -205,6 +221,7 @@
         <nav class="secondary-options" id="secondary-options">
             <ul class="options-list">
                 <li><a href="compliance-check.html" class="option-link">Compliance Documentation</a></li>
+                <li><a href="the-algorithm.html" class="option-link">About The Algorithm</a></li>
                 <li><a href="https://github.com/norrisaftcc/algocratic" class="option-link">GitHub Repository</a></li>
                 <li style="margin-top: 20px; font-size: 0.8em; color: #808080;">
                     <span>Already compliant? </span>
@@ -220,6 +237,7 @@
                 <li><a href="compliance-pledge.html" class="option-link">🔻 Allegiance Protocol</a></li>
                 <li><a href="metrics.html" class="option-link">Performance Metrics</a></li>
                 <li><a href="portal.html" class="option-link">Employee Portal</a></li>
+                <li><a href="the-algorithm.html" class="option-link">About The Algorithm</a></li>
                 <li><a href="new_player_guide.html" class="option-link">New Player Guide</a></li>
                 <li><a href="https://github.com/norrisaftcc/algocratic" class="option-link">GitHub Repository</a></li>
             </ul>
@@ -271,5 +289,6 @@
             console.log('%c📋 Compliance documentation required before system access', 'color: #ffff00;');
         }
     </script>
+  </div>
 </body>
 </html>

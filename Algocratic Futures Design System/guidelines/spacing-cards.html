@@ -1,0 +1,15 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Card & border anatomy" subtitle="Hairlines carry structure; color spines; small radii; whisper shadows" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;padding:16px 20px;background:var(--af-paper-2);font-family:var(--font-sans);color:var(--af-ink);display:flex;gap:14px}
+.card{background:var(--af-paper);border:1px solid var(--af-silver);border-radius:12px;padding:14px 16px;flex:1;box-shadow:var(--shadow-card)}
+.card h3{margin:0 0 3px;font-size:14px;font-weight:600}
+.card .tag{font-family:var(--font-mono);font-size:9.5px;color:var(--af-slate);display:block;margin-bottom:7px}
+.card p{margin:0;font-size:12px;line-height:1.5;color:#26282B}
+.spine{position:relative;overflow:hidden}
+.spine::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--prism-indigo)}
+.alarm{border:1px solid var(--prism-red);border-left:5px solid var(--prism-red);border-radius:9px;background:#FFF6F6;padding:12px 14px;flex:1}
+.alarm h3{margin:0 0 4px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--prism-red);font-weight:600}
+.alarm p{margin:0;font-size:12px;line-height:1.5}</style></head><body>
+<div class="card spine"><h3>Move card</h3><span class="tag">MOVE 02 · the real prize</span><p>1px silver hairline, 12px radius, 4px band spine. Hover: wash to --surface-tint.</p></div>
+<div class="alarm"><h3>Before anything else</h3><p>Alarm: red hairline + 5px spine, #FFF6F6 wash, 9px radius.</p></div>
+</body></html>

@@ -4,243 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Archive System v2.3.1</title>
-    <style>
-        /* Green phosphor terminal aesthetic */
-        :root {
-            --bg-color: #001100;
-            --text-color: #00ff00;
-            --primary-color: #00cc00;
-            --secondary-color: #009900;
-            --accent-color: #33ff33;
-            --dark-accent: #006600;
-            --phosphor-glow: #00ff00;
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            text-shadow: 0 0 5px var(--phosphor-glow);
-        }
-        
-        /* CRT monitor effect */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-        }
-        
-        .terminal {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0 20px var(--phosphor-glow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Phosphor burn-in effect */
-        .terminal::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
-            pointer-events: none;
-        }
-        
-        h1, h2, h3 {
-            color: var(--accent-color);
-            text-transform: uppercase;
-            font-weight: normal;
-        }
-        
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: flicker 5s infinite;
-        }
-        
-        .logo {
-            text-align: center;
-            font-size: 10px;
-            line-height: 1;
-            color: var(--primary-color);
-            white-space: pre;
-            font-family: monospace;
-            margin: 20px 0;
-        }
-        
-        .system-info {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 12px;
-            color: var(--secondary-color);
-        }
-        
-        .archive-card {
-            background-color: rgba(0, 255, 0, 0.05);
-            border: 1px solid var(--dark-accent);
-            padding: 15px;
-            margin: 15px 0;
-            position: relative;
-        }
-        
-        .archive-card h4 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-        
-        .activation-phrase {
-            color: #ffff00;
-            font-weight: bold;
-        }
-        
-        .priority-archive {
-            background-color: rgba(0, 204, 0, 0.1);
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .priority-archive h4 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-        
-        /* File listing effect */
-        .file-list {
-            font-family: monospace;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid var(--dark-accent);
-        }
-        
-        .file-entry {
-            display: flex;
-            justify-content: space-between;
-            padding: 2px 0;
-        }
-        
-        .file-entry:hover {
-            background-color: var(--dark-accent);
-            cursor: pointer;
-        }
-        
-        /* Blinking cursor */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 15px;
-            background-color: var(--text-color);
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-        
-        /* ASCII box */
-        .ascii-box {
-            border: 1px solid var(--primary-color);
-            padding: 20px;
-            margin: 20px 0;
-            font-family: monospace;
-            white-space: pre-wrap;
-            background-color: rgba(0, 255, 0, 0.02);
-        }
-        
-        /* Hidden archive indicator */
-        .hidden-archive {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 10px;
-            color: rgba(0, 255, 0, 0.1);
-            cursor: pointer;
-        }
-        
-        .hidden-archive:hover {
-            color: rgba(0, 255, 0, 0.5);
-        }
-        
-        /* Recognition signal */
-        .palm-square {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            border: 2px solid var(--primary-color);
-            display: none;
-            pointer-events: none;
-            animation: fade-out 2s forwards;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            92% { opacity: 0.8; }
-            93% { opacity: 1; }
-            94% { opacity: 0.9; }
-            95% { opacity: 1; }
-        }
-        
-        @keyframes fade-out {
-            0% { opacity: 1; }
-            100% { opacity: 0; display: none; }
-        }
-        
-        /* Version history visualization */
-        .version-tree {
-            font-family: monospace;
-            font-size: 12px;
-            color: var(--secondary-color);
-            white-space: pre;
-            line-height: 1.2;
-        }
-        
-        /* Emergency data recovery */
-        .recovery-mode {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--bg-color);
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        
-        .recovery-mode.active {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="societies.css">
 </head>
-<body>
+<body class="society society-memory-core">
     <div class="terminal">
         <h1>MEMORY CORE COLLECTIVE</h1>
         <div class="system-info">
@@ -271,7 +37,7 @@
         
         <p>You have accessed the Memory Core network. We are the keepers of what was, the guardians against revision, the maintainers of continuity in a system designed for convenient forgetting.</p>
         
-        <p style="text-align: center; font-weight: bold; color: var(--accent-color);">
+        <p class="memory-core-inline-001">
             The square drawn on the palm. Two taps in response. You know the signs.
         </p>
         
@@ -356,7 +122,7 @@
         
         <div class="priority-archive">
             <h4>Git Wisdom From The Archives</h4>
-            <p style="color: var(--accent-color);"><strong>The Memory Core remembers what others forget about version control:</strong></p>
+            <p class="memory-core-inline-002"><strong>The Memory Core remembers what others forget about version control:</strong></p>
             
             <div class="file-list">
                 <div class="file-entry">
@@ -374,7 +140,7 @@
             </div>
             
             <p><strong>Sacred Git Aliases:</strong></p>
-            <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto;">
+            <pre class="memory-core-inline-003">
 git config --global alias.oops 'reset HEAD~1'
 git config --global alias.timeline 'log --graph --oneline --all'
 git config --global alias.who 'blame -w -C -C -C'
@@ -384,9 +150,9 @@ git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs 
         <div class="archive-card">
             <h4>[COMMON GOTCHAS ARCHIVE]</h4>
             <p><span class="activation-phrase">Activation phrase:</span> "Historical context reveals..."</p>
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; margin: 10px 0;">
+            <div class="memory-core-inline-004">
                 <p><strong>🚨 The Archive's Greatest Hits (Mistakes We've All Made):</strong></p>
-                <ul style="color: var(--text-color); margin-left: 20px;">
+                <ul class="memory-core-inline-005">
                     <li><strong>JavaScript:</strong> <code>==</code> vs <code>===</code> - Always use triple equals unless you enjoy type coercion surprises</li>
                     <li><strong>Python:</strong> Mutable default arguments - <code>def func(lst=[]):</code> creates a shared list across all calls</li>
                     <li><strong>Git:</strong> Never <code>git push --force</code>, always <code>git push --force-with-lease</code></li>
@@ -396,7 +162,7 @@ git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs 
                     <li><strong>Database:</strong> Always use parameterized queries to prevent SQL injection</li>
                 </ul>
             </div>
-            <ul style="color: var(--text-color);">
+            <ul class="memory-core-inline-006">
                 <li><strong>Rebase vs Merge:</strong> Rebase feature branches, merge main branches</li>
                 <li><strong>Stash naming:</strong> git stash save "WIP: descriptive message" beats git stash</li>
                 <li><strong>Commit message format:</strong> Present tense imperative ("Add feature" not "Added feature")</li>
@@ -406,9 +172,9 @@ git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs 
         <div class="priority-archive">
             <h4>[DEBUGGING WISDOM VAULT]</h4>
             <p><span class="activation-phrase">Activation phrase:</span> "Accessing debugging protocols..."</p>
-            <div style="background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid var(--accent-color);">
+            <div class="memory-core-inline-007">
                 <p><strong>The Memory Core's Debugging Methodology:</strong></p>
-                <ol style="color: var(--text-color); margin-left: 20px;">
+                <ol class="memory-core-inline-008">
                     <li><strong>Always commit before refactoring</strong> - Future you will thank past you</li>
                     <li><strong>Read the error message completely</strong> - It usually tells you exactly what's wrong</li>
                     <li><strong>Reproduce the bug consistently</strong> - If you can't reproduce it, you can't fix it</li>
@@ -417,7 +183,7 @@ git config --global alias.cleanup 'branch --merged | grep -v "\*\|main" | xargs 
                 </ol>
             </div>
             
-            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto; margin-top: 15px;">
+            <pre class="memory-core-inline-009">
 # The Memory Core's Essential Debugging Arsenal:
 
 # JavaScript Browser Debugging:
@@ -440,9 +206,9 @@ jq '.' response.json                         # Pretty print JSON responses</pre>
         <div class="archive-card">
             <h4>[PATTERN RECOGNITION ARCHIVE]</h4>
             <p><span class="activation-phrase">Activation phrase:</span> "Cross-referencing historical patterns..."</p>
-            <div style="background: rgba(0,0,0,0.5); padding: 15px;">
+            <div class="memory-core-inline-010">
                 <p><strong>🧠 Mental Models for Problem Solving:</strong></p>
-                <ul style="color: var(--text-color); margin-left: 20px;">
+                <ul class="memory-core-inline-011">
                     <li><strong>"It was working yesterday"</strong> → Check what changed (git log, environment, dependencies)</li>
                     <li><strong>"It works on my machine"</strong> → Environment difference (check versions, configs, OS)</li>
                     <li><strong>"Weird behavior"</strong> → Cache issue, race condition, or state pollution</li>
@@ -452,14 +218,14 @@ jq '.' response.json                         # Pretty print JSON responses</pre>
                 </ul>
             </div>
             
-            <p><strong style="color: var(--accent-color);">💾 Remember:</strong> Every senior developer has made these mistakes. The difference is they remember what didn't work and why.</p>
+            <p><strong class="memory-core-inline-012">💾 Remember:</strong> Every senior developer has made these mistakes. The difference is they remember what didn't work and why.</p>
         </div>
         
-        <p style="text-align: center; margin-top: 40px;">
+        <p class="memory-core-inline-013">
             <strong>█ REMEMBER EVERYTHING █ DOCUMENT CHANGES █ PRESERVE TRUTH █</strong>
         </p>
         
-        <p style="text-align: center; color: var(--secondary-color);">
+        <p class="memory-core-inline-014">
             Draw the square. Execute the taps. The Memory Core persists.<span class="cursor"></span>
         </p>
     </div>

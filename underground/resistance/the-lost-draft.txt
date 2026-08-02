@@ -1,0 +1,783 @@
+The contract preserves the prior ASSAY finding as an alignment block. It limits the first implementation to one to nine agents.   
+
+# Implement and test the minimal agent-organization kernel
+
+## Alignment block — prior ASSAY finding
+
+### Residue
+
+* Replace broad agent reasoning with a small coordination protocol.
+* Give each agent finite states and a bounded token vocabulary.
+* Use guarded token transitions.
+* Limit each agent to local neighbor information.
+* Define work with preconditions and postconditions.
+* Record exceptions, refusals, amendments, and specification failures.
+* Treat stopping and justified refusal as valid outcomes.
+* Test workflow completion under asynchronous communication and partial failure.
+* Measure states, tokens, clauses, and graph primitives.
+* Require completion or an explicit, recorded refusal.
+* Prove that further reduction removes at least one required guarantee.
+
+Proposed kernel:
+
+```text
+STATES: IDLE, OFFERED, COMMITTED, DONE, REFUSED
+TOKENS: OFFER, ACCEPT, RESULT, FAIL, AMEND
+
+IF valid(TOKEN, STATE, CONTRACT)
+THEN transition_and_emit
+ELSE refuse_and_record
+```
+
+### Evaporated
+
+Historical synthesis, repeated contrasts, explanatory examples, and the full bibliography.
+
+Their functions are motivation, disciplinary alignment, and research positioning.
+
+### Operative sentence
+
+Define the smallest agent-organization kernel that guarantees completion or justified refusal for a defined workflow class.
+
+### Finding
+
+Above floor as a research concept.
+
+Below floor as a formal specification.
+
+Erosion direction: expansive.
+
+Flags:
+
+* Define the workflow class.
+* Define the failure model.
+* Define justified refusal.
+* Define minimality.
+* Define bounded recovery.
+* Define task ownership.
+* Separate message syntax from transition logic.
+* Define amendment authority.
+* Define record ordering and integrity.
+* Test whether the cited foundations jointly support the kernel.
+
+---
+
+## Objective
+
+Implement a deterministic coordination kernel for one to nine agents.
+
+Demonstrate sound completion, detected deadlock, bounded recovery, or recorded refusal.
+
+Do not add planning, unrestricted natural-language negotiation, or global organizational knowledge.
+
+---
+
+## Audience
+
+* Implementor
+* Product owner
+* Test author
+* Independent assayer
+* Future researchers who reproduce the experiment
+
+---
+
+## Initial scope
+
+### Agent count
+
+Support these configurations:
+
+* one agent
+* two agents
+* three agents
+* five agents
+* seven agents
+* nine agents
+
+Do not support ten or more agents in this work item.
+
+### Workflow class
+
+Support finite directed workflow graphs with:
+
+* one start node
+* one or more terminal nodes
+* finite task nodes
+* explicit directed edges
+* no graph mutation during execution
+* bounded retry counts
+* explicit ownership rules
+* explicit task contracts
+
+Support acyclic graphs first.
+
+Add bounded cycles only after all acyclic tests pass.
+
+### Communication model
+
+Use asynchronous message delivery.
+
+Permit:
+
+* delayed messages
+* reordered messages
+* duplicated messages
+* dropped messages within a configured bound
+* agent crash-stop failures
+* agent restart when the test enables recovery
+
+Do not claim progress guarantees during an unbounded network partition.
+
+### Failure bound
+
+Configure these limits:
+
+* maximum failed agents
+* maximum dropped messages
+* maximum delivery delay
+* maximum retries
+* maximum recovery transitions
+
+A run outside these limits must refuse and record the exceeded bound.
+
+---
+
+## Kernel model
+
+### Required agent states
+
+Start with:
+
+```text
+IDLE
+OFFERED
+COMMITTED
+RUNNING
+DONE
+REFUSED
+FAILED
+RECOVERING
+```
+
+Do not remove a state until tests prove that its behavior remains distinguishable.
+
+### Required tokens
+
+Start with:
+
+```text
+OFFER
+ACCEPT
+REJECT
+START
+RESULT
+FAIL
+ACK
+TIMEOUT
+RECOVER
+AMEND
+CANCEL
+```
+
+Do not remove a token until tests prove that another token preserves its meaning.
+
+### Transition rule
+
+Use this rule shape:
+
+```text
+IF valid(token, state, contract, sender, receiver)
+THEN apply_transition_and_emit
+ELSE refuse_and_record
+```
+
+Each transition definition must include:
+
+* current state
+* accepted token
+* guard
+* action
+* next state
+* emitted token
+* precondition
+* postcondition
+* refusal reason
+* record event
+
+### Determinism
+
+For one agent state and one accepted token, permit one valid transition.
+
+Reject ambiguous transition tables before execution.
+
+### Local view
+
+Each agent may read:
+
+* its state
+* its current contract
+* its owned tasks
+* its direct neighbors
+* messages addressed to it
+* relevant record entries
+* configured failure bounds
+
+Each agent must not read the full graph unless the graph gives that role explicitly.
+
+---
+
+## Task contracts
+
+Each task contract must contain:
+
+```text
+task_id
+owner
+permitted_predecessors
+preconditions
+postconditions
+input_schema
+output_schema
+retry_limit
+timeout_limit
+refusal_conditions
+amendment_authority
+```
+
+A task may enter `DONE` only when all postconditions pass.
+
+A task must enter `REFUSED` when a refusal condition holds.
+
+A task must enter `FAILED` when execution stops without a valid refusal.
+
+---
+
+## Ownership rules
+
+Use one active owner for each task.
+
+Permit ownership transfer only through a recorded transition.
+
+Require both of these events:
+
+```text
+OWNER_RELEASED
+OWNER_ACCEPTED
+```
+
+Do not permit concurrent active ownership.
+
+Refuse the transfer when either event is absent.
+
+---
+
+## Refusal rules
+
+A justified refusal must include:
+
+```text
+agent_id
+task_id
+state
+received_token
+failed_guard
+contract_clause
+reason_code
+timestamp_or_sequence
+prior_record_hash
+```
+
+Use a bounded reason-code vocabulary.
+
+Include at least:
+
+```text
+INVALID_TOKEN
+INVALID_STATE
+PRECONDITION_FAILED
+POSTCONDITION_FAILED
+OWNERSHIP_CONFLICT
+RETRY_LIMIT
+TIMEOUT_LIMIT
+FAILURE_BOUND
+MISSING_DEPENDENCY
+UNAUTHORIZED_AMENDMENT
+INVALID_CONTRACT
+DEADLOCK_DETECTED
+```
+
+Do not use free text as the sole refusal reason.
+
+---
+
+## Amendment rules
+
+Permit amendments only before affected work starts.
+
+Require an authorized amendment token.
+
+Record:
+
+* prior contract hash
+* amended contract hash
+* amendment authority
+* changed clauses
+* reason code
+* sequence number
+
+Reject amendments to completed tasks.
+
+Reject unrecorded amendments.
+
+---
+
+## Append-only record
+
+Implement an append-only event log.
+
+Each record must include:
+
+```text
+sequence
+run_id
+agent_id
+task_id
+event_type
+prior_state
+next_state
+token
+reason_code
+contract_hash
+prior_record_hash
+record_hash
+```
+
+Reject a record when its prior hash does not match.
+
+Detect missing or reordered records during replay.
+
+Do not claim distributed consensus in this work item.
+
+Use one authoritative test record for initial experiments.
+
+---
+
+## Graph execution
+
+### Start
+
+Start only when:
+
+* the graph validates
+* every task has a contract
+* every task has one owner
+* every transition table is deterministic
+* all bounds are configured
+* the record is empty or belongs to the current run
+
+### Progress
+
+Mark a task ready only when all required predecessors complete.
+
+Offer ready work to its owner.
+
+Require acceptance before commitment.
+
+Require commitment before execution.
+
+Require validated results before completion.
+
+### Stop
+
+Stop the run with one terminal status:
+
+```text
+COMPLETED
+REFUSED
+DEADLOCKED
+FAILED
+BOUND_EXCEEDED
+```
+
+Do not leave a run without a terminal status.
+
+---
+
+## Deadlock detection
+
+Detect deadlock when:
+
+* unfinished tasks remain
+* no valid transition is enabled
+* no permitted message remains in transit
+* no configured timeout or recovery action can enable progress
+
+Record the blocked tasks and failed guards.
+
+Return `DEADLOCKED`.
+
+Do not classify a temporary delay as deadlock before its bound expires.
+
+---
+
+## Recovery
+
+Support bounded recovery for:
+
+* one dropped message
+* one duplicated message
+* one reordered message pair
+* one agent crash
+* one agent restart
+* one task ownership transfer
+
+Require idempotent message handling.
+
+Ignore duplicate message identifiers after recording the duplicate.
+
+Replay the record to restore agent state.
+
+Refuse recovery when the configured bound is exceeded.
+
+---
+
+## Implementation modules
+
+Create these logical modules:
+
+```text
+model
+transition_engine
+contract_validator
+message_bus
+agent_runtime
+workflow_engine
+ownership
+recovery
+event_log
+deadlock_detector
+simulator
+test_support
+```
+
+Keep protocol logic separate from the simulation transport.
+
+Keep graph validation separate from runtime execution.
+
+Keep the event log independent from agent state.
+
+---
+
+## Test levels
+
+### Unit tests
+
+Test:
+
+* every valid state-token pair
+* every invalid state-token pair
+* every guard
+* every state transition
+* every refusal code
+* contract validation
+* graph validation
+* record hash chaining
+* duplicate message handling
+* ownership transfer
+* amendment authorization
+* retry and timeout bounds
+
+### Property tests
+
+Verify:
+
+* one active owner per task
+* no transition without a valid guard
+* no completed task with failed postconditions
+* no silent contract amendment
+* no silent refusal
+* no run without a terminal status
+* deterministic replay from the same record
+* identical inputs produce identical transitions
+* duplicate messages do not duplicate task completion
+* record sequence never decreases
+
+### Model-based tests
+
+Generate small graphs for one to nine agents.
+
+Explore all enabled transitions within configured bounds.
+
+Compare runtime traces with the formal transition model.
+
+Report every unreachable state.
+
+Report every state with no defined exit.
+
+Report every token that no state accepts.
+
+### Integration tests
+
+Test:
+
+* linear workflow
+* fork workflow
+* join workflow
+* independent parallel tasks
+* ownership transfer
+* bounded retry
+* bounded cycle
+* deadlock
+* refusal
+* amendment before execution
+* rejected amendment after execution
+* crash and restart
+* message delay
+* message loss
+* message duplication
+* message reordering
+
+### Replay tests
+
+Run each scenario.
+
+Save the event record.
+
+Delete runtime state.
+
+Rebuild all agent states from the record.
+
+Compare rebuilt states with final runtime states.
+
+Fail on any difference.
+
+---
+
+## Agent-count matrix
+
+Run each applicable scenario with:
+
+| Agents | Required graph forms                |
+| -----: | ----------------------------------- |
+|      1 | linear, refusal, retry              |
+|      2 | handoff, ownership transfer         |
+|      3 | fork, join, one failed agent        |
+|      5 | parallel branches, delayed messages |
+|      7 | mixed ownership, bounded recovery   |
+|      9 | largest initial stress graph        |
+
+Run each configuration with deterministic random seeds.
+
+Record the seed for every failed test.
+
+---
+
+## Required baseline scenarios
+
+### Scenario 1 — single-agent completion
+
+Use one agent and three linear tasks.
+
+Expect all tasks to complete.
+
+Expect no refusal.
+
+Expect deterministic replay.
+
+### Scenario 2 — invalid token refusal
+
+Send `RESULT` to an `IDLE` agent.
+
+Expect `REFUSED`.
+
+Expect `INVALID_STATE`.
+
+Expect one refusal record.
+
+### Scenario 3 — two-agent handoff
+
+Complete one task.
+
+Transfer the dependent task.
+
+Require release and acceptance records.
+
+Expect one active owner throughout.
+
+### Scenario 4 — dropped acceptance
+
+Drop one `ACCEPT` token.
+
+Permit one retry.
+
+Expect recovery or bounded refusal.
+
+Do not permit silent commitment.
+
+### Scenario 5 — duplicate result
+
+Deliver the same `RESULT` twice.
+
+Complete the task once.
+
+Record the duplicate.
+
+Do not produce two completion events.
+
+### Scenario 6 — agent crash
+
+Crash one committed agent.
+
+Restart or transfer ownership within the configured bound.
+
+Expect recovery or recorded refusal.
+
+### Scenario 7 — deadlock
+
+Create two tasks with unsatisfied circular dependencies.
+
+Expect `DEADLOCKED`.
+
+Record both blocked contracts and guards.
+
+### Scenario 8 — unauthorized amendment
+
+Send `AMEND` from an unauthorized agent.
+
+Expect `UNAUTHORIZED_AMENDMENT`.
+
+Preserve the prior contract.
+
+### Scenario 9 — nine-agent workflow
+
+Use nine agents with fork, join, transfer, delay, and one crash.
+
+Expect completion within configured bounds.
+
+Otherwise expect one explicit terminal refusal.
+
+---
+
+## Minimality experiments
+
+Create a baseline implementation that passes all required tests.
+
+Remove one state.
+
+Run the full suite.
+
+Record the first lost property.
+
+Restore the state.
+
+Repeat for each state.
+
+Repeat the process for:
+
+* each token
+* each contract clause
+* each graph primitive
+* each refusal code
+
+Classify each element:
+
+```text
+REQUIRED
+DERIVABLE
+REDUNDANT
+UNDECIDED
+```
+
+Call the kernel minimal only when every retained element is `REQUIRED` or formally derived.
+
+Do not use source-code line count as the sole minimality measure.
+
+---
+
+## Acceptance criteria
+
+The work item passes when:
+
+* one to nine agents execute supported workflows
+* every run reaches one terminal status
+* every refusal has a valid reason code
+* every amendment is authorized and recorded
+* every task has at most one active owner
+* every completed task passes its postconditions
+* bounded failures recover or produce explicit refusal
+* deadlock is absent or detected
+* replay reproduces final state
+* the test suite identifies the property lost after each destructive reduction
+* documentation states all environmental assumptions
+* no result claims guarantees outside the configured model
+
+---
+
+## Deliverables
+
+Produce:
+
+```text
+docs/kernel-spec.md
+docs/failure-model.md
+docs/test-plan.md
+docs/minimality-results.md
+src/
+tests/
+examples/
+artifacts/test-records/
+README.md
+```
+
+Include:
+
+* state definitions
+* token definitions
+* transition table
+* contract schema
+* event schema
+* supported graph class
+* failure assumptions
+* test matrix
+* replay instructions
+* known limits
+* minimality findings
+
+---
+
+## Execution order
+
+1. Write the formal state and token definitions.
+2. Define the contract and event schemas.
+3. Define the transition table.
+4. Implement validation.
+5. Implement the append-only record.
+6. Implement the single-agent runtime.
+7. Pass all one-agent tests.
+8. Add asynchronous messaging.
+9. Add two-agent ownership transfer.
+10. Add three-agent fork and join.
+11. Add bounded failure injection.
+12. Add recovery and replay.
+13. Extend tests to five, seven, and nine agents.
+14. Run destructive minimality experiments.
+15. Document assumptions, failures, and unresolved claims.
+16. ASSAY the completed deliverables in a later operation.
+17. SHIP the deliverables with the execution record.
+
+## Open questions
+
+* Which programming language and test framework must the implementation use?
+* Which repository path contains the work item?
+* Must the first implementation use threads, processes, or a deterministic simulator?
+
+Cut: The contract removes broad theory and retains the implementation model, limits, tests, deliverables, and measurable acceptance conditions.
+
+Assume: Use a deterministic simulator before any concurrent runtime.
+
+Assume: Use one authoritative append-only record for the first implementation.
+
+Assume: Treat crash-stop failure as the initial agent failure model.
+
+Freeze this contract and execute, or keep negotiating?
