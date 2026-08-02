@@ -38,8 +38,11 @@ h2 { margin-bottom:0; font-family:var(--font-display); font-size:clamp(2rem,4vw,
 .action:hover,.action:focus { color:var(--band-ink); background:var(--band); }
 .green-pivot { margin:3px 0; padding:13px 20px; border:1px dashed #65e67a; color:#c8f3cf; background:#0d2514; font-family:var(--font-mono); font-size:.78rem; text-align:center; }
 .horizon { opacity:.8; }
-.horizon .action { cursor:default; }
-.horizon:hover { transform:none; border-color:color-mix(in srgb, var(--band) 60%, #1a3422); }
+.horizon .action { cursor:pointer; }
+.horizon:hover { border-color:var(--band); }
+.trapezoid-aside { max-width:680px; margin:28px 0 0 auto; padding:18px 21px; border-left:2px solid #c274ff; color:#ddd0ee; background:rgba(48, 25, 70, .38); font-family:var(--font-mono); font-size:.8rem; line-height:1.55; opacity:.78; }
+.trapezoid-aside p:last-child { margin-bottom:0; }
+.trapezoid-aside .eyebrow { color:#dcb1ff; }
 .horizon-label { color:var(--band); }
 .next { padding:46px 0; border-top:1px solid var(--atlas-line); text-align:center; }
 .next p { max-width:650px; margin:18px auto 0; color:#c9dccd; line-height:1.5; }
