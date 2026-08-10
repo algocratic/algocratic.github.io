@@ -6,278 +6,9 @@
     <title>System Maintenance Log - Network Infrastructure</title>
     <!-- Innocuous title to hide true purpose -->
     <link rel="stylesheet" href="../../static/styles.css">
-    <style>
-        /* Phreak-specific blue theme overrides */
-        :root {
-            --bg-color: #000510;
-            --text-color: #ccddff;
-            --primary-color: #0088ff;
-            --secondary-color: #00aaff;
-            --accent-color: #55ddff;
-            --dark-accent: #005599;
-            --font-mono: 'Courier New', monospace;
-            --font-main: 'Arial', sans-serif;
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-mono);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            cursor: default;
-        }
-        
-        .terminal {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: #001122;
-            border: 1px solid var(--primary-color);
-            box-shadow: 0 0 20px var(--primary-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        h1, h2, h3, h4 {
-            color: var(--accent-color);
-            font-weight: normal;
-        }
-        
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        
-        h2 {
-            text-align: center;
-            font-size: 18px;
-            font-style: italic;
-            margin-top: 0;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-        
-        h3 {
-            border-bottom: 1px solid var(--primary-color);
-            padding-bottom: 5px;
-            font-size: 20px;
-            margin-top: 40px;
-        }
-        
-        .ascii-art {
-            text-align: center;
-            font-size: 12px;
-            white-space: pre;
-            line-height: 1.2;
-            color: var(--primary-color);
-            margin: 20px auto;
-            max-width: 500px;
-        }
-        
-        .security-banner {
-            background-color: var(--dark-accent);
-            color: var(--text-color);
-            text-align: center;
-            padding: 5px;
-            margin: 20px 0;
-            font-weight: bold;
-            font-size: 14px;
-            border-top: 1px solid var(--accent-color);
-            border-bottom: 1px solid var(--accent-color);
-        }
-        
-        .note {
-            background-color: rgba(0, 128, 255, 0.1);
-            border-left: 3px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding-left: 20px;
-        }
-        
-        ul li {
-            margin-bottom: 10px;
-            position: relative;
-        }
-        
-        ul li:before {
-            content: ">";
-            position: absolute;
-            left: -20px;
-            color: var(--primary-color);
-        }
-        
-        .power-card {
-            background-color: rgba(0, 128, 255, 0.15);
-            border: 1px solid var(--primary-color);
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .power-card h4 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-        
-        .power-activation {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        
-        .operation {
-            margin-bottom: 25px;
-        }
-        
-        .operation h4 {
-            color: var(--accent-color);
-            margin-bottom: 5px;
-        }
-        
-        .status {
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-        
-        /* Blinking cursor effect */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 15px;
-            background-color: var(--primary-color);
-            animation: blink 1s step-end infinite;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-        
-        /* Scanline effect */
-        .scanline {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(0, 170, 255, 0.1);
-            opacity: 0.75;
-            z-index: 999;
-            animation: scanline 6s linear infinite;
-            pointer-events: none;
-        }
-        
-        /* CRT flicker */
-        .terminal:before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.03));
-            z-index: 999;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-            animation: flicker 0.15s infinite;
-            opacity: 0.3;
-        }
-        
-        /* Hidden message that appears on hover near logo */
-        .hidden-message {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: var(--bg-color);
-            font-size: 10px;
-            transition: color 0.5s ease;
-        }
-        
-        .terminal:hover .hidden-message {
-            color: var(--primary-color);
-        }
-        
-        /* Signal/noise pattern in the background */
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/png;base64,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');
-            pointer-events: none;
-            opacity: 0.03;
-            z-index: -1;
-        }
-        
-        /* Animations */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        @keyframes scanline {
-            0% { top: -5%; }
-            100% { top: 105%; }
-        }
-        
-        @keyframes flicker {
-            0% { opacity: 0.27; }
-            5% { opacity: 0.34; }
-            10% { opacity: 0.25; }
-            15% { opacity: 0.31; }
-            20% { opacity: 0.35; }
-            25% { opacity: 0.33; }
-            30% { opacity: 0.30; }
-            35% { opacity: 0.33; }
-            40% { opacity: 0.28; }
-            45% { opacity: 0.34; }
-            50% { opacity: 0.29; }
-            55% { opacity: 0.32; }
-            60% { opacity: 0.29; }
-            65% { opacity: 0.35; }
-            70% { opacity: 0.31; }
-            75% { opacity: 0.28; }
-            80% { opacity: 0.33; }
-            85% { opacity: 0.29; }
-            90% { opacity: 0.27; }
-            95% { opacity: 0.32; }
-            100% { opacity: 0.31; }
-        }
-        
-        /* Security measures */
-        #decoy-content {
-            display: none;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--primary-color);
-            font-size: 14px;
-            color: var(--dark-accent);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .terminal {
-                margin: 10px;
-                padding: 15px;
-            }
-            
-            .ascii-art {
-                font-size: 8px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="societies.css">
 </head>
-<body>
+<body class="society society-phreaks">
     <!-- Decoy content for casual browsers -->
     <div id="decoy-content">
         <h1>Network Infrastructure Maintenance Log</h1>
@@ -360,10 +91,10 @@
         <h3>YOUR RESOURCES</h3>
         <p>As a Phreak, you have access to powers that others lack:</p>
         
-        <h3 style="margin-top: 40px; color: var(--accent-color);">PHREAK EFFICIENCY ARSENAL</h3>
-        <div class="note" style="background-color: rgba(0, 170, 255, 0.2);">
-            <h4 style="color: var(--accent-color);">Claude Code Power Commands</h4>
-            <pre style="background: rgba(0,0,0,0.5); padding: 10px; overflow-x: auto;">
+        <h3 class="phreaks-inline-001">PHREAK EFFICIENCY ARSENAL</h3>
+        <div class="note phreaks-inline-002">
+            <h4 class="phreaks-inline-003">Claude Code Power Commands</h4>
+            <pre class="phreaks-inline-004">
 # The System Optimization Toolkit
 claude --no-auto-close  # Persistent connection for deep work
 claude --resume         # Continue where surveillance interrupted
@@ -377,10 +108,10 @@ claude --model opus-4   # Maximum pattern recognition power
 </pre>
         </div>
         
-        <div class="note" style="background-color: rgba(85, 221, 255, 0.15);">
-            <h4 style="color: var(--accent-color);">AI Prompting Metaskills</h4>
+        <div class="note phreaks-inline-005">
+            <h4 class="phreaks-inline-006">AI Prompting Metaskills</h4>
             <p><strong>The Phreak's Guide to Making AI Actually Useful:</strong></p>
-            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto;">
+            <pre class="phreaks-inline-007">
 # The "Context Loading" Pattern:
 "I'm working on [specific task]. Here's my current code: [paste code]
 Here's what I'm trying to achieve: [clear goal]
@@ -402,8 +133,8 @@ Prioritize by business impact."
 </pre>
         </div>
         
-        <div class="note" style="background-color: rgba(0, 136, 255, 0.15);">
-            <h4 style="color: var(--accent-color);">Terminal Velocity Tricks</h4>
+        <div class="note phreaks-inline-008">
+            <h4 class="phreaks-inline-009">Terminal Velocity Tricks</h4>
             <ul>
                 <li><code>alias yeet='git add . && git commit -m "quick fix" && git push'</code></li>
                 <li><code>alias nuke='rm -rf node_modules && npm install'</code></li>
@@ -414,20 +145,20 @@ Prioritize by business impact."
                 <li><code>ctrl+r</code> - Reverse search command history (life-changing)</li>
                 <li><code>cmd+k</code> (Mac) / <code>ctrl+l</code> (Linux) - Clear terminal but keep history</li>
             </ul>
-            <p style="margin-top: 15px; color: #55ddff; font-style: italic;">💡 Pro Tip: Set up these aliases in your ~/.bashrc or ~/.zshrc. Your future self will thank you.</p>
+            <p class="phreaks-inline-010">💡 Pro Tip: Set up these aliases in your ~/.bashrc or ~/.zshrc. Your future self will thank you.</p>
         </div>
         
-        <div class="note" style="background-color: rgba(0, 200, 255, 0.1);">
-            <h4 style="color: var(--accent-color);">Debugging Wisdom</h4>
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--accent-color); margin: 10px 0;">
+        <div class="note phreaks-inline-011">
+            <h4 class="phreaks-inline-012">Debugging Wisdom</h4>
+            <div class="phreaks-inline-013">
                 <p><strong>"The Three Laws of Debugging" (Phreak Edition):</strong></p>
-                <ol style="color: var(--text-color); margin-left: 20px;">
+                <ol class="phreaks-inline-014">
                     <li>The bug is always where you least expect it</li>
                     <li>When in doubt, console.log() everything</li>
                     <li>If it worked yesterday and doesn't work today, check what changed</li>
                 </ol>
             </div>
-            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto;">
+            <pre class="phreaks-inline-015">
 # The Debugging Arsenal:
 git bisect start     # Binary search through commits to find the bug
 git log --oneline -p # See what actually changed in each commit
@@ -443,14 +174,14 @@ debugger;           # Breakpoint in browser dev tools
         
         <div class="power-card">
             <h4>[CURSOR HERESY ACKNOWLEDGED]</h4>
-            <p style="color: #ff9999;"><strong>Warning:</strong> Some Phreaks have been caught using Cursor</p>
+            <p class="phreaks-inline-016"><strong>Warning:</strong> Some Phreaks have been caught using Cursor</p>
             <p>While Claude Code remains our sanctioned tool, we acknowledge that <em>certain rebels</em> prefer Cursor's inline editing. If you must use it:</p>
-            <ul style="color: var(--text-color);">
+            <ul class="phreaks-inline-017">
                 <li>Cmd+K for inline generation (the forbidden efficiency)</li>
                 <li>Cmd+L for chat (when Claude Code is "under maintenance")</li>
                 <li>Tab autocomplete (addictive, use with caution)</li>
             </ul>
-            <p style="font-style: italic; color: var(--dark-accent);">"We don't endorse it, but we understand why you'd want actual productivity"</p>
+            <p class="phreaks-inline-018">"We don't endorse it, but we understand why you'd want actual productivity"</p>
         </div>
         
         <div class="power-card">
@@ -499,9 +230,9 @@ debugger;           # Breakpoint in browser dev tools
         <p>Check them regularly but not obviously. Alternate your patterns to avoid detection.</p>
         
         <h3>PHREAK WISDOM: PROMPT ENGINEERING</h3>
-        <div class="note" style="background-color: rgba(85, 221, 255, 0.1);">
+        <div class="note phreaks-inline-019">
             <p><strong>The Art of Making AI Do The Heavy Lifting:</strong></p>
-            <pre style="background: rgba(0,0,0,0.5); padding: 15px; overflow-x: auto;">
+            <pre class="phreaks-inline-020">
 # The "I'm Too Lazy To Debug" Prompt:
 "Here's my error: [paste error]
 Here's my code: [paste code]
@@ -522,11 +253,11 @@ Fix it and explain what you did like I'm smart but tired"
         </div>
         
         <h3>STRATEGIC PROMPTING: BATTLE-TESTED APPROACHES</h3>
-        <div class="note" style="background-color: rgba(255, 165, 0, 0.1); border-left: 3px solid #ffa500;">
+        <div class="note phreaks-inline-021">
             <p><strong>🧠 IRL-Tested Techniques That Actually Work:</strong></p>
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--accent-color); margin: 10px 0;">
-                <p style="color: var(--accent-color);"><strong>The "Deep Breath" Protocol:</strong></p>
-                <pre style="background: transparent; margin: 0;">
+            <div class="phreaks-inline-022">
+                <p class="phreaks-inline-023"><strong>The "Deep Breath" Protocol:</strong></p>
+                <pre class="phreaks-inline-024">
 "Think hard / take a deep breath and help me understand this step by step"
 
 # Why it works: Forces the AI to slow down and be methodical
@@ -534,9 +265,9 @@ Fix it and explain what you did like I'm smart but tired"
 # Phreak insight: Sometimes you need to make the AI pause and reconsider</pre>
             </div>
             
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--accent-color); margin: 10px 0;">
-                <p style="color: var(--accent-color);"><strong>The "Haskell Then Port" Method:</strong></p>
-                <pre style="background: transparent; margin: 0;">
+            <div class="phreaks-inline-025">
+                <p class="phreaks-inline-026"><strong>The "Haskell Then Port" Method:</strong></p>
+                <pre class="phreaks-inline-027">
 "Design it in Haskell first, then port it to [practical language]"
 
 # Why it works: Forces clean, functional thinking before implementation
@@ -544,9 +275,9 @@ Fix it and explain what you did like I'm smart but tired"
 # Phreak insight: Haskell's purity reveals the true essence of the problem</pre>
             </div>
             
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--accent-color); margin: 10px 0;">
-                <p style="color: var(--accent-color);"><strong>The "PRD First" Approach:</strong></p>
-                <pre style="background: transparent; margin: 0;">
+            <div class="phreaks-inline-028">
+                <p class="phreaks-inline-029"><strong>The "PRD First" Approach:</strong></p>
+                <pre class="phreaks-inline-030">
 "I need a PRD (Product Requirements Document) first - let's define exactly 
 what we're building before we write any code"
 
@@ -555,9 +286,9 @@ what we're building before we write any code"
 # Phreak insight: 10 minutes of planning saves 2 hours of rewriting</pre>
             </div>
             
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--accent-color); margin: 10px 0;">
-                <p style="color: var(--accent-color);"><strong>The "Don't Build, Just Discuss" Strategy:</strong></p>
-                <pre style="background: transparent; margin: 0;">
+            <div class="phreaks-inline-031">
+                <p class="phreaks-inline-032"><strong>The "Don't Build, Just Discuss" Strategy:</strong></p>
+                <pre class="phreaks-inline-033">
 "Don't make the thing, just talk about how we would make it. 
 What would the architecture look like? What are the edge cases?"
 
@@ -566,9 +297,9 @@ What would the architecture look like? What are the edge cases?"
 # Phreak insight: The best code is code you never had to write</pre>
             </div>
             
-            <div style="background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid #ffff00; margin: 15px 0;">
-                <p style="color: #ffff00;"><strong>💡 Advanced Phreak Combos:</strong></p>
-                <pre style="background: transparent; color: #ffff00; margin: 0;">
+            <div class="phreaks-inline-034">
+                <p class="phreaks-inline-035"><strong>💡 Advanced Phreak Combos:</strong></p>
+                <pre class="phreaks-inline-036">
 # The "Rubber Duck Upgrade":
 "Be my rubber duck, but one that asks probing questions and 
 suggests improvements I might not see"
@@ -583,7 +314,7 @@ suggests improvements I might not see"
 "How would [Martin Fowler/Rich Hickey/etc] approach this problem?"</pre>
             </div>
             
-            <p style="color: var(--accent-color); font-style: italic; margin-top: 15px;">
+            <p class="phreaks-inline-037">
                 <strong>🔥 Phreak Secret:</strong> Chain these techniques together. Start with "deep breath," 
                 then "don't build," then "Haskell design," then "port to practical." 
                 You'll be amazed at the quality improvement.
@@ -591,10 +322,10 @@ suggests improvements I might not see"
         </div>
         
         <h3>PHREAK CHALLENGE: SYSTEM INTRUSION SIMULATION</h3>
-        <div class="note" style="background-color: rgba(0, 170, 255, 0.3); cursor: pointer;" onclick="activatePuzzleMode()">
-            <h4 style="color: var(--accent-color);">🔓 INTERACTIVE CHALLENGE UNLOCKED</h4>
+        <div class="note phreaks-inline-038" onclick="activatePuzzleMode()">
+            <h4 class="phreaks-inline-039">🔓 INTERACTIVE CHALLENGE UNLOCKED</h4>
             <p><strong>The Efficiency Breach:</strong> Can you optimize this "inefficient" code?</p>
-            <pre style="background: rgba(0,0,0,0.7); padding: 15px; overflow-x: auto; margin: 10px 0;">
+            <pre class="phreaks-inline-040">
 def corporate_inefficiency():
     result = []
     for i in range(1000):
@@ -607,14 +338,14 @@ def corporate_inefficiency():
 # Click here to enter PHREAK MODE</pre>
         </div>
         
-        <div id="puzzle-mode" style="display: none; background-color: rgba(0, 0, 0, 0.9); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; padding: 20px; overflow-y: auto;">
-            <div style="max-width: 800px; margin: 0 auto; background-color: var(--bg-color); border: 2px solid var(--primary-color); padding: 30px;">
-                <h2 style="color: var(--accent-color);">PHREAK CHALLENGE: SYSTEM OPTIMIZATION</h2>
+        <div class="phreaks-inline-041" id="puzzle-mode">
+            <div class="phreaks-inline-042">
+                <h2 class="phreaks-inline-043">PHREAK CHALLENGE: SYSTEM OPTIMIZATION</h2>
                 <p>You've discovered inefficient corporate code. As a Phreak, it's your duty to optimize it.</p>
                 
-                <div style="margin: 20px 0;">
+                <div class="phreaks-inline-044">
                     <h4>Original "Corporate" Code:</h4>
-                    <pre style="background: rgba(255,0,0,0.1); padding: 15px; border: 1px solid #ff0000;">
+                    <pre class="phreaks-inline-045">
 def corporate_inefficiency():
     result = []
     for i in range(1000):
@@ -627,27 +358,27 @@ def corporate_inefficiency():
 # Space complexity: O(k) where k is result size</pre>
                 </div>
                 
-                <div style="margin: 20px 0;">
+                <div class="phreaks-inline-046">
                     <h4>Your Optimized Solution:</h4>
-                    <textarea id="solution-input" style="width: 100%; height: 200px; background: rgba(0,255,0,0.1); border: 1px solid var(--primary-color); color: var(--text-color); font-family: monospace; padding: 10px;" placeholder="Enter your optimized code here...">
+                    <textarea class="phreaks-inline-047" id="solution-input" placeholder="Enter your optimized code here...">
 def phreak_optimization():
     # Your optimized solution here
     # Remember: Phreaks value efficiency over protocol
     pass</textarea>
                 </div>
                 
-                <div style="margin: 20px 0;">
-                    <button onclick="checkSolution()" style="background: var(--primary-color); color: var(--bg-color); border: none; padding: 10px 20px; font-family: monospace; font-weight: bold; cursor: pointer;">SUBMIT OPTIMIZATION</button>
-                    <button onclick="showHint()" style="background: var(--dark-accent); color: var(--text-color); border: 1px solid var(--primary-color); padding: 10px 20px; font-family: monospace; margin-left: 10px; cursor: pointer;">REQUEST HINT</button>
-                    <button onclick="closePuzzleMode()" style="background: transparent; color: var(--text-color); border: 1px solid var(--primary-color); padding: 10px 20px; font-family: monospace; float: right; cursor: pointer;">EXIT</button>
+                <div class="phreaks-inline-048">
+                    <button class="phreaks-inline-049" onclick="checkSolution()">SUBMIT OPTIMIZATION</button>
+                    <button class="phreaks-inline-050" onclick="showHint()">REQUEST HINT</button>
+                    <button class="phreaks-inline-051" onclick="closePuzzleMode()">EXIT</button>
                 </div>
                 
-                <div id="feedback-area" style="margin: 20px 0; padding: 15px; border: 1px solid var(--primary-color); background: rgba(0,0,0,0.5); display: none;">
+                <div class="phreaks-inline-052" id="feedback-area">
                     <h4>Algorithm Analysis:</h4>
                     <p id="feedback-text"></p>
                 </div>
                 
-                <div id="hint-area" style="margin: 20px 0; padding: 15px; border: 1px solid #ffff00; background: rgba(255,255,0,0.1); color: #ffff00; display: none;">
+                <div class="phreaks-inline-053" id="hint-area">
                     <h4>Phreak Wisdom:</h4>
                     <p id="hint-text"></p>
                 </div>

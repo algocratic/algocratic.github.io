@@ -1,0 +1,98 @@
+<!-- compositor: M4 · learn -->
+<!-- Canvas page title (rendered as h1 by Canvas, not in this fragment): "Decisions: the idea" -->
+<!-- Source: book-ch4-decisions.md §Where You Are, §The Idea in One Picture, §The Minimum Syntax -->
+
+<div style="max-width:52rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Lato,Helvetica,Arial,sans-serif;color:#3C4149;font-size:1rem;line-height:1.65;">
+
+  <p style="margin:0 0 .5rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#1F6F5C;">Module 04 &middot; Reading</p>
+
+  <p style="margin:0 0 1.4rem;font-size:1.1rem;">Until now your programs have run in a straight line. This is where that ends &mdash; and where the diamonds you drew in Module 2 become something the machine can run.</p>
+
+  <hr style="border:0;border-top:1px solid #DFE3E8;margin:0 0 1.6rem;">
+
+  <p style="margin:0 0 1.2rem;">Every statement in your programs so far has executed, top to bottom, every time. Change the input and the numbers changed &mdash; but the <em>path</em> through the program never did.</p>
+
+  <p style="margin:0 0 1.2rem;">A program that makes decisions can take one path today and a different path tomorrow, depending on what it finds when it runs. This is called <strong>selection</strong>. It is the first of the two ideas that separate a calculator from a program. The second is repetition, and it is the next reading.</p>
+
+  <p style="margin:0 0 1.4rem;">When you finish this reading you will be able to:</p>
+
+  <ul style="margin:0 0 1.6rem;padding-left:1.2rem;">
+    <li style="margin:0 0 .4rem;">Write an <code style="font-size:.92em;">if</code> statement that runs a block only when a condition is true</li>
+    <li style="margin:0 0 .4rem;">Name the four parts of an <code style="font-size:.92em;">if</code> statement and say what each one does</li>
+    <li style="margin:0;">Explain why both paths of a decision come back together</li>
+  </ul>
+
+  <h2 style="margin:1.8rem 0 .6rem;font-size:1.2rem;line-height:1.3;color:#16191D;">The idea in one picture</h2>
+
+  <p style="margin:0 0 1.2rem;">A decision is a question with a yes-branch and a no-branch. That is all it ever is, no matter how complicated the code looks.</p>
+
+  <figure style="margin:0 0 1.4rem;">
+    <img src="UPLOAD-PENDING-figure-m4-01.svg" alt="A flowchart. From a start node labelled Program running, an arrow leads to a diamond reading Is the condition true. The yes branch leads to a box reading Do the thing. The no branch leads to a box reading Skip it. Both boxes then lead to a single end node reading Keep going." style="display:block;max-width:100%;height:auto;border:1px solid #DFE3E8;">
+    <figcaption style="margin:.5rem 0 0;font-size:.85rem;color:#6B7280;">Figure 1. Every decision, at its simplest. &middot; <a href="#LINK-PENDING-fig-m4-01-source" style="color:#0374B5;">diagram source</a> <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.7rem;color:#9A6700;">[LINK PENDING]</span></figcaption>
+  </figure>
+
+  <p style="margin:0 0 1.2rem;">In words: the program reaches a question. If the answer is yes, it does the thing. If the answer is no, it skips the thing. Either way it arrives at the same next step and keeps going.</p>
+
+  <p style="margin:0 0 1.2rem;"><strong>Both paths come back together.</strong> Whatever the program decides, it continues afterward. A decision changes what happens <em>for a moment</em>. It does not end the program or start a new one.</p>
+
+  <p style="margin:0 0 1.6rem;"><strong>The condition must be answerable yes or no.</strong> Not &ldquo;how much.&rdquo; Not &ldquo;which one.&rdquo; Just true or false. C++ has a type for exactly this &mdash; <code style="font-size:.92em;">bool</code> &mdash; holding two values and no others. Every condition you write, however long, collapses to a single <code style="font-size:.92em;">bool</code> before the program acts on it.</p>
+
+  <h2 style="margin:1.8rem 0 .6rem;font-size:1.2rem;line-height:1.3;color:#16191D;">The smallest program that decides</h2>
+
+  <p style="margin:0 0 1.2rem;">Here is a complete C++ program that makes one decision. Read it before you run it.</p>
+
+  <pre style="margin:0 0 1.2rem;padding:.85rem 1rem;background-color:#F4F6F7;color:#16191D;border-left:2px solid #DFE3E8;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;overflow-x:auto;">// Program 4-1: The smallest complete decision.
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int temperature = 38;
+
+    cout &lt;&lt; "Checking the freezer..." &lt;&lt; endl;
+
+    if (temperature &gt; 32)
+    {
+        cout &lt;&lt; "Warning: everything is melting." &lt;&lt; endl;
+    }
+
+    cout &lt;&lt; "Check complete." &lt;&lt; endl;
+
+    return 0;
+}</pre>
+
+  <p style="margin:0 0 1.2rem;">Compile it and run it. Three lines come back:</p>
+
+  <pre style="margin:0 0 1.4rem;padding:.85rem 1rem;background-color:#F4F6F7;color:#16191D;border-left:2px solid #DFE3E8;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;overflow-x:auto;">Checking the freezer...
+Warning: everything is melting.
+Check complete.</pre>
+
+  <p style="margin:0 0 1.2rem;">Strip away the freezer and the shape underneath never changes:</p>
+
+  <pre style="margin:0 0 1.4rem;padding:.85rem 1rem;background-color:#F4F6F7;color:#16191D;border-left:2px solid #DFE3E8;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;overflow-x:auto;">if (condition)
+{
+    statements that run only when the condition is true
+}</pre>
+
+  <p style="margin:0 0 1rem;">Four parts:</p>
+
+  <ol style="margin:0 0 1.6rem;padding-left:1.4rem;">
+    <li style="margin:0 0 .5rem;">The keyword <code style="font-size:.92em;">if</code>.</li>
+    <li style="margin:0 0 .5rem;">A condition <strong>in parentheses</strong>. Required, always.</li>
+    <li style="margin:0 0 .5rem;">A block <strong>in braces</strong>. Those statements run only when the condition is true.</li>
+    <li style="margin:0;"><strong>No semicolon after the closing parenthesis.</strong> See the caution below.</li>
+  </ol>
+
+  <div style="border-left:2px solid #9A6700;padding-left:1rem;margin:0 0 1.6rem;">
+    <p style="margin:0 0 .25rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#9A6700;">Caution</p>
+    <p style="margin:0 0 .6rem;">Most students who lose an hour to this module lose it to one semicolon. Writing <code style="font-size:.92em;">if (temperature &gt; 32);</code> ends the <code style="font-size:.92em;">if</code> statement right there. The block below it then runs no matter what the temperature is.</p>
+    <p style="margin:0;">Your compiler will warn you about this, and the warning says so in plain English. You will meet it in the next reading but one.</p>
+  </div>
+
+  <h2 style="margin:1.8rem 0 .6rem;font-size:1.2rem;line-height:1.3;color:#16191D;">Before you move on</h2>
+
+  <p style="margin:0 0 1.2rem;">Open Program 4-1, change <code style="font-size:.92em;">temperature</code> to <code style="font-size:.92em;">20</code>, rebuild, and run it again. Two lines print instead of three.</p>
+
+  <p style="margin:0;">Do that now. It takes fifteen seconds, and it makes the idea stick in a way that reading about it does not.</p>
+
+</div>

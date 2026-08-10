@@ -1,0 +1,55 @@
+:root{
+  /* base — corporate */
+  --af-ink:#0D1B2A;            /* eye/triangle mark navy-black */
+  --af-charcoal:#363E4A;       /* banner slate */
+  --af-navy:#16305F;           /* report headings, table headers */
+  --af-navy-deep:#0F2347;
+  --af-gold:#F0B82D;           /* accent, quotes, ×
+                                  used sparingly — one glint per page */
+  --af-slate:#53565A;          /* GRAY. secondary text on paper */
+  --af-silver:#E2E1DD;         /* hairlines on paper */
+  --af-cream:#F2ECD9;          /* retro cream */
+  --af-paper:#FFFFFF;
+  --af-paper-2:#FAF9F6;
+
+  /* PRISM clearance spectrum (canonical hex from PRISM house docs) */
+  --prism-infrared:#A01028;
+  --prism-red:#E03131;
+  --prism-orange:#E8590C;
+  --prism-yellow:#F2C037;
+  --prism-green:#2F9E44;
+  --prism-blue:#1971C2;
+  --prism-indigo:#3F3CA6;
+  --prism-violet:#6D28D9;
+  --prism-ultraviolet:#3B0F73;
+  --prism-gray:#53565A;        /* GRAY — Gather Required Aesthetic Yields */
+  --prism-rail:linear-gradient(to right,var(--prism-infrared),var(--prism-red),var(--prism-orange),var(--prism-yellow),var(--prism-green),var(--prism-blue),var(--prism-indigo),var(--prism-violet),var(--prism-ultraviolet));
+
+  /* retro stripe set (course banners) */
+  --stripe-1:#A93226; --stripe-2:#DD5A2B; --stripe-3:#EFA43C; --stripe-4:#4F8F53; --stripe-5:#2BA3C4;
+  --stripe-gap:#F2ECD3;
+
+  /* ops (Teacherbot dark surfaces) */
+  --ops-bg:#0F1115; --ops-panel:#161A21; --ops-panel-2:#1C212A; --ops-line:#262C37;
+  --ops-ink:#E7EBF2; --ops-ink-2:#A7B0C0; --ops-ink-3:#6F7889;
+  --ops-series-1:#5AA9E6; --ops-series-2:#E0863F;
+  --ops-crit:#E05561; --ops-warn:#D9A441; --ops-ok:#4FB286;
+  --ops-urgent-wash:rgba(224,85,97,.10);
+
+  /* semantic — paper surfaces (default) */
+  --text-body:var(--af-ink);
+  --text-secondary:var(--af-slate);
+  --text-heading:var(--af-navy);
+  --text-inverse:var(--af-cream);
+  --surface-page:var(--af-paper);
+  --surface-card:var(--af-paper);
+  --surface-tint:var(--af-paper-2);
+  --surface-dark:var(--af-charcoal);
+  --border-hairline:var(--af-silver);
+  --accent:var(--af-gold);
+  --link:var(--prism-blue);
+  --link-hover:var(--af-navy);
+  --danger:var(--prism-red);
+  --warning:var(--prism-yellow);
+  --success:var(--prism-green);
+}
