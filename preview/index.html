@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Design System v0.2 — Preview Cover · AlgoCratic Futures™</title>
+  <!-- STRATUM=PELICAN/196X · COLUMN=PRINT · TOKENS=v0.2 -->
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body data-stratum="pelican">
+
+<div class="af-shell-page af-section">
+
+  <header>
+    <div class="af-banner" data-level="orange">
+      <img class="af-banner__mark" src="design-system/assets/algocratic-mark.svg" alt="">
+      <div class="af-banner__text">
+        <h1>Design System v0.2 — Preview</h1>
+        <div class="af-banner__meta">FOUR SAMPLE PAGES · FOR GO / NO-GO REVIEW · NOTHING PUBLISHED HAS CHANGED</div>
+      </div>
+      <span class="af-chip" data-column="print" data-level="orange">Draft</span>
+    </div>
+    <div class="af-pattern-strip" data-level="orange" aria-hidden="true"></div>
+  </header>
+
+  <h2 class="af-h2">What This Is</h2>
+  <p class="af-body af-measure">Four pages from <strong>algocratic.github.io</strong> rebuilt in the <strong>AlgoCratic Design System v0.2</strong>, so we can decide whether to adopt it site-wide before anyone starts a migration. This cover page is itself a specimen — it is a Pelican/196X document in the print column.</p>
+  <p class="af-body af-measure">Every sample is a <strong>new file under <code>preview/</code></strong>. No published page was edited. The branch is additive and can be closed without consequence.</p>
+
+  <h2 class="af-h2">The Samples</h2>
+  <table class="af-table">
+    <tbody>
+      <tr>
+        <td><strong><a href="landing.html">Landing</a></strong> — the front door<br><span class="af-fine">Ink-dark hero band, accretion strip, paper body. Replaces the Courier / #00ff41 scanline treatment.</span></td>
+        <td data-num>MEDIA/2026<br>SCREEN</td>
+        <td data-num><a href="../index.html">before ›</a></td>
+      </tr>
+      <tr>
+        <td><strong><a href="portal.html">Portal</a></strong> — the app shell<br><span class="af-fine">Heaviest component load: masthead, sticky nav, 2fr/1fr grid, XU counter, Trusted Workflow, SHODANN, terminal crack, OOC note.</span></td>
+        <td data-num>MEDIA/2026<br>SCREEN</td>
+        <td data-num><a href="../portal.html">before ›</a></td>
+      </tr>
+      <tr>
+        <td><strong><a href="clearance-orange.html">ORANGE clearance guide</a></strong> — the band template<br><span class="af-fine">Clearance machinery: both color columns side by side, badge, pattern accretion, the nine-band chip set. This template repeats across every band, so it is the highest-leverage thing to validate.</span></td>
+        <td data-num>MEDIA/2026<br>SCREEN</td>
+        <td data-num><a href="../clearance/orange/index.html">before ›</a></td>
+      </tr>
+      <tr>
+        <td><strong><a href="orientation-packet.html">Orientation packet</a></strong> — the document register<br><span class="af-fine">Clearance banner with 4px underline, mono checklist, assessment table, SHODANN inset, instructor OOC note, mono fine print.</span></td>
+        <td data-num>PELICAN/196X<br>PRINT</td>
+        <td data-num><a href="../orientation_packet.html">before ›</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="af-h2">Why Those Strata</h2>
+  <p class="af-body af-measure">Rule 4 requires every artifact to declare what year it thinks it is. Interactive site surfaces were built as <strong>Media/2026 on the screen column</strong> — that is the stratum v0.2 defines for badge language on screen, and it is where the nav, cards and counters live. The orientation packet was built as <strong>Pelican/196X on the print column</strong>, because it is a document, not an app.</p>
+  <p class="af-body af-measure">198X Terminal appears on every page, but only as a <em>crack</em> — a mono phosphor panel deliberately interrupting a lighter page, marked <code>frotz</code>. That is the system's prescribed use. It is worth noticing that the published site is currently terminal-flavored end to end, which v0.2 would treat as one stratum applied everywhere. See open question 2.</p>
+
+  <h2 class="af-h2">The Yardstick</h2>
+  <p class="af-body af-measure">Judge fidelity against the five rules, condensed:</p>
+  <ul class="af-list af-measure">
+    <li><strong>0 · Produced artifacts outrank speculation.</strong> Shipped badges and print are canon; digital conforms.</li>
+    <li><strong>1 · Five typefaces, five jobs.</strong> Orbitron display, Saira Condensed labels, IBM Plex Sans body, IBM Plex Mono metadata, Bangers underground-only.</li>
+    <li><strong>2 · Screen ≠ print, both are real.</strong> Declare a substrate column and stay in it. Never average the two.</li>
+    <li><strong>3 · Pattern accretion.</strong> pattern(N) = pattern(N−1) at 30% + motif(N) at 90%. The badge remembers where you started.</li>
+    <li><strong>4 · Declare your stratum.</strong> 1968 Comix · 196X Pelican · 198X Terminal · 2026 Media. Never mixed except deliberately, at the cracks.</li>
+  </ul>
+  <p class="af-body af-measure">Plus the standing prohibitions the current site breaks: <strong>no emoji, no gradients, no stock icon sets, effectively no motion.</strong> The samples strip the emoji from the nav and console logs, drop the scanline and blink animations, and redraw the ASCII hierarchy diagram as flat geometric SVG.</p>
+
+  <h2 class="af-h2">What We Need Decided</h2>
+  <table class="af-table af-measure">
+    <tbody>
+      <tr>
+        <td data-num>01</td>
+        <td><strong>Replace or coexist?</strong> The repo already contains <code>Algocratic Futures Design System/</code> — the earlier navy / gold / Michroma identity — and <code>static/portal-shell.css</code> imports it on line 1, so all 22 shell pages inherit its tokens. Both systems define <code>--link</code>, <code>--surface-page</code> and <code>--text-body</code> with different values. They cannot both feed the shell. A GO means picking one.</td>
+      </tr>
+      <tr>
+        <td data-num>02</td>
+        <td><strong>Is the front door Media or Terminal?</strong> The published site is uniformly 198X-terminal-flavored. v0.2 says terminal is one stratum, used at the cracks. These samples take v0.2 at its word. If terminal-everywhere is the intended identity, that is a legitimate answer — but it should be an explicit choice, not an inheritance.</td>
+      </tr>
+      <tr>
+        <td data-num>03</td>
+        <td><strong>How does shared chrome get shared?</strong> The <code>af-system-header</code> block is hand-copied into 22 pages, and the site has no build step. Rolling out any system across all of them means a build step or a JS include. Worth deciding before the rollout, not during.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="af-h2">Known Gaps</h2>
+  <ul class="af-list af-measure">
+    <li><strong>Fonts are proxies.</strong> v0.2 itself names Orbitron as the web proxy for an unconfirmed production display face. No font binaries were provided; the tokens import from Google Fonts, which is a third-party runtime dependency the current site does not have.</li>
+    <li><strong>The print column is incomplete.</strong> INFRARED, GREEN and BLUE print values are extrapolated (◇) pending the designer's swatch export. INDIGO, VIOLET, ULTRAVIOLET and GRAY have no print value at all — the orientation packet shows those as absences rather than borrowing the screen value.</li>
+    <li><strong>BLUE+ accretion patterns are canonically [REDACTED]</strong> and were never drawn, so bands above GREEN have no pattern strip.</li>
+    <li><strong>Vendored subset.</strong> <code>preview/design-system/</code> carries only tokens, <code>styles.css</code> and assets. The kit's React components, UI kits, slides and guideline cards were left out; the samples are plain HTML and CSS with no runtime.</li>
+    <li><strong>One upstream fix is demonstrated but not applied.</strong> The published <code>portal.html</code> routes through stale <code>website/</code>-prefixed paths; the sample uses the corrected paths. The original file is untouched.</li>
+  </ul>
+
+  <div class="af-ooc af-measure af-stack-top">
+    <div class="af-ooc__who">Out of character</div>
+    <p>Nothing here is a commitment. If the answer is no-go, delete the branch and the published site is exactly as it was. If the answer is go, <code>preview/preview.css</code> is the starting point — it is written entirely against v0.2 tokens with no new hex values, and is meant to graduate into <code>static/</code> alongside <code>portal-shell.css</code>.</p>
+  </div>
+
+  <div class="af-footer__inner">
+    <span class="af-declaration">ALGOCRATIC FUTURES™ · STRATUM=PELICAN/196X · COLUMN=PRINT · TOKENS=v0.2 · This document contains no jokes about your standing. It contains several about ours.</span>
+  </div>
+
+</div>
+</body>
+</html>

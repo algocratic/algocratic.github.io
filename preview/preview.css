@@ -1,0 +1,541 @@
+/* ============================================================
+   AlgoCratic Design System v0.2 — page-level primitives
+   ------------------------------------------------------------
+   Every value here resolves to a token in design-system/tokens/.
+   No new hex values are introduced. Classes are translations of
+   the kit components (components/{core,badges,voice,workflow,
+   media}/*.jsx) from inline-style JSX into plain CSS, so the
+   preview pages can be static HTML with no React runtime.
+
+   If v0.2 is a GO, this file is the thing that graduates into
+   static/ alongside portal-shell.css.
+   ============================================================ */
+
+@import url("design-system/styles.css");
+
+/* ---------- reset + page ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--leading-body);
+  background: var(--surface-page);
+  color: var(--text-strong);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+
+/* Rule 4 asks every artifact to declare its stratum. Pages set
+   data-stratum on <body>; these two only change the substrate. */
+body[data-stratum="terminal"] { background: var(--term-bg); color: var(--term-phosphor); }
+body[data-stratum="comix"]    { background: var(--paper-aged); }
+
+/* ---------- shells (spacing.css measures) ---------- */
+.af-shell      { max-width: var(--measure-app);  margin: 0 auto; padding: 0 var(--space-24); }
+.af-shell-page { max-width: var(--measure-page); margin: 0 auto; padding: 0 var(--space-24); }
+.af-measure    { max-width: var(--measure-body); }
+.af-section    { padding-top: var(--space-44); padding-bottom: var(--space-44); }
+.af-stack-top  { margin-top: var(--space-20); }
+.af-stack-top-sm { margin-top: var(--space-16); }
+
+/* ---------- type roles (five faces, five jobs) ---------- */
+.af-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+.af-label {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-label);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.af-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: var(--space-6);
+}
+.af-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  color: var(--text-meta);
+}
+.af-fine {
+  font-size: var(--text-fine);
+  color: var(--text-meta);
+  line-height: 1.55;
+}
+.af-body { font-size: 14px; color: var(--text-body); }
+.af-body strong { color: var(--text-strong); }
+.af-body + .af-body { margin-top: var(--space-12); }
+
+h1, h2, h3 { font-family: var(--font-condensed); font-weight: 700; text-transform: uppercase; }
+
+/* Section heading, document register (AssignmentPage docStyles.h2) */
+.af-h2 {
+  font-size: var(--text-card-h);
+  letter-spacing: .03em;
+  margin: var(--space-34) 0 var(--space-10);
+}
+
+/* ---------- masthead: flat clearance field + accretion strip ---------- */
+.af-masthead {
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+}
+.af-masthead[data-field="ink"] { background: var(--surface-inverse); color: var(--paper); }
+.af-masthead[data-field="orange"] { background: var(--scr-orange); }
+.af-masthead[data-field="red"]    { background: var(--scr-red);    color: var(--text-on-clearance); }
+.af-masthead[data-field="yellow"] { background: var(--scr-yellow); }
+
+.af-masthead__inner { position: relative; z-index: 2; }
+
+.af-masthead__brand {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-14);
+  padding-top: var(--space-26);
+}
+.af-masthead__mark { width: 34px; height: 46px; flex-shrink: 0; }
+/* the mark ships with a #1A1A22 stroke; invert it on ink fields */
+.af-masthead[data-field="ink"] .af-masthead__mark,
+.af-masthead[data-field="red"] .af-masthead__mark { filter: invert(1); opacity: .95; }
+
+.af-masthead__wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: .06em;
+  line-height: 1.2;
+}
+.af-masthead__wordmark small {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: .04em;
+  margin-top: var(--space-2);
+  opacity: .85;
+  text-transform: none;
+}
+
+/* bottom padding clears the 64px accretion strip pinned to the base */
+.af-masthead__title { padding: var(--space-26) 0 calc(var(--space-64) + var(--space-20)); }
+.af-masthead__level {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(34px, 7vw, 64px);
+  letter-spacing: .04em;
+  line-height: 1.05;
+}
+.af-masthead__level--long { font-size: clamp(28px, 5.4vw, 50px); }
+.af-masthead__descriptor {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-tier-sub);
+  letter-spacing: var(--track-clearance);
+  text-transform: uppercase;
+  margin-top: var(--space-2);
+}
+.af-masthead__receipt {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin-top: var(--space-14);
+  opacity: .75;
+}
+
+/* PatternStrip — accretion is baked into the SVGs (pattern(N) =
+   pattern(N-1) ghost + motif(N)); we place, never recompute. */
+.af-pattern-strip {
+  height: 22px;
+  background-size: auto 500%;
+  background-position: center 32%;
+  background-repeat: repeat-x;
+  overflow: hidden;
+}
+.af-pattern-strip[data-level="infrared"] { background-image: url("design-system/assets/patterns/pattern-infrared.svg"); }
+.af-pattern-strip[data-level="red"]      { background-image: url("design-system/assets/patterns/pattern-red.svg"); }
+.af-pattern-strip[data-level="orange"]   { background-image: url("design-system/assets/patterns/pattern-orange.svg"); }
+.af-pattern-strip[data-level="yellow"]   { background-image: url("design-system/assets/patterns/pattern-yellow.svg"); }
+.af-pattern-strip[data-level="green"]    { background-image: url("design-system/assets/patterns/pattern-green.svg"); }
+
+.af-masthead .af-pattern-strip {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 1;
+  opacity: .85;
+  background-size: auto 400%;
+}
+
+/* ---------- sticky nav: ink field, 3px active underline ---------- */
+.af-nav {
+  background: var(--surface-inverse);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.af-nav__inner { display: flex; gap: var(--space-4); overflow-x: auto; }
+.af-nav a {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  padding: var(--space-14) var(--space-16);
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+}
+/* hover is a color swap, nothing else — v0.2 allows no motion */
+.af-nav a:hover           { color: var(--scr-orange); }
+.af-nav a[aria-current]   { color: var(--scr-orange); border-bottom-color: var(--scr-orange); }
+
+/* ---------- card: border-defined, never shadow-defined ---------- */
+.af-card {
+  background: var(--surface-card);
+  border: var(--border-panel);
+  border-radius: var(--radius-card);
+  padding: var(--space-26);
+  margin-bottom: var(--space-24);
+}
+.af-card__title {
+  font-size: var(--text-card-h);
+  letter-spacing: .03em;
+  margin-bottom: var(--space-14);
+}
+
+.af-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-28);
+  align-items: start;
+}
+
+/* ---------- figures: flat geometric SVG, the only imagery the system allows ---------- */
+.af-figure { display: block; width: 100%; height: auto; }
+
+/* ---------- clearance chip / rule tag ---------- */
+.af-chip {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-chip);
+  display: inline-block;
+  color: var(--text-on-clearance);
+  white-space: nowrap;
+}
+/* Rule 2: declare a column, then stay in it. */
+.af-chip[data-column="print"][data-level="infrared"] { background: var(--prt-infrared); }
+.af-chip[data-column="print"][data-level="red"]      { background: var(--prt-red); }
+.af-chip[data-column="print"][data-level="orange"]   { background: var(--prt-orange); }
+.af-chip[data-column="print"][data-level="yellow"]   { background: var(--prt-yellow); color: var(--ink); }
+.af-chip[data-column="print"][data-level="green"]    { background: var(--prt-green); }
+.af-chip[data-column="print"][data-level="blue"]     { background: var(--prt-blue); }
+.af-chip[data-column="screen"][data-level="infrared"]{ background: var(--scr-infrared); }
+.af-chip[data-column="screen"][data-level="red"]     { background: var(--scr-red); }
+.af-chip[data-column="screen"][data-level="orange"]  { background: var(--scr-orange); color: var(--ink); }
+.af-chip[data-column="screen"][data-level="yellow"]  { background: var(--scr-yellow);  color: var(--ink); }
+.af-chip[data-column="screen"][data-level="green"]   { background: var(--scr-green); }
+.af-chip[data-column="screen"][data-level="blue"]    { background: var(--scr-blue); }
+.af-chip[data-column="screen"][data-level="indigo"]  { background: var(--scr-indigo); }
+.af-chip[data-column="screen"][data-level="violet"]  { background: var(--scr-violet); }
+.af-chip[data-column="screen"][data-level="uv"]      { background: var(--scr-uv); }
+.af-chip[data-column="screen"][data-level="gray"]    { background: var(--gray); }
+/* No measured print swatch exists for these bands yet (v0.2 caveat). Rather
+   than borrow the screen value, the absence is shown as an absence. */
+.af-chip[data-column="print"][data-level="none"] {
+  background: transparent;
+  color: var(--text-meta);
+  border: 1px dashed var(--hairline);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.af-rule-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: 5px var(--space-12);
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+}
+
+/* ---------- call to action: a flat field with an ink border, no glow ---------- */
+.af-cta {
+  display: inline-block;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: var(--space-16) var(--space-28);
+  border: var(--border-step);
+  border-radius: var(--radius-chip);
+  background: var(--scr-orange);
+  color: var(--ink);
+}
+.af-cta:hover { background: var(--ink); color: var(--paper); }
+.af-cta[data-variant="quiet"] { background: transparent; color: var(--ink); }
+.af-cta[data-variant="quiet"]:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- badge (produced artifact; the one place a shadow is allowed) ---------- */
+.af-badge {
+  width: 170px;
+  aspect-ratio: 5 / 8;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-badge);
+  color: var(--text-on-clearance);
+}
+.af-badge[data-level="orange"] { background: var(--prt-orange); }
+.af-badge[data-level="red"]    { background: var(--prt-red); }
+.af-badge__head { padding: var(--space-14) var(--space-12) var(--space-8); display: flex; align-items: flex-start; gap: var(--space-8); }
+.af-badge__head img { width: 22px; height: 30px; filter: invert(1); opacity: .95; }
+.af-badge__brand { font-family: var(--font-display); font-size: 9px; font-weight: 700; letter-spacing: .06em; line-height: 1.25; }
+.af-badge__brand small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 5.5px; letter-spacing: .04em; margin-top: var(--space-2); opacity: .9; }
+.af-badge__level { text-align: center; margin-top: var(--space-8); font-family: var(--font-display); font-weight: 900; font-size: 21px; letter-spacing: .05em; }
+.af-badge__descriptor { text-align: center; font-family: var(--font-condensed); font-weight: 500; font-size: 11px; letter-spacing: var(--track-clearance); text-transform: uppercase; }
+.af-badge__operative { text-align: center; margin-top: var(--space-10); font-family: var(--font-condensed); font-size: 9px; letter-spacing: .3em; }
+.af-badge__number { text-align: center; font-family: var(--font-display); font-weight: 900; font-size: 30px; letter-spacing: .04em; }
+.af-badge__strip { margin-top: auto; height: 32%; background-size: auto 400%; background-position: center 30%; }
+
+/* ---------- SHODANN: the one stratum-independent element ---------- */
+.af-shodann {
+  border-left: var(--rule-shodann);
+  background: var(--surface-inset);
+  border-radius: var(--radius-inset);
+  padding: var(--space-16) var(--space-18);
+}
+.af-shodann p {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--accent-green);
+  line-height: 1.5;
+  margin-bottom: var(--space-6);
+}
+.af-shodann cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: normal;
+  color: var(--text-meta);
+}
+
+/* ---------- instructor OOC: the fiction stops. plain type, no stratum ---------- */
+.af-ooc {
+  border-top: var(--border-panel);
+  border-bottom: var(--border-panel);
+  padding: var(--space-14) 0;
+}
+.af-ooc__who {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: var(--space-6);
+}
+.af-ooc p { font-size: 13.5px; color: var(--text-meta); line-height: 1.6; }
+
+/* ---------- terminal crack: older stratum showing through ---------- */
+.af-crack {
+  background: var(--term-bg);
+  border-radius: var(--radius-card);
+  padding: var(--space-18) var(--space-20);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--term-phosphor);
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.af-crack .dim { color: var(--term-phosphor-dim); }
+.af-crack .amber { color: var(--term-amber); }
+
+/* ---------- checklist: mono [✓] / [ ], dashed hairline rows ---------- */
+.af-checklist { list-style: none; }
+.af-checklist li {
+  padding: var(--space-10) 0;
+  border-bottom: 1px dashed var(--hairline);
+  font-size: 14px;
+  display: flex;
+  gap: var(--space-10);
+  align-items: baseline;
+  color: var(--text-body);
+}
+.af-checklist li:last-child { border-bottom: none; }
+.af-checklist li::before {
+  content: "[ ]";
+  font-family: var(--font-mono);
+  color: var(--scr-orange);
+  flex-shrink: 0;
+}
+.af-checklist li[data-done]::before { content: "[✓]"; color: var(--scr-green); }
+/* print column documents mark their open boxes in the print red */
+.af-checklist[data-column="print"] li::before { color: var(--prt-red); }
+
+/* plain dashed-row list — same rhythm as the checklist, no box glyph */
+.af-list { list-style: none; }
+.af-list li {
+  padding: var(--space-10) 0;
+  border-bottom: 1px dashed var(--hairline);
+  font-size: 14px;
+  color: var(--text-body);
+}
+.af-list li:last-child { border-bottom: none; }
+.af-list li strong { color: var(--text-strong); }
+
+/* ---------- Trusted Workflow ---------- */
+.af-workflow { display: flex; flex-wrap: wrap; gap: var(--space-8); align-items: center; }
+.af-workflow span[data-step] {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border: var(--border-step);
+  border-radius: var(--radius-chip);
+  padding: 7px 11px;
+  background: var(--paper);
+}
+.af-workflow span[data-step="done"] { background: var(--scr-green); border-color: var(--scr-green); color: var(--text-on-clearance); }
+.af-workflow span[data-step="now"]  { background: var(--scr-orange); border-color: var(--scr-orange); }
+.af-workflow .arrow { font-family: var(--font-mono); color: var(--text-meta); font-size: 13px; }
+
+/* ---------- XU counter ---------- */
+.af-xu__value { font-family: var(--font-display); font-weight: 900; font-size: 46px; color: var(--scr-orange); line-height: 1.1; }
+.af-xu__delta { font-family: var(--font-mono); font-size: 12px; color: var(--accent-green); margin-top: var(--space-2); }
+.af-xu__fine  { font-size: var(--text-fine); color: var(--text-meta); margin-top: var(--space-12); line-height: 1.55; }
+
+/* ---------- document banner (Pelican/196X, print column) ---------- */
+.af-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-26) 0 var(--space-18);
+  border-bottom: var(--rule-clearance) solid var(--prt-red);
+  margin-bottom: var(--space-8);
+}
+.af-banner[data-level="orange"] { border-bottom-color: var(--prt-orange); }
+.af-banner__mark { width: 30px; height: 42px; flex-shrink: 0; }
+.af-banner__text { flex: 1; }
+.af-banner h1 {
+  font-size: clamp(22px, 4vw, 32px);
+  line-height: 1.1;
+}
+.af-banner__meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-meta); margin-top: var(--space-4); }
+
+/* ---------- assessment table ---------- */
+.af-table { width: 100%; border-collapse: collapse; margin-top: var(--space-12); }
+.af-table td {
+  text-align: left;
+  padding: 9px 11px;
+  border-bottom: var(--border-panel);
+  font-size: 13px;
+  vertical-align: top;
+  color: var(--text-body);
+}
+.af-table tr:last-child td { border-bottom: none; }
+.af-table td strong { color: var(--text-strong); }
+.af-table td[data-num] { font-family: var(--font-mono); white-space: nowrap; }
+.af-table td[data-swatch] { width: 1%; white-space: nowrap; }
+
+/* ---------- menu rows (portal resource list) ---------- */
+.af-menu { list-style: none; }
+.af-menu li { border-bottom: 1px dashed var(--hairline); }
+.af-menu li:last-child { border-bottom: none; }
+.af-menu a,
+.af-menu span[data-locked] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  padding: var(--space-12) 0;
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-strong);
+}
+.af-menu a:hover { color: var(--scr-orange); }
+.af-menu span[data-locked] { color: var(--text-meta); }
+
+/* ---------- footer + the mandatory stratum declaration ---------- */
+.af-footer { border-top: var(--border-panel); margin-top: 30px; }
+.af-footer__inner {
+  padding: var(--space-34) 0;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-meta);
+  line-height: 1.8;
+}
+.af-footer__slogan {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  margin-bottom: var(--space-8);
+}
+.af-declaration {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .1em;
+  color: var(--text-meta);
+}
+
+/* ---------- preview-only chrome (not part of the system) ---------- */
+.af-preview-bar {
+  background: var(--surface-inverse);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+}
+.af-preview-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-18);
+  align-items: baseline;
+  padding: var(--space-8) var(--space-24);
+  max-width: var(--measure-app);
+  margin: 0 auto;
+}
+.af-preview-bar a { color: var(--scr-orange); text-decoration: none; }
+.af-preview-bar a:hover { color: var(--paper); }
+.af-preview-bar strong { font-weight: 600; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  .af-grid { grid-template-columns: 1fr; gap: var(--space-20); }
+  .af-card { padding: var(--space-20); }
+  .af-shell, .af-shell-page { padding: 0 var(--space-16); }
+  .af-preview-bar__inner { padding: var(--space-8) var(--space-16); }
+  .af-xu__value { font-size: 38px; }
+  .af-banner { flex-wrap: wrap; gap: var(--space-10); }
+}
