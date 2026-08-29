@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GRAY Clearance | Department of Design Compliance</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/portal-shell.css">
+    <link rel="stylesheet" href="../../static/clearance.css">
 </head>
-<body class="portal-shell portal-society-deep-algorithm">
+<body data-clearance="gray">
 <header class="af-system-header" data-portal-function="governance and clearance">
   <a class="af-system-header__home" href="../../index.html">
-    <img class="af-system-header__mark" src="../../Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
+    <img class="af-system-header__mark" src="../../static/design-system/assets/AF_A_Eye.svg" alt="">
     <span class="af-system-header__brand">Algocratic Futures™</span>
   </a>
   <div>
@@ -116,27 +111,11 @@
         </div>
     </div>
 
-    <script>
-        // Glitch effect
-        setInterval(() => {
-            const glitchElements = document.querySelectorAll('.glitch-text');
-            glitchElements.forEach(el => {
-                if (Math.random() > 0.95) {
-                    el.style.animation = 'glitch 0.3s infinite';
-                    setTimeout(() => {
-                        el.style.animation = '';
-                    }, 300);
-                }
-            });
-        }, 1000);
-
-        // Loading animation
-        let progress = 0;
-        const loadingInterval = setInterval(() => {
-            progress = (progress + 1) % 100;
-            document.querySelector('.loading-progress').style.width = progress + '%';
-        }, 50);
-    </script>
+    <!-- Removed on the v0.2 install: two perpetual setIntervals (a 1s
+         glitch cycle and a 50ms loading bar). The second crashed on
+         every tick — .loading-progress is referenced here but has
+         never existed in this page's markup — and both are motion,
+         which v0.2 prohibits. -->
   </div>
 </body>
 </html>

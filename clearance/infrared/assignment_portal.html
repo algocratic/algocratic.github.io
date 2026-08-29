@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFRARED Assignment Portal | AlgoCratic Futures™</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../static/clearance.css">
     <link rel="stylesheet" href="../../static/terminal-ui.css">
     <script src="../../static/navigation.js"></script>
 </head>
-<body>
+<body data-clearance="infrared">
     <div class="scanline"></div>
     
     <div class="container">
@@ -24,19 +24,19 @@
 
         <div class="content-section">
             <div class="alert-box">
-                <h3>⚠️ MANDATORY PRODUCTIVITY NOTICE</h3>
+                <h3>▲ MANDATORY PRODUCTIVITY NOTICE</h3>
                 <p>All INFRARED citizens must complete assignments in sequence. Failure to maintain productivity will result in termination of employment and/or existence. Happiness is mandatory during all assignments.</p>
             </div>
 
-            <div class="alert-box" style="background-color: rgba(0, 255, 0, 0.1); border-color: #00ff00;">
-                <h3>🎮 EXPERIMENTAL: ADVENTURE MODE ACTIVATED</h3>
+            <div class="alert-box" style="background-color: var(--band-wash-soft); border-color: var(--band);">
+                <h3>EXPERIMENTAL: ADVENTURE MODE ACTIVATED</h3>
                 <p>The Algorithm has approved experimental learning protocols. Practice your skills through interactive puzzles before tackling full assignments.</p>
                 <a href="adventure_mode.html" class="button" style="margin-top: 10px;">ENTER ADVENTURE MODE</a>
             </div>
 
             <h2>Pre-Assignment Requirements</h2>
             <div class="assignment-card required">
-                <h3>🛠️ Development Environment Setup</h3>
+                <h3>Development Environment Setup</h3>
                 <p><strong>Priority: CRITICAL - Complete First!</strong></p>
                 <p>Configure your workstation for optimal algorithmic productivity. Includes VSCode setup, terminal configuration, and loyalty tracker installation.</p>
                 <a href="/underground/archive/assignments/infrared_development_environment.md" class="button">ACCESS SETUP GUIDE</a>
@@ -155,7 +155,7 @@
                 this.textContent = 'ACCESSING...';
                 
                 // Console easter egg
-                console.log('%c⚠️ The Algorithm notes your interest in ' + this.parentElement.querySelector('h3').textContent, 
+                console.log('%c▲ The Algorithm notes your interest in ' + this.parentElement.querySelector('h3').textContent, 
                            'color: #ff3030; font-weight: bold;');
                 
                 // Loyalty tracker fluctuation
@@ -172,14 +172,14 @@
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
                     this.parentElement.style.color = '#00ff00';
-                    console.log('%c✓ The Algorithm acknowledges your compliance', 'color: #00ff00;');
+                    console.log('%c[✓] The Algorithm acknowledges your compliance', 'color: #00ff00;');
                 }
             });
         });
 
         // Hidden message for the curious
         if (Math.random() < 0.1) {
-            console.log('%c👁️ /underground/societies/phreaks.html', 'color: #333; font-size: 8px;');
+            console.log('%c· /underground/societies/phreaks.html', 'color: #333; font-size: 8px;');
         }
     </script>
 </body>

@@ -1,0 +1,1032 @@
+/* ============================================================
+   ALGOCRATIC CLEARANCE GUIDES — one stylesheet, nine bands.
+   STRATUM=TERMINAL/198X · COLUMN=SCREEN · TOKENS=v0.2
+
+   Replaces six near-identical per-band styles.css files
+   (clearance/{infrared,red,orange,yellow,green,gray}/styles.css,
+   ~58 KB combined). Band identity is a single attribute:
+
+       <body data-clearance="orange">
+
+   Everything band-coloured resolves from --band, which is drawn
+   from the v0.2 SCREEN column. No new hex values are defined in
+   this file; every colour is a token or a color-mix of one.
+
+   The Terminal stratum is declared deliberately, per Rule 4 —
+   these guides are the operational surface the terminal front
+   door leads into, so they stay in its stratum rather than
+   jumping to Media/2026 on every click.
+
+   MOTION: v0.2 specifies "animation: effectively none". The eight
+   @keyframes loops in the old per-band sheets (pulse, fadeInOut,
+   scanline travel, glow, glitch-before, glitch-after, typing,
+   blink-caret) are not reproduced here. They ran infinitely, did
+   not respect prefers-reduced-motion, and are the system's single
+   most explicit prohibition. Static equivalents are kept so the
+   CRT reading survives without the movement.
+   ============================================================ */
+
+@import url("design-system/styles.css");
+
+/* -- Band accent, SCREEN column. One line per band. -------- */
+body[data-clearance="infrared"] { --band: var(--scr-infrared); }
+body[data-clearance="red"]      { --band: var(--scr-red); }
+body[data-clearance="orange"]   { --band: var(--scr-orange); }
+body[data-clearance="yellow"]   { --band: var(--scr-yellow); }
+body[data-clearance="green"]    { --band: var(--scr-green); }
+body[data-clearance="blue"]     { --band: var(--scr-blue); }
+body[data-clearance="indigo"]   { --band: var(--scr-indigo); }
+body[data-clearance="violet"]   { --band: var(--scr-violet); }
+body[data-clearance="uv"]       { --band: var(--scr-uv); }
+/* GRAY is the redacted band: it has no clearance colour by design. */
+body[data-clearance="gray"]     { --band: var(--term-phosphor-dim); }
+
+:root {
+  /* Derived band tints — color-mix keeps these tied to --band
+     instead of hard-coding an rgba() per band, which is what the
+     old sheets did (six copies of the same value, six hexes). */
+  --band-wash: color-mix(in srgb, var(--band) 15%, transparent);
+  --band-wash-soft: color-mix(in srgb, var(--band) 10%, transparent);
+  --band-quiet: color-mix(in srgb, var(--band) 45%, var(--term-bg));
+}
+
+/* -- Terminal substrate ------------------------------------ */
+body {
+  --band: var(--term-phosphor); /* fallback when no band declared */
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  line-height: var(--leading-body);
+  background: var(--term-bg);
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.terminal-container {
+  position: relative;
+  max-width: var(--measure-page);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--space-20);
+  background: color-mix(in srgb, var(--term-grid) 55%, var(--term-bg));
+  border-left: 1px solid var(--band);
+  border-right: 1px solid var(--band);
+  overflow: hidden;
+}
+
+/* The CRT top rule. Was a glow; v0.2 reserves shadow for lifting
+   produced badge artifacts, so it is a solid band rule now. */
+.terminal-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--band);
+  z-index: 10;
+}
+
+/* Static CRT hairline. Was a 6s travelling scanline. */
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--band);
+  opacity: .25;
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* -- Document header --------------------------------------- */
+.document-header {
+  position: relative;
+  margin-bottom: var(--space-28);
+  padding-bottom: var(--space-20);
+  border-bottom: 1px solid var(--band);
+  text-align: center;
+}
+
+.document-title {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--band);
+}
+
+.document-subtitle {
+  margin-bottom: var(--space-20);
+  font-family: var(--font-condensed);
+  font-weight: 500;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--paper);
+}
+
+.classification {
+  display: inline-block;
+  margin-bottom: var(--space-14);
+  padding: var(--space-6) var(--space-12);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--term-bg);
+  background: var(--band);
+  border: 1px solid var(--band);
+}
+
+/* YELLOW and UV sit too light/dark for the default knockout. */
+body[data-clearance="yellow"] .classification,
+body[data-clearance="green"] .classification { color: var(--term-bg); }
+body[data-clearance="infrared"] .classification,
+body[data-clearance="indigo"] .classification,
+body[data-clearance="violet"] .classification,
+body[data-clearance="uv"] .classification { color: var(--paper); }
+
+.document-id {
+  margin-top: var(--space-10);
+  font-size: var(--text-fine);
+  letter-spacing: .08em;
+  color: var(--text-meta);
+}
+
+/* -- Sections ---------------------------------------------- */
+.section-title {
+  margin-bottom: var(--space-14);
+  padding-bottom: var(--space-6);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--band);
+  border-bottom: 1px dashed var(--band);
+}
+
+.guide-content,
+.guide-intro { padding: 0 var(--space-20); }
+
+h4 {
+  margin: var(--space-24) 0 var(--space-10);
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--band);
+}
+
+.text-center { text-align: center; }
+
+/* -- Attention box ----------------------------------------- */
+.attention-box {
+  position: relative;
+  margin: var(--space-20) 0;
+  padding: var(--space-16);
+  background: var(--band-wash);
+  border: 1px solid var(--band);
+}
+
+.attention-box::before {
+  content: "!";
+  position: absolute;
+  top: -14px;
+  left: var(--space-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  color: var(--term-bg);
+  background: var(--band);
+  border-radius: 50%;
+}
+
+body[data-clearance="infrared"] .attention-box::before,
+body[data-clearance="indigo"] .attention-box::before,
+body[data-clearance="violet"] .attention-box::before,
+body[data-clearance="uv"] .attention-box::before { color: var(--paper); }
+
+/* -- Lists ------------------------------------------------- */
+.resource-list,
+.toc-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.resource-list li,
+.toc-list li {
+  position: relative;
+  margin-bottom: var(--space-10);
+  padding-left: var(--space-24);
+}
+
+.resource-list li::before {
+  content: "\25B9"; /* ▹ */
+  position: absolute;
+  left: var(--space-4);
+  color: var(--band);
+}
+
+.toc-list li::before {
+  content: ">";
+  position: absolute;
+  left: var(--space-4);
+  color: var(--band);
+}
+
+.toc-list a {
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.toc-list a:hover {
+  color: var(--band);
+  text-decoration: underline;
+}
+
+/* -- Tip callout ------------------------------------------------
+   One component. The old sheets shipped this three times under
+   .survival-tip (infrared, red), .technical-tip (orange) and
+   .strategic-tip (yellow) with identical rules. Legacy names are
+   kept as aliases so existing markup needs no edit. */
+.af-tip,
+.survival-tip,
+.technical-tip,
+.strategic-tip {
+  margin: var(--space-20) 0;
+  padding-left: var(--space-14);
+  border-left: 2px dotted var(--band);
+  font-style: italic;
+}
+
+.algorithm-message {
+  margin: var(--space-20) 0;
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  text-align: center;
+  color: var(--band);
+}
+
+.binary-decoration {
+  margin-top: var(--space-44);
+  font-size: 8px;
+  text-align: center;
+  color: var(--band);
+  opacity: .3;
+}
+
+/* -- Navigation -------------------------------------------- */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-12);
+  margin-top: var(--space-44);
+}
+
+.nav-button {
+  display: inline-block;
+  padding: var(--space-8) var(--space-16);
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  text-decoration: none;
+  color: var(--term-bg);
+  background: var(--band);
+  border: 1px solid var(--band);
+  border-radius: var(--radius-chip);
+}
+
+body[data-clearance="infrared"] .nav-button,
+body[data-clearance="indigo"] .nav-button,
+body[data-clearance="violet"] .nav-button,
+body[data-clearance="uv"] .nav-button { color: var(--paper); }
+
+/* Hover is a colour swap only — v0.2 allows nothing else. */
+.nav-button:hover {
+  color: var(--band);
+  background: transparent;
+}
+
+.nav-button.disabled,
+.nav-button[aria-disabled="true"] {
+  opacity: .4;
+  pointer-events: none;
+}
+
+.prev-button::before { content: "\2190\00a0"; } /* ← */
+.next-button::after  { content: "\00a0\2192"; } /* → */
+.home-button::before { content: "\2302\00a0"; } /* ⌂ */
+
+/* -- Monolith ---------------------------------------------- */
+.monolith-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 100px;
+  margin: 0 auto var(--space-20);
+  background: var(--term-bg);
+  border: 1px solid var(--band);
+}
+
+.monolith-icon::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  background: var(--band);
+  border-radius: 50%;
+}
+
+.monolith-icon::after {
+  content: "THE ALGORITHM";
+  position: absolute;
+  bottom: var(--space-4);
+  font-size: 6px;
+  letter-spacing: .06em;
+  color: var(--band);
+}
+
+.eyes {
+  display: flex;
+  margin-top: var(--space-28);
+}
+
+.eye {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  margin: 3px;
+  background: var(--band);
+  border-radius: 50%;
+  opacity: .8;
+}
+
+.eye::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background: var(--term-bg);
+  border-radius: 50%;
+}
+
+/* -- Status tracker ---------------------------------------------
+   One widget. The old sheets shipped this five times with
+   identical structure and different class-name families:
+   loyalty- (infrared, red), efficiency- (orange), strategy-
+   (yellow), compliance- (green, gray). Legacy names kept as
+   aliases; new markup should use .af-tracker. */
+.af-tracker,
+#loyalty-tracker,
+#efficiency-tracker,
+#strategy-tracker,
+#compliance-tracker {
+  position: fixed;
+  top: var(--space-10);
+  right: var(--space-10);
+  z-index: 1000;
+  width: 150px;
+  padding: var(--space-10);
+  font-size: var(--text-fine);
+  background: var(--term-bg);
+  border: 1px solid var(--band);
+}
+
+.af-tracker__label,
+.loyalty-label,
+.efficiency-label,
+.strategy-label,
+.compliance-label {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--band);
+}
+
+.af-tracker__track,
+.loyalty-progress,
+.efficiency-progress,
+.strategy-progress,
+.compliance-progress {
+  width: 100%;
+  height: 8px;
+  margin-bottom: var(--space-4);
+  background: color-mix(in srgb, var(--paper) 12%, transparent);
+}
+
+.af-tracker__bar,
+.loyalty-bar,
+.efficiency-bar,
+.strategy-bar,
+.compliance-bar {
+  height: 100%;
+  background: var(--band);
+}
+
+.af-tracker__status,
+.loyalty-status,
+.efficiency-status,
+.strategy-status,
+.compliance-status {
+  text-align: right;
+  font-style: italic;
+  color: var(--text-meta);
+}
+
+/* -- Technical blocks -------------------------------------- */
+.technical-diagram {
+  margin: var(--space-20) 0;
+  padding: var(--space-16);
+  font-family: var(--font-mono);
+  font-size: var(--text-fine);
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--band);
+  border: 1px dashed var(--band);
+}
+
+.code-block {
+  margin: var(--space-14) 0;
+  padding: var(--space-10);
+  font-family: var(--font-mono);
+  font-size: var(--text-fine);
+  overflow-x: auto;
+  background: var(--band-wash-soft);
+  border-left: 3px solid var(--band);
+}
+
+/* -- Process flow ------------------------------------------ */
+.process-flow {
+  position: relative;
+  margin: var(--space-20) 0;
+  padding: var(--space-16);
+  border: 1px solid var(--band);
+}
+
+.process-flow::before {
+  content: "PROCESS FLOW";
+  position: absolute;
+  top: -10px;
+  left: var(--space-10);
+  padding: 0 var(--space-4);
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-eyebrow);
+  letter-spacing: .14em;
+  color: var(--band);
+  background: color-mix(in srgb, var(--term-grid) 55%, var(--term-bg));
+}
+
+.process-step {
+  position: relative;
+  margin-bottom: var(--space-14);
+  padding-left: var(--space-28);
+}
+
+.process-step::before {
+  content: "\25BA"; /* ► */
+  position: absolute;
+  left: var(--space-4);
+  color: var(--band);
+}
+
+.process-step:last-child { margin-bottom: 0; }
+
+.process-arrow {
+  margin: var(--space-4) 0;
+  text-align: center;
+  color: var(--band);
+}
+
+/* -- Typewriter -------------------------------------------------
+   Was a typing + blink-caret animation pair. In every one of its
+   31 uses it sits on .section-title, whose dashed underline the
+   caret collided with once the width animation was removed. The
+   caret is dropped; the class is retained as a no-op so no page
+   markup has to change. */
+.typewriter { letter-spacing: .1em; }
+
+/* -- Glitch -----------------------------------------------------
+   Was two infinite transform loops in magenta/cyan — off-palette
+   and pure motion. Reduced to a band-coloured emphasis. */
+.glitch,
+.glitch-text {
+  position: relative;
+  color: var(--band);
+  letter-spacing: .06em;
+}
+
+/* ============================================================
+   BAND-SPECIFIC COMPONENTS
+   Genuinely unique to one band — not duplication, kept as-is
+   but re-pointed at --band so they inherit the token column.
+   ============================================================ */
+
+/* INFRARED — assignment cards */
+.assignment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-16);
+  margin: var(--space-20) 0;
+}
+
+.assignment-card {
+  padding: var(--space-16);
+  background: var(--band-wash-soft);
+  border: 1px solid var(--band);
+  border-radius: var(--radius-card);
+}
+
+.assignment-card h3 {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--band);
+}
+
+.assignment-card p { margin: 0 0 var(--space-12); }
+
+.assignment-card.required { border-width: 2px; }
+.assignment-card.advanced,
+.assignment-card.progression { border-style: dashed; }
+
+.assignment-card .button {
+  display: inline-block;
+  padding: var(--space-6) var(--space-14);
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  text-decoration: none;
+  color: var(--term-bg);
+  background: var(--band);
+  border-radius: var(--radius-chip);
+}
+
+body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); }
+
+.assignment-card .button:hover {
+  color: var(--band);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--band);
+}
+
+.completion-tracker { margin: var(--space-16) 0; }
+.completion-tracker input[type="checkbox"] { accent-color: var(--band); }
+
+.hidden-section { display: none; }
+
+.whisper,
+.section-note {
+  font-size: var(--text-fine);
+  font-style: italic;
+  color: var(--text-meta);
+}
+
+.whisper:hover { color: var(--band); }
+
+/* YELLOW — decision matrix */
+.decision-matrix {
+  width: 100%;
+  margin: var(--space-20) 0;
+  border-collapse: collapse;
+  font-size: var(--text-fine);
+}
+
+.decision-matrix th,
+.decision-matrix td {
+  padding: var(--space-8) var(--space-10);
+  text-align: left;
+  border: 1px solid var(--band);
+}
+
+.decision-matrix th {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--band);
+}
+
+.decision-matrix tr:nth-child(even) { background: var(--band-wash-soft); }
+
+.strategy-block {
+  margin: var(--space-20) 0;
+  padding: var(--space-16);
+  border: 1px solid var(--band);
+}
+
+/* GREEN — certificate */
+.certificate-container {
+  position: relative;
+  margin: var(--space-28) 0;
+  padding: var(--space-28);
+  background: var(--term-bg);
+  border: 2px solid var(--band);
+}
+
+.certificate-container::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-6);
+  border: 1px solid var(--band);
+  pointer-events: none;
+}
+
+.certificate-header { text-align: center; }
+
+.certificate-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--band);
+}
+
+.certificate-subtitle {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--text-meta);
+}
+
+.certificate-content { margin: var(--space-24) 0; }
+
+.certificate-content h3 {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--band);
+}
+
+.certificate-badge,
+.certificate-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-eyebrow);
+  text-align: center;
+  letter-spacing: .1em;
+  color: var(--band);
+  border: 2px solid var(--band);
+  border-radius: 50%;
+}
+
+.certificate-footer,
+.authority-signature {
+  font-size: var(--text-fine);
+  text-align: center;
+  color: var(--text-meta);
+}
+
+/* GRAY — the redacted band */
+.redacted {
+  color: transparent;
+  background: var(--term-phosphor-dim);
+  user-select: none;
+}
+
+.redacted-section,
+.truth-box,
+.understanding-box,
+.warning-box,
+.redirect-box,
+.note,
+.contact-info {
+  margin: var(--space-20) 0;
+  padding: var(--space-16);
+  border: 1px solid var(--band);
+}
+
+.truth-box { border-style: dashed; }
+
+.understanding-box h4 { margin-top: 0; }
+.understanding-box p { margin-bottom: var(--space-10); }
+.understanding-box em { color: var(--band); }
+
+.contact-info .subtitle,
+.status-text,
+.loading-text {
+  font-size: var(--text-fine);
+  color: var(--text-meta);
+}
+
+.loading-section { margin: var(--space-20) 0; }
+
+.loading-bar {
+  width: 100%;
+  height: 8px;
+  background: color-mix(in srgb, var(--paper) 12%, transparent);
+}
+
+.loading-progress {
+  height: 100%;
+  background: var(--band);
+}
+
+.void-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--space-16);
+  background: var(--term-bg);
+  border: 1px solid var(--band);
+  border-radius: 50%;
+}
+
+/* Was an animated static-noise / glitch overlay pair. */
+.static-noise,
+.glitch-overlay { display: none; }
+
+/* -- Responsive -------------------------------------------- */
+@media (max-width: 760px) {
+  .terminal-container {
+    padding: var(--space-14);
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .guide-content,
+  .guide-intro { padding: 0; }
+
+  .document-title { font-size: 1.5rem; }
+  .document-subtitle { font-size: 1rem; }
+
+  .nav-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  /* The fixed tracker overlaps content on small screens. */
+  .af-tracker,
+  #loyalty-tracker,
+  #efficiency-tracker,
+  #strategy-tracker,
+  #compliance-tracker {
+    position: static;
+    width: auto;
+    margin-bottom: var(--space-16);
+  }
+
+  .assignment-grid { grid-template-columns: 1fr; }
+
+  .technical-diagram { font-size: 10px; }
+}
+
+/* -- Monolith acknowledgement -------------------------------
+   Set by clearance.js on click. Replaces the old scripts'
+   inline backgroundColor flash, which hard-coded a hex. */
+.monolith-icon.is-acknowledged .eye { background: var(--term-amber); }
+.monolith-icon.is-acknowledged .eye::before { background: var(--term-bg); }
+
+/* ============================================================
+   SYSTEM HEADER — Terminal stratum, v0.2 tokens.
+
+   The clearance tree previously drew this from
+   static/portal-shell.css, which @imports the older
+   "Algocratic Futures Design System" (navy/gold/Michroma).
+   Loading both meant two token systems defined --link,
+   --surface-page and --text-body on the same page, and the
+   older one won on load order. This re-implementation lets the
+   tree drop that import and resolve exactly one system.
+   ============================================================ */
+.af-system-header {
+  position: relative;
+  z-index: 10000;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--space-18);
+  align-items: center;
+  width: min(var(--measure-guide), calc(100% - var(--space-28)));
+  margin: 0 auto;
+  padding: var(--space-14) var(--space-20);
+  color: var(--paper);
+  background: var(--term-bg);
+  border-bottom: 4px solid var(--band);
+}
+
+.af-system-header__home {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.af-system-header__mark {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.af-system-header__brand {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.af-system-header__home:hover .af-system-header__brand { color: var(--band); }
+
+.af-system-header__label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--text-meta);
+}
+
+.af-system-header__name {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--band);
+}
+
+.af-system-header__meta { text-align: right; }
+
+.af-system-header__clearance {
+  display: inline-block;
+  padding: var(--space-4) var(--space-8);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--paper);
+  border: 1px solid var(--band);
+}
+
+.af-system-header__receipt {
+  display: block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-meta);
+}
+
+@media (max-width: 760px) {
+  .af-system-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    text-align: left;
+  }
+  .af-system-header__meta { text-align: left; }
+}
+
+/* -- Terminal frame -------------------------------------------
+   Also inherited from portal-shell.css. The original painted a
+   repeating-linear-gradient scanline overlay and a drop shadow;
+   v0.2 permits neither, so this is the flat equivalent. */
+.af-terminal-frame {
+  position: relative;
+  isolation: isolate;
+  width: min(var(--measure-guide), calc(100% - var(--space-28)));
+  margin: 0 auto var(--space-44);
+  padding: var(--space-24);
+  overflow: hidden;
+  color: var(--paper);
+  background: var(--term-bg);
+  border: 1px solid var(--band);
+  border-top: 0;
+  font-family: var(--font-mono);
+}
+
+.af-terminal-frame > .container,
+.af-terminal-frame > .terminal-container,
+.af-terminal-frame > .page-container,
+.af-terminal-frame > main {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  .af-terminal-frame {
+    width: min(100% - var(--space-20), var(--measure-guide));
+    margin-bottom: var(--space-20);
+    padding: var(--space-14);
+  }
+}
+
+/* -- Band index prose -----------------------------------------
+   Used by the GREEN and BLUE index pages, which were written as
+   one-off inline-styled documents rather than on the band sheet
+   (BLUE's carried a linear-gradient body and a Georgia serif
+   stack — both off-system). Re-expressed here in tokens. */
+.warning,
+.executive-suite {
+  margin: var(--space-20) 0;
+  padding: var(--space-16);
+  background: var(--band-wash);
+  border: 1px solid var(--band);
+}
+
+.requirement,
+.privilege {
+  margin: var(--space-10) 0;
+  padding: var(--space-10) var(--space-14);
+  background: var(--band-wash-soft);
+  border-left: 4px solid var(--band);
+}
+
+.algorithmic-truth,
+.disclaimer {
+  font-style: italic;
+  color: var(--text-meta);
+}
+
+.gold { color: var(--term-amber); }
+
+.af-terminal-frame h1,
+.af-terminal-frame h2 {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--band);
+}
+
+.af-terminal-frame h1 {
+  padding-bottom: var(--space-10);
+  border-bottom: 2px solid var(--band);
+}
+
+.af-terminal-frame h2 { margin-top: var(--space-28); }
+.af-terminal-frame strong { color: var(--band); }
+.af-terminal-frame ul { line-height: 1.8; }
+
+/* The tracker is fixed to the viewport, so on the band index
+   pages — the only ones carrying .af-system-header — it landed
+   on top of the header. Offset it clear of the header there. */
+body:has(.af-system-header) .af-tracker,
+body:has(.af-system-header) #loyalty-tracker,
+body:has(.af-system-header) #efficiency-tracker,
+body:has(.af-system-header) #strategy-tracker,
+body:has(.af-system-header) #compliance-tracker {
+  top: calc(var(--space-64) + var(--space-20));
+}
+
+@media (max-width: 760px) {
+  /* Static at this width already, so the offset must not apply. */
+  body:has(.af-system-header) .af-tracker,
+  body:has(.af-system-header) #loyalty-tracker,
+  body:has(.af-system-header) #efficiency-tracker,
+  body:has(.af-system-header) #strategy-tracker,
+  body:has(.af-system-header) #compliance-tracker {
+    top: auto;
+  }
+}
+
+/* Hidden link — near-invisible until hovered. Was an inline
+   #001100 with onmouseover/onmouseout handlers swapping to
+   #00ff00; both hexes are now tokens and the swap is CSS. */
+.af-hidden-link {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  font-size: 8px;
+  color: var(--term-bg);
+  cursor: pointer;
+}
+
+.af-hidden-link:hover { color: var(--term-phosphor); }

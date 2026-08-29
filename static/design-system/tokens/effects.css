@@ -1,0 +1,20 @@
+/* ALGOCRATIC TOKENS v0.2 — EFFECTS: radii, borders, shadows, pattern accretion. */
+:root {
+  --radius-chip: 3px;      /* clearance chips, tags */
+  --radius-card: 6px;      /* cards, badges */
+  --radius-panel: 5px;     /* code panels, specimen boxes */
+  --radius-inset: 0 5px 5px 0; /* SHODANN inset: square left edge against the rule */
+  --radius-balloon: 12px;  /* comix speech balloons */
+  --border-panel: 1px solid var(--hairline);
+  --border-step: 2px solid var(--ink);   /* workflow steps (3px on slides) */
+  --border-comix: 2.5px solid var(--ink);/* comix panel borders */
+  --rule-shodann: 4px solid var(--accent-green); /* 6px on slides */
+  --rule-clearance: 4px;   /* document banner underline, clearance-colored */
+  --shadow-badge: 0 4px 14px rgba(26,26,34,0.18);
+  --shadow-strip: 0 6px 24px rgba(26,26,34,0.18);
+
+  /* Pattern accretion rule:
+     pattern(N) = pattern(N-1) @ ghost opacity + motif(N) @ motif opacity */
+  --pattern-ghost-opacity: 0.30; /* @kind other */
+  --pattern-motif-opacity: 0.90; /* @kind other */
+}

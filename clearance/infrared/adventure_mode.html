@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFRARED Adventure Mode | AlgoCratic Futures™</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../static/clearance.css">
     <style>
         .terminal-adventure {
             background-color: #001100;
@@ -67,16 +67,11 @@
             padding: 15px;
             margin: 15px 0;
             text-align: center;
-            animation: glow 2s ease-in-out infinite alternate;
         }
         
-        @keyframes glow {
-            from { box-shadow: 0 0 5px #00ff00; }
-            to { box-shadow: 0 0 20px #00ff00; }
-        }
     </style>
 </head>
-<body>
+<body data-clearance="infrared">
     <div class="scanline"></div>
     
     <div class="container">
@@ -94,7 +89,7 @@
 
         <div class="content-section">
             <div class="alert-box">
-                <h3>🎮 EXPERIMENTAL LEARNING PROTOCOL</h3>
+                <h3>EXPERIMENTAL LEARNING PROTOCOL</h3>
                 <p>This is an experimental text-based adventure that teaches programming concepts through interactive puzzles. Use commands like "look", "examine", "use", and "help" to explore.</p>
             </div>
 
@@ -189,7 +184,7 @@ Type 'help' for available commands, or start exploring!
                 const achievement = document.createElement('div');
                 achievement.className = 'achievement';
                 achievement.innerHTML = `
-                    <h4>🏆 ACHIEVEMENT UNLOCKED: ${title}</h4>
+                    <h4>▲ ACHIEVEMENT UNLOCKED: ${title}</h4>
                     <p>${description}</p>
                 `;
                 this.achievementArea.appendChild(achievement);
@@ -378,7 +373,7 @@ The duck's plastic stare suddenly makes sense. Of course! Employee #748293 - tha
                         
                     case 'door':
                         if (this.gameState.doorCode === '8293') {
-                            this.print(`🎉 The door clicks open!
+                            this.print(`The door clicks open!
 
 Beyond, you see... another puzzle chamber. But also, somehow, understanding.
 
@@ -465,7 +460,7 @@ This is a simple state machine teaching basic programming concepts through puzzl
         const game = new AdventureGame();
         
         // Console easter egg
-        console.log('%c🎮 INFRARED ADVENTURE MODE ACTIVATED', 'color: #00ff00; font-weight: bold; font-size: 16px;');
+        console.log('%cINFRARED ADVENTURE MODE ACTIVATED', 'color: #00ff00; font-weight: bold; font-size: 16px;');
         console.log('%cThis is a learning adventure disguised as a text game!', 'color: #00ff00; font-style: italic;');
     </script>
 </body>

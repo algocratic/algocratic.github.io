@@ -1,0 +1,19 @@
+/* ALGOCRATIC TOKENS v0.2 — TYPE. Five faces, five jobs, no exceptions. */
+:root {
+  --font-display: 'Orbitron', sans-serif;          /* level names, wordmarks, operative numbers */
+  --font-condensed: 'Saira Condensed', sans-serif; /* labels, subheads, letterspaced descriptors */
+  --font-body: 'IBM Plex Sans', sans-serif;        /* running text on paper */
+  --font-mono: 'IBM Plex Mono', monospace;         /* code, metadata, terminal stratum, underground text */
+  --font-comix: 'Bangers', cursive;                /* underground press titles ONLY */
+
+  /* Observed scale (from produced artifacts, not rounded) */
+  --text-eyebrow: 10px;   /* mono, ls .18em, uppercase */
+  --text-meta: 11px;      /* mono, ls .1-.2em */
+  --text-fine: 11.5px;
+  --text-label: 12.5px;   /* condensed 600, ls .08em, uppercase */
+  --text-body-size: 15px;
+  --text-card-h: 21px;    /* condensed 700, uppercase */
+  --text-tier-sub: 16px;  /* condensed 600, ls .4em */
+  --track-clearance: 0.35em; /* CLEARANCE descriptor letterspacing */
+  --leading-body: 1.5;
+}
