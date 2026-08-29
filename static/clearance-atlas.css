@@ -1,52 +1,260 @@
-:root { --atlas-ink:#e7eee8; --atlas-muted:#afc3b2; --atlas-paper:#07100b; --atlas-panel:#0d1b12; --atlas-line:#34533d; --atlas-gold:#f6d75c; --font-sans:Arial, Helvetica, sans-serif; --font-display:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; --font-mono:'Courier New', Courier, monospace; }
-* { box-sizing:border-box; }
-body { margin:0; color:var(--atlas-ink); background:radial-gradient(circle at 90% 5%, #1a4230 0, transparent 32rem), var(--atlas-paper); font-family:var(--font-sans); }
-a { color:inherit; }
-.shell { width:min(1120px, calc(100% - 32px)); margin:0 auto; }
-.skip-link { position:absolute; left:-999px; }
-.skip-link:focus { left:16px; top:16px; z-index:4; padding:9px; color:#07100b; background:white; }
-.head { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:23px 0; border-bottom:1px solid var(--atlas-line); }
-.brand { display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:.82rem; letter-spacing:.06em; text-decoration:none; text-transform:uppercase; }
-.brand-mark { display:grid; width:42px; height:42px; place-items:center; border:1px solid #9bf0a5; border-radius:50%; color:#9bf0a5; font-family:var(--font-mono); font-size:.75rem; }
-.receipt,.eyebrow,.band-meta,.action,.horizon-label { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; }
-.receipt { margin:0; color:var(--atlas-muted); text-align:right; }
-.hero { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:end; padding:clamp(56px,10vw,110px) 0 66px; }
-.eyebrow { margin:0 0 12px; color:#9bf0a5; }
-h1,h2,h3,p { margin-top:0; }
-h1 { max-width:760px; margin-bottom:20px; font-family:var(--font-display); font-size:clamp(3.2rem,8.5vw,7rem); font-weight:500; letter-spacing:-.055em; line-height:.88; text-transform:uppercase; }
-.lead { max-width:650px; margin-bottom:0; color:#d0dfd2; font-size:1.2rem; line-height:1.55; }
-.key { padding:22px; border:1px solid var(--atlas-line); background:rgba(13,27,18,.9); }
-.key p { margin:0; color:#c9dccd; line-height:1.5; }
-.key strong { color:var(--atlas-gold); }
-.interjection { position:relative; margin:0 0 48px; padding:20px 24px 20px 54px; border:1px solid #79703b; background:#1b1a0c; color:#fff1a2; font-family:var(--font-mono); line-height:1.55; }
-.interjection::before { position:absolute; left:20px; color:var(--atlas-gold); content:">_"; }
-.interjection p:last-child { margin-bottom:0; }
-.interjection .eyebrow { color:var(--atlas-gold); }
-.atlas { padding-bottom:86px; }
-.atlas-head { display:grid; grid-template-columns:.7fr 1.3fr; gap:28px; margin-bottom:30px; }
-h2 { margin-bottom:0; font-family:var(--font-display); font-size:clamp(2rem,4vw,3.5rem); font-weight:500; letter-spacing:-.04em; line-height:.94; text-transform:uppercase; }
-.atlas-head p { max-width:650px; margin-bottom:0; color:#c9dccd; font-size:1.1rem; line-height:1.5; }
-.spectrum { display:grid; gap:10px; }
-.terminal { --band:#97a29a; --band-ink:#07100b; display:grid; grid-template-columns:132px minmax(0,1fr) auto; gap:22px; align-items:center; min-height:116px; padding:18px 20px; border:1px solid color-mix(in srgb, var(--band) 60%, #1a3422); border-left:10px solid var(--band); background:linear-gradient(90deg, color-mix(in srgb, var(--band) 12%, var(--atlas-panel)), var(--atlas-panel) 55%); transition:transform .18s ease, border-color .18s ease; }
-.terminal:hover { transform:translateX(4px); border-color:var(--band); }
-.terminal--gray { --band:#a9adb1; }.terminal--infrared { --band:#a82020; }.terminal--red { --band:#ff4949; }.terminal--orange { --band:#ff9d2d; }.terminal--yellow { --band:#f6db48; }.terminal--green { --band:#65e67a; }.terminal--blue { --band:#5ba8ff; }.terminal--indigo { --band:#8e7ae8; }.terminal--violet { --band:#c274ff; }.terminal--ultraviolet { --band:#e1a5ff; }
-.band { color:var(--band); font-family:var(--font-display); font-size:1.4rem; letter-spacing:.02em; line-height:1; text-transform:uppercase; }
-.band-meta { display:block; margin-top:7px; color:var(--atlas-muted); }
-.terminal h3 { margin-bottom:5px; font-family:var(--font-display); font-size:1.25rem; font-weight:500; letter-spacing:-.01em; text-transform:uppercase; }
-.terminal p { margin-bottom:0; color:#c7d7c9; line-height:1.4; }
-.action { display:inline-block; padding:11px 13px; border:1px solid var(--band); color:var(--band); text-decoration:none; white-space:nowrap; }
-.action:hover,.action:focus { color:var(--band-ink); background:var(--band); }
-.green-pivot { margin:3px 0; padding:13px 20px; border:1px dashed #65e67a; color:#c8f3cf; background:#0d2514; font-family:var(--font-mono); font-size:.78rem; text-align:center; }
-.horizon { opacity:.8; }
-.horizon .action { cursor:pointer; }
-.horizon:hover { border-color:var(--band); }
-.trapezoid-aside { max-width:680px; margin:28px 0 0 auto; padding:18px 21px; border-left:2px solid #c274ff; color:#ddd0ee; background:rgba(48, 25, 70, .38); font-family:var(--font-mono); font-size:.8rem; line-height:1.55; opacity:.78; }
-.trapezoid-aside p:last-child { margin-bottom:0; }
-.trapezoid-aside .eyebrow { color:#dcb1ff; }
-.horizon-label { color:var(--band); }
-.next { padding:46px 0; border-top:1px solid var(--atlas-line); text-align:center; }
-.next p { max-width:650px; margin:18px auto 0; color:#c9dccd; line-height:1.5; }
-footer { padding:24px 0 38px; border-top:1px solid var(--atlas-line); }
-footer .receipt { text-align:left; }
-.prism-credit { margin:10px 0 0; color:var(--atlas-muted); font-family:var(--font-sans); font-size:.77rem; font-style:italic; }
-@media(max-width:720px) { .head,.hero,.atlas-head { display:block; }.receipt { margin-top:12px; text-align:left; }.hero { padding-top:68px; }.key { margin-top:32px; }.terminal { grid-template-columns:1fr; gap:9px; }.action { justify-self:start; }.terminal:hover { transform:none; } }
+/* ============================================================
+   PRISM CLEARANCE ATLAS — the clearance tree's index page.
+   STRATUM=TERMINAL/198X · COLUMN=SCREEN · TOKENS=v0.2
+
+   Re-tokened for the v0.2 install. The page markup is unchanged;
+   every class name and the layout are preserved.
+
+   What changed and why:
+   - The atlas defined its own band palette (#a82020 infrared,
+     #ff4949 red, #ff9d2d orange ...), a THIRD set of clearance
+     colours alongside the SCREEN and PRINT columns. Rule 2 allows
+     two columns, not three. Bands now resolve from --scr-*.
+   - Impact / Arial / Courier New replaced by the v0.2 faces.
+   - Two gradients removed (a radial on <body>, a linear on each
+     .terminal row); both are flat fills now.
+   - The .terminal:hover translateX is removed. v0.2 allows a
+     colour swap on hover and nothing else.
+   ============================================================ */
+
+@import url("design-system/styles.css");
+
+:root {
+  --atlas-panel: color-mix(in srgb, var(--term-grid) 55%, var(--term-bg));
+  --atlas-line: color-mix(in srgb, var(--term-phosphor) 22%, var(--term-bg));
+  --atlas-muted: var(--text-meta);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--paper);
+  background: var(--term-bg);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+.shell { width: min(var(--measure-guide), calc(100% - var(--space-28))); margin: 0 auto; }
+
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus {
+  left: var(--space-16); top: var(--space-16); z-index: 4;
+  padding: var(--space-8);
+  color: var(--term-bg); background: var(--paper);
+}
+
+.head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-18);
+  padding: var(--space-24) 0;
+  border-bottom: 1px solid var(--atlas-line);
+}
+
+.brand {
+  display: inline-flex; align-items: center; gap: var(--space-10);
+  font-family: var(--font-condensed); font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+}
+
+.brand-mark {
+  display: grid; place-items: center;
+  width: 42px; height: 42px;
+  font-family: var(--font-mono); font-size: .75rem;
+  color: var(--term-phosphor);
+  border: 1px solid var(--term-phosphor);
+  border-radius: 50%;
+}
+
+.receipt, .eyebrow, .band-meta, .action, .horizon-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.receipt { margin: 0; color: var(--atlas-muted); text-align: right; }
+
+.hero {
+  display: grid; grid-template-columns: 1.15fr .85fr;
+  gap: var(--space-44); align-items: end;
+  padding: clamp(56px, 10vw, 110px) 0 66px;
+}
+
+.eyebrow { margin: 0 0 var(--space-12); color: var(--term-phosphor); }
+
+h1, h2, h3, p { margin-top: 0; }
+
+h1 {
+  max-width: 760px; margin-bottom: var(--space-20);
+  font-family: var(--font-display); font-weight: 900;
+  /* Orbitron is far wider per character than the Impact it replaced,
+     so the inherited display sizes overflowed. Scaled to the face. */
+  font-size: clamp(1.9rem, 4.6vw, 3.6rem);
+  letter-spacing: -.01em; line-height: 1;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+}
+
+.lead { max-width: 650px; margin-bottom: 0; font-size: 1.2rem; line-height: 1.55; }
+
+.key { padding: var(--space-24); background: var(--atlas-panel); border: 1px solid var(--atlas-line); }
+.key p { margin: 0; line-height: 1.5; }
+.key strong { color: var(--term-amber); }
+
+/* Underground transmission — amber terminal register. */
+.interjection {
+  position: relative;
+  margin: 0 0 var(--space-44);
+  padding: var(--space-20) var(--space-24) var(--space-20) 54px;
+  font-family: var(--font-mono); line-height: 1.55;
+  color: var(--term-amber);
+  background: color-mix(in srgb, var(--term-amber) 8%, var(--term-bg));
+  border: 1px solid color-mix(in srgb, var(--term-amber) 45%, var(--term-bg));
+}
+.interjection::before { position: absolute; left: var(--space-20); color: var(--term-amber); content: ">_"; }
+.interjection p:last-child { margin-bottom: 0; }
+.interjection .eyebrow { color: var(--term-amber); }
+
+.atlas { padding-bottom: 86px; }
+
+.atlas-head {
+  display: grid; grid-template-columns: .7fr 1.3fr;
+  gap: var(--space-28); margin-bottom: var(--space-28);
+}
+
+h2 {
+  margin-bottom: 0;
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  letter-spacing: -.005em; line-height: 1.05;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+}
+
+.atlas-head p { max-width: 650px; margin-bottom: 0; font-size: 1.1rem; line-height: 1.5; }
+
+.spectrum { display: grid; gap: var(--space-10); }
+
+/* -- Band rows -------------------------------------------------
+   --band is the canonical SCREEN value, used for rules and fills.
+   --band-ink is the legible derivative used for text: five of the
+   nine SCREEN values fail WCAG against the terminal ground, so the
+   dark bands are lifted 50% toward --paper. Same rule as
+   static/clearance.css. --band-knockout is text ON the fill. */
+.terminal {
+  --band: var(--term-phosphor-dim);
+  --band-ink: var(--band);
+  --band-knockout: var(--term-bg);
+  display: grid; grid-template-columns: 132px minmax(0, 1fr) auto;
+  gap: var(--space-24); align-items: center;
+  min-height: 116px;
+  padding: var(--space-18) var(--space-20);
+  background: var(--atlas-panel);
+  border: 1px solid color-mix(in srgb, var(--band) 40%, var(--term-bg));
+  border-left: 10px solid var(--band);
+}
+
+.terminal:hover { border-color: var(--band); }
+
+.terminal--gray         { --band: var(--term-phosphor-dim); }
+.terminal--infrared     { --band: var(--scr-infrared); }
+.terminal--red          { --band: var(--scr-red); }
+.terminal--orange       { --band: var(--scr-orange); }
+.terminal--yellow       { --band: var(--scr-yellow); }
+.terminal--green        { --band: var(--scr-green); }
+.terminal--blue         { --band: var(--scr-blue); }
+.terminal--indigo       { --band: var(--scr-indigo); }
+.terminal--violet       { --band: var(--scr-violet); }
+.terminal--ultraviolet  { --band: var(--scr-uv); }
+
+.terminal--gray,
+.terminal--infrared,
+.terminal--blue,
+.terminal--indigo,
+.terminal--violet,
+.terminal--ultraviolet {
+  --band-ink: color-mix(in srgb, var(--band) 50%, var(--paper));
+  --band-knockout: var(--paper);
+}
+
+.band {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.4rem; letter-spacing: .02em; line-height: 1;
+  text-transform: uppercase;
+  color: var(--band-ink);
+}
+
+.band-meta { display: block; margin-top: var(--space-6); color: var(--atlas-muted); }
+
+.terminal h3 {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-condensed); font-weight: 700;
+  font-size: 1.2rem; letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.terminal p { margin-bottom: 0; line-height: 1.4; }
+
+.action {
+  display: inline-block;
+  padding: var(--space-10) var(--space-12);
+  color: var(--band-ink);
+  border: 1px solid var(--band);
+  text-decoration: none; white-space: nowrap;
+}
+
+.action:hover, .action:focus { color: var(--band-knockout); background: var(--band); }
+
+.green-pivot {
+  margin: var(--space-2) 0;
+  padding: var(--space-12) var(--space-20);
+  font-family: var(--font-mono); font-size: var(--text-fine);
+  text-align: center;
+  color: color-mix(in srgb, var(--scr-green) 50%, var(--paper));
+  background: color-mix(in srgb, var(--scr-green) 10%, var(--term-bg));
+  border: 1px dashed var(--scr-green);
+}
+
+.horizon { opacity: .8; }
+.horizon .action { cursor: pointer; }
+.horizon:hover { border-color: var(--band); }
+.horizon-label { color: var(--band-ink); }
+
+.trapezoid-aside {
+  max-width: 680px;
+  margin: var(--space-28) 0 0 auto;
+  padding: var(--space-18) var(--space-20);
+  font-family: var(--font-mono); font-size: var(--text-fine); line-height: 1.55;
+  color: color-mix(in srgb, var(--scr-violet) 45%, var(--paper));
+  background: color-mix(in srgb, var(--scr-violet) 14%, var(--term-bg));
+  border-left: 2px solid color-mix(in srgb, var(--scr-violet) 55%, var(--paper));
+}
+.trapezoid-aside p:last-child { margin-bottom: 0; }
+.trapezoid-aside .eyebrow { color: color-mix(in srgb, var(--scr-violet) 40%, var(--paper)); }
+
+.next { padding: 46px 0; border-top: 1px solid var(--atlas-line); text-align: center; }
+.next p { max-width: 650px; margin: var(--space-18) auto 0; line-height: 1.5; }
+
+footer { padding: var(--space-24) 0 38px; border-top: 1px solid var(--atlas-line); }
+footer .receipt { text-align: left; }
+
+.prism-credit {
+  margin: var(--space-10) 0 0;
+  font-family: var(--font-body); font-size: var(--text-fine); font-style: italic;
+  color: var(--atlas-muted);
+}
+
+@media (max-width: 720px) {
+  .head, .hero, .atlas-head { display: block; }
+  .receipt { margin-top: var(--space-12); text-align: left; }
+  .hero { padding-top: 68px; }
+  .key { margin-top: var(--space-34); }
+  .terminal { grid-template-columns: 1fr; gap: var(--space-8); }
+  .action { justify-self: start; }
+}

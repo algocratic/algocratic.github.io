@@ -57,6 +57,7 @@ body[data-clearance="gray"]     { --band: var(--term-phosphor-dim); }
    and paper wins on infrared/blue/indigo/violet/uv. */
 :root { --band-ink: var(--band); --band-knockout: var(--term-bg); }
 
+body[data-clearance="gray"],
 body[data-clearance="infrared"],
 body[data-clearance="blue"],
 body[data-clearance="indigo"],
@@ -1039,3 +1040,87 @@ body:has(.af-system-header) #compliance-tracker {
 }
 
 .af-hidden-link:hover { color: var(--term-phosphor); }
+
+/* -- Standalone guide sections --------------------------------
+   Used by clearance/infrared.html, a long-form variant of the
+   INFRARED guide that carried its own copy of this stylesheet. */
+.section { position: relative; margin-bottom: var(--space-44); }
+.section-content { padding-left: var(--space-20); }
+
+/* ============================================================
+   UNDERGROUND — clearance/red/unauthorized_resources.html
+
+   The frotz page: a Terminal-stratum surface the operative is
+   not supposed to have reached. This is the one place in the
+   clearance tree where Bangers is licensed to appear (Rule 1,
+   "underground press titles ONLY"). The original used raw cyan,
+   magenta and yellow with a 2s pulse on the header.
+   ============================================================ */
+.content {
+  max-width: 80ch;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+.header {
+  margin: var(--space-20) 0;
+  font-family: var(--font-comix);
+  font-size: 2.2rem;
+  letter-spacing: .02em;
+  text-align: center;
+  color: var(--band-ink);
+}
+
+.section-header {
+  margin: var(--space-28) 0 var(--space-10);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--term-amber);
+  border-bottom: 1px solid var(--term-amber);
+}
+
+.ascii-art {
+  margin: var(--space-20) 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  white-space: pre;
+  overflow-x: auto;
+  text-align: center;
+  color: var(--term-phosphor);
+}
+
+.command { color: var(--term-phosphor); }
+
+.timer {
+  position: fixed;
+  top: var(--space-10);
+  right: var(--space-10);
+  z-index: 1000;
+  padding: var(--space-4) var(--space-8);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--band-ink);
+  background: var(--term-bg);
+  border: 1px solid var(--band);
+}
+
+/* frotz. */
+.frotz-trigger { cursor: pointer; color: var(--text-meta); }
+.frotz-trigger:hover { color: var(--term-phosphor); }
+
+.hidden-message {
+  display: none;
+  margin: var(--space-10) 0;
+  padding: var(--space-10);
+  color: var(--term-phosphor);
+  background: var(--term-bg);
+  border: 1px dashed var(--term-phosphor);
+}
+
+/* unauthorized_resources.html: DO / DON'T columns, and the konami
+   state its script used to set as an inline background hex. */
+.do-heading { color: var(--term-phosphor); }
+.dont-heading { color: var(--band-ink); }
+body.is-frotzed { background: var(--term-grid); }

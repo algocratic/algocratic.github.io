@@ -4,123 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNAUTHORIZED ACCESS DETECTED | AlgoCratic Security</title>
-    <style>
-        body {
-            background: #000;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            padding: 20px;
-            overflow-x: auto;
-            animation: flicker 3s infinite;
-        }
-        
-        @keyframes flicker {
-            0%, 98% { opacity: 1; }
-            99% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-        
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #00ff00;
-            animation: scan 2s linear infinite;
-            z-index: 1000;
-        }
-        
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 100vh; }
-        }
-        
-        .ascii-art {
-            white-space: pre;
-            color: #00ffff;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 12px;
-        }
-        
-        .header {
-            color: #ff0000;
-            text-align: center;
-            margin: 20px 0;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .content {
-            max-width: 80ch;
-            margin: 0 auto;
-            line-height: 1.4;
-        }
-        
-        .section-header {
-            color: #ffff00;
-            border-bottom: 1px solid #ffff00;
-            margin: 30px 0 10px 0;
-        }
-        
-        .code-block {
-            background: #111;
-            border: 1px solid #333;
-            padding: 10px;
-            margin: 10px 0;
-            overflow-x: auto;
-        }
-        
-        .warning {
-            color: #ff6600;
-            background: #330000;
-            border: 1px solid #ff0000;
-            padding: 10px;
-            margin: 15px 0;
-        }
-        
-        .command {
-            color: #00ffff;
-        }
-        
-        .timer {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            color: #ff0000;
-            font-weight: bold;
-            background: #000;
-            padding: 5px;
-            border: 1px solid #ff0000;
-        }
-        
-        .frotz-trigger {
-            cursor: pointer;
-            color: #666;
-            transition: color 0.3s;
-        }
-        
-        .frotz-trigger:hover {
-            color: #00ff00;
-        }
-        
-        .hidden-message {
-            display: none;
-            color: #ff00ff;
-            background: #001100;
-            padding: 10px;
-            border: 1px dashed #ff00ff;
-            margin: 10px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../../static/clearance.css">
 </head>
-<body>
+<body data-clearance="red">
     <div class="scanline"></div>
     
     <div class="timer" id="countdown">SELF-DESTRUCT: 71:59:59</div>
@@ -192,7 +78,7 @@
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div>
-                <h4 style="color: #00ff00;">DO:</h4>
+                <h4 class="do-heading">DO:</h4>
                 <ul>
                     <li>Initialize your GPT on a personal device, NEVER COMPANY HARDWARE</li>
                     <li>Use text-only mode (images get scanned by The Algorithm)</li>
@@ -204,7 +90,7 @@
                 </ul>
             </div>
             <div>
-                <h4 style="color: #ff0000;">DON'T:</h4>
+                <h4 class="dont-heading">DON'T:</h4>
                 <ul>
                     <li>Copy/paste entire blocks of GPT-generated code</li>
                     <li>Generate full solutions in one go (raises suspicion flags)</li>
@@ -330,7 +216,7 @@ Them: [If fellow slacker] "But humans improvise."
             <p>If you found this useful, place a coffee mug with three paperclips on your desk tomorrow. Further instructions may follow.</p>
         </div>
         
-        <div style="text-align: center; margin: 50px 0; color: #666;">
+        <div style="text-align: center; margin: 50px 0; color: var(--text-meta);">
             <p>// END TRANSMISSION</p>
             <p>// FILE WILL SELF-DESTRUCT IN <span id="self-destruct">259200</span> SECONDS</p>
         </div>
@@ -374,15 +260,9 @@ Them: [If fellow slacker] "But humans improvise."
         
         setInterval(updateCountdown, 1000);
         
-        // Random flicker effect
-        setInterval(() => {
-            if (Math.random() < 0.1) {
-                document.body.style.opacity = '0.9';
-                setTimeout(() => {
-                    document.body.style.opacity = '1';
-                }, 100);
-            }
-        }, 5000);
+        // Removed on the v0.2 install: a 5s interval that randomly dropped
+        // the whole page to 0.9 opacity. Decorative motion, and it fought
+        // every reader who happened to be mid-sentence.
         
         // Konami code easter egg
         let konamiSequence = [];
@@ -395,7 +275,7 @@ Them: [If fellow slacker] "But humans improvise."
             }
             
             if (JSON.stringify(konamiSequence) === JSON.stringify(konamiCode)) {
-                document.body.style.background = '#001100';
+                document.body.classList.add('is-frotzed');
                 alert('30 LIVES GRANTED. THE ALGORITHM CANNOT DETECT INFINITE PLAYERS.');
                 konamiSequence = [];
             }
