@@ -41,6 +41,31 @@ body[data-clearance="uv"]       { --band: var(--scr-uv); }
 /* GRAY is the redacted band: it has no clearance colour by design. */
 body[data-clearance="gray"]     { --band: var(--term-phosphor-dim); }
 
+/* -- Derived band tokens -------------------------------------------
+   The SCREEN column is canon (Rule 2) and is not edited here. But on
+   the terminal substrate five of the nine values fail WCAG outright
+   against --term-bg: infrared 2.02, blue 1.48, indigo 1.43, violet
+   1.60, and uv 1.00 — uv is the background, so it is invisible.
+
+   So --band stays canonical and is used for fills, rules and
+   borders, while text resolves --band-ink. For the five dark bands
+   that is the canonical value lifted 50% toward --paper, which keeps
+   the hue and clears 4.5:1 for all five (4.82-5.98).
+
+   --band-knockout is the reverse problem: text sitting ON a solid
+   band fill. Measured per band, ink wins on red/orange/yellow/green
+   and paper wins on infrared/blue/indigo/violet/uv. */
+:root { --band-ink: var(--band); --band-knockout: var(--term-bg); }
+
+body[data-clearance="infrared"],
+body[data-clearance="blue"],
+body[data-clearance="indigo"],
+body[data-clearance="violet"],
+body[data-clearance="uv"] {
+  --band-ink: color-mix(in srgb, var(--band) 50%, var(--paper));
+  --band-knockout: var(--paper);
+}
+
 :root {
   /* Derived band tints — color-mix keeps these tied to --band
      instead of hard-coding an rgba() per band, which is what the
@@ -118,7 +143,7 @@ body {
   line-height: 1.1;
   text-transform: uppercase;
   letter-spacing: .04em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .document-subtitle {
@@ -140,18 +165,11 @@ body {
   font-size: var(--text-label);
   text-transform: uppercase;
   letter-spacing: .14em;
-  color: var(--term-bg);
+  color: var(--band-knockout);
   background: var(--band);
   border: 1px solid var(--band);
 }
 
-/* YELLOW and UV sit too light/dark for the default knockout. */
-body[data-clearance="yellow"] .classification,
-body[data-clearance="green"] .classification { color: var(--term-bg); }
-body[data-clearance="infrared"] .classification,
-body[data-clearance="indigo"] .classification,
-body[data-clearance="violet"] .classification,
-body[data-clearance="uv"] .classification { color: var(--paper); }
 
 .document-id {
   margin-top: var(--space-10);
@@ -169,7 +187,7 @@ body[data-clearance="uv"] .classification { color: var(--paper); }
   font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
   border-bottom: 1px dashed var(--band);
 }
 
@@ -182,7 +200,7 @@ h4 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .text-center { text-align: center; }
@@ -208,15 +226,11 @@ h4 {
   height: 26px;
   font-family: var(--font-condensed);
   font-weight: 700;
-  color: var(--term-bg);
+  color: var(--band-knockout);
   background: var(--band);
   border-radius: 50%;
 }
 
-body[data-clearance="infrared"] .attention-box::before,
-body[data-clearance="indigo"] .attention-box::before,
-body[data-clearance="violet"] .attention-box::before,
-body[data-clearance="uv"] .attention-box::before { color: var(--paper); }
 
 /* -- Lists ------------------------------------------------- */
 .resource-list,
@@ -236,14 +250,14 @@ body[data-clearance="uv"] .attention-box::before { color: var(--paper); }
   content: "\25B9"; /* ▹ */
   position: absolute;
   left: var(--space-4);
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .toc-list li::before {
   content: ">";
   position: absolute;
   left: var(--space-4);
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .toc-list a {
@@ -252,7 +266,7 @@ body[data-clearance="uv"] .attention-box::before { color: var(--paper); }
 }
 
 .toc-list a:hover {
-  color: var(--band);
+  color: var(--band-ink);
   text-decoration: underline;
 }
 
@@ -278,14 +292,14 @@ body[data-clearance="uv"] .attention-box::before { color: var(--paper); }
   font-size: 1.1rem;
   letter-spacing: .08em;
   text-align: center;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .binary-decoration {
   margin-top: var(--space-44);
   font-size: 8px;
   text-align: center;
-  color: var(--band);
+  color: var(--band-ink);
   opacity: .3;
 }
 
@@ -306,20 +320,16 @@ body[data-clearance="uv"] .attention-box::before { color: var(--paper); }
   text-transform: uppercase;
   letter-spacing: .1em;
   text-decoration: none;
-  color: var(--term-bg);
+  color: var(--band-knockout);
   background: var(--band);
   border: 1px solid var(--band);
   border-radius: var(--radius-chip);
 }
 
-body[data-clearance="infrared"] .nav-button,
-body[data-clearance="indigo"] .nav-button,
-body[data-clearance="violet"] .nav-button,
-body[data-clearance="uv"] .nav-button { color: var(--paper); }
 
 /* Hover is a colour swap only — v0.2 allows nothing else. */
 .nav-button:hover {
-  color: var(--band);
+  color: var(--band-ink);
   background: transparent;
 }
 
@@ -363,7 +373,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   bottom: var(--space-4);
   font-size: 6px;
   letter-spacing: .06em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .eyes {
@@ -423,7 +433,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   font-family: var(--font-condensed);
   font-weight: 700;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .af-tracker__track,
@@ -464,7 +474,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   font-size: var(--text-fine);
   white-space: pre;
   overflow-x: auto;
-  color: var(--band);
+  color: var(--band-ink);
   border: 1px dashed var(--band);
 }
 
@@ -496,7 +506,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   font-weight: 600;
   font-size: var(--text-eyebrow);
   letter-spacing: .14em;
-  color: var(--band);
+  color: var(--band-ink);
   background: color-mix(in srgb, var(--term-grid) 55%, var(--term-bg));
 }
 
@@ -510,7 +520,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   content: "\25BA"; /* ► */
   position: absolute;
   left: var(--space-4);
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .process-step:last-child { margin-bottom: 0; }
@@ -518,7 +528,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
 .process-arrow {
   margin: var(--space-4) 0;
   text-align: center;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 /* -- Typewriter -------------------------------------------------
@@ -535,7 +545,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
 .glitch,
 .glitch-text {
   position: relative;
-  color: var(--band);
+  color: var(--band-ink);
   letter-spacing: .06em;
 }
 
@@ -566,7 +576,7 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .assignment-card p { margin: 0 0 var(--space-12); }
@@ -583,21 +593,20 @@ body[data-clearance="uv"] .nav-button { color: var(--paper); }
   text-transform: uppercase;
   letter-spacing: .1em;
   text-decoration: none;
-  color: var(--term-bg);
+  color: var(--band-knockout);
   background: var(--band);
   border-radius: var(--radius-chip);
 }
 
-body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); }
 
 .assignment-card .button:hover {
-  color: var(--band);
+  color: var(--band-ink);
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--band);
 }
 
 .completion-tracker { margin: var(--space-16) 0; }
-.completion-tracker input[type="checkbox"] { accent-color: var(--band); }
+.completion-tracker input[type="checkbox"] { accent-color: var(--band-ink); }
 
 .hidden-section { display: none; }
 
@@ -608,7 +617,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   color: var(--text-meta);
 }
 
-.whisper:hover { color: var(--band); }
+.whisper:hover { color: var(--band-ink); }
 
 /* YELLOW — decision matrix */
 .decision-matrix {
@@ -630,7 +639,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .decision-matrix tr:nth-child(even) { background: var(--band-wash-soft); }
@@ -666,7 +675,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   font-size: 1.6rem;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .certificate-subtitle {
@@ -683,7 +692,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .certificate-badge,
@@ -699,7 +708,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   font-size: var(--text-eyebrow);
   text-align: center;
   letter-spacing: .1em;
-  color: var(--band);
+  color: var(--band-ink);
   border: 2px solid var(--band);
   border-radius: 50%;
 }
@@ -734,7 +743,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
 
 .understanding-box h4 { margin-top: 0; }
 .understanding-box p { margin-bottom: var(--space-10); }
-.understanding-box em { color: var(--band); }
+.understanding-box em { color: var(--band-ink); }
 
 .contact-info .subtitle,
 .status-text,
@@ -859,7 +868,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   letter-spacing: .12em;
 }
 
-.af-system-header__home:hover .af-system-header__brand { color: var(--band); }
+.af-system-header__home:hover .af-system-header__brand { color: var(--band-ink); }
 
 .af-system-header__label {
   margin: 0;
@@ -878,7 +887,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .af-system-header__meta { text-align: right; }
@@ -983,7 +992,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .08em;
-  color: var(--band);
+  color: var(--band-ink);
 }
 
 .af-terminal-frame h1 {
@@ -992,7 +1001,7 @@ body[data-clearance="infrared"] .assignment-card .button { color: var(--paper); 
 }
 
 .af-terminal-frame h2 { margin-top: var(--space-28); }
-.af-terminal-frame strong { color: var(--band); }
+.af-terminal-frame strong { color: var(--band-ink); }
 .af-terminal-frame ul { line-height: 1.8; }
 
 /* The tracker is fixed to the viewport, so on the band index

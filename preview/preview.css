@@ -11,7 +11,7 @@
    static/ alongside portal-shell.css.
    ============================================================ */
 
-@import url("design-system/styles.css");
+@import url("../static/design-system/styles.css");
 
 /* ---------- reset + page ---------- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -161,11 +161,11 @@ h1, h2, h3 { font-family: var(--font-condensed); font-weight: 700; text-transfor
   background-repeat: repeat-x;
   overflow: hidden;
 }
-.af-pattern-strip[data-level="infrared"] { background-image: url("design-system/assets/patterns/pattern-infrared.svg"); }
-.af-pattern-strip[data-level="red"]      { background-image: url("design-system/assets/patterns/pattern-red.svg"); }
-.af-pattern-strip[data-level="orange"]   { background-image: url("design-system/assets/patterns/pattern-orange.svg"); }
-.af-pattern-strip[data-level="yellow"]   { background-image: url("design-system/assets/patterns/pattern-yellow.svg"); }
-.af-pattern-strip[data-level="green"]    { background-image: url("design-system/assets/patterns/pattern-green.svg"); }
+.af-pattern-strip[data-level="infrared"] { background-image: url("../static/design-system/assets/patterns/pattern-infrared.svg"); }
+.af-pattern-strip[data-level="red"]      { background-image: url("../static/design-system/assets/patterns/pattern-red.svg"); }
+.af-pattern-strip[data-level="orange"]   { background-image: url("../static/design-system/assets/patterns/pattern-orange.svg"); }
+.af-pattern-strip[data-level="yellow"]   { background-image: url("../static/design-system/assets/patterns/pattern-yellow.svg"); }
+.af-pattern-strip[data-level="green"]    { background-image: url("../static/design-system/assets/patterns/pattern-green.svg"); }
 
 .af-masthead .af-pattern-strip {
   position: absolute;
