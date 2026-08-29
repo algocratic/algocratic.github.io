@@ -7,14 +7,14 @@
     <style>
         /* Console/Terminal Aesthetic */
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #00ff41;
-            --text-secondary: #e0e0e0;
-            --text-muted: #808080;
+            --bg-primary: var(--term-bg);
+            --bg-secondary: var(--term-grid);
+            --text-primary: var(--term-phosphor);
+            --text-secondary: var(--paper);
+            --text-muted: var(--text-meta);
             --border-color: #333333;
-            --error-color: #ff0000;
-            --warning-color: #ffff00;
+            --error-color: var(--scr-red);
+            --warning-color: var(--scr-yellow);
         }
 
         * {
@@ -26,7 +26,7 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 14px;
             line-height: 1.6;
             overflow-x: hidden;
@@ -109,7 +109,7 @@
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 14px;
             transition: all 0.3s;
         }
@@ -143,7 +143,7 @@
             background-color: var(--text-primary);
             color: var(--bg-primary);
             border: none;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -228,23 +228,15 @@
             font-size: 12px;
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-bancho">
-<header class="af-system-header" data-portal-function="security and access">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Employee Authentication</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">BANCHO · RED</span>
-    <span class="af-system-header__receipt">teacherbot@green · security and access</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Employee Authentication"
+        data-clearance="BANCHO · RED"
+        data-receipt="teacherbot@green · security and access"
+        data-function="security and access"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="bancho" data-semantic-clearance="RED">
     <div class="binary-bg" id="binaryBg"></div>
 

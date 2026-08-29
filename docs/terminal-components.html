@@ -16,8 +16,8 @@
         }
         
         .component-title {
-            color: #00ff41;
-            font-family: 'Courier New', monospace;
+            color: var(--term-phosphor);
+            font-family: var(--font-mono);
             font-size: 18px;
             margin-bottom: 15px;
             text-transform: uppercase;
@@ -31,13 +31,13 @@
         }
         
         .code-example {
-            background-color: #0a0a0a;
+            background-color: var(--term-bg);
             border: 1px solid #333;
             padding: 15px;
             margin: 15px 0;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 13px;
-            color: #00ff41;
+            color: var(--term-phosphor);
             overflow-x: auto;
             white-space: pre;
         }
@@ -52,39 +52,31 @@
         .clearance-badge {
             padding: 5px 10px;
             border-radius: 3px;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 12px;
             font-weight: bold;
             text-transform: uppercase;
         }
         
-        .infrared { background-color: #8b0000; color: white; }
-        .red { background-color: #ff0000; color: white; }
-        .orange { background-color: #ffa500; color: black; }
-        .yellow { background-color: #ffff00; color: black; }
-        .green { background-color: #00ff00; color: black; }
-        .blue { background-color: #0000ff; color: white; }
-        .indigo { background-color: #4b0082; color: white; }
-        .violet { background-color: #8a2be2; color: white; }
+        .infrared { background-color: var(--scr-infrared); color: white; }
+        .red { background-color: var(--scr-red); color: white; }
+        .orange { background-color: var(--scr-orange); color: black; }
+        .yellow { background-color: var(--scr-yellow); color: black; }
+        .green { background-color: var(--term-phosphor); color: black; }
+        .blue { background-color: var(--scr-blue); color: white; }
+        .indigo { background-color: var(--scr-indigo); color: white; }
+        .violet { background-color: var(--scr-violet); color: white; }
         .ultraviolet { background-color: #9966cc; color: white; }
     </style>
-    <link rel="stylesheet" href="../static/portal-shell.css">
+    <link rel="stylesheet" href="../static/shell.css">
 </head>
 <body class="portal-shell portal-society-phreaks">
-<header class="af-system-header" data-portal-function="operations and technical process">
-  <a class="af-system-header__home" href="../index.html">
-    <img class="af-system-header__mark" src="../Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Terminal Component Library</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">PHREAKS · BLUE</span>
-    <span class="af-system-header__receipt">teacherbot@green · operations and technical process</span>
-  </div>
-</header>
+<script src="../static/chrome.js"
+        data-system="Terminal Component Library"
+        data-clearance="PHREAKS · BLUE"
+        data-receipt="teacherbot@green · operations and technical process"
+        data-function="operations and technical process"></script>
+<noscript><a href="../index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="phreaks" data-semantic-clearance="BLUE">
     <div class="container">
         <header>

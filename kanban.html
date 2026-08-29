@@ -14,23 +14,23 @@
             --primary-light: #1a1a4d;
             
             /* Accent colors */
-            --accent-red: #ff3030;
+            --accent-red: var(--scr-red);
             --accent-green: #10ff10;
             --accent-blue: #2080ff;
-            --accent-yellow: #ffcc00;
+            --accent-yellow: var(--scr-yellow);
             
             /* Text colors */
-            --text-primary: #ffffff;
+            --text-primary: var(--paper);
             --text-secondary: #cccccc;
             --text-muted: #888888;
             
             /* Status colors */
-            --backlog-color: #4b0082;  /* Indigo */
-            --todo-color: #8b0000;     /* Infrared */
-            --inprogress-color: #ff0000; /* Red */
-            --review-color: #ffa500;   /* Orange */
-            --done-color: #00ff00;     /* Green */
-            --blocked-color: #ff3030;  /* Bright red */
+            --backlog-color: var(--scr-indigo);  /* Indigo */
+            --todo-color: var(--scr-infrared);     /* Infrared */
+            --inprogress-color: var(--scr-red); /* Red */
+            --review-color: var(--scr-orange);   /* Orange */
+            --done-color: var(--term-phosphor);     /* Green */
+            --blocked-color: var(--scr-red);  /* Bright red */
             
             /* Spacing */
             --space-xs: 0.25rem;
@@ -47,7 +47,7 @@
         }
         
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: var(--font-body);
             background-color: var(--primary-dark);
             color: var(--text-primary);
             line-height: 1.6;
@@ -242,7 +242,7 @@
         
         .metric-value {
             font-weight: bold;
-            font-family: 'Roboto Mono', monospace;
+            font-family: var(--font-mono);
         }
         
         .efficiency-high {
@@ -372,7 +372,7 @@
             font-size: 0.7rem;
             color: var(--text-muted);
             margin-bottom: 0.25rem;
-            font-family: 'Roboto Mono', monospace;
+            font-family: var(--font-mono);
         }
         
         .task-title {
@@ -536,7 +536,7 @@
             border: 1px solid rgba(32, 128, 255, 0.3);
             color: var(--text-primary);
             border-radius: 4px;
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: var(--font-body);
         }
         
         .form-group textarea {
@@ -652,7 +652,7 @@
             padding: 0.5rem;
             border-radius: 4px;
             z-index: 1000;
-            font-family: 'Roboto Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 0.8rem;
             width: 150px;
         }
@@ -732,23 +732,15 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-phreaks">
-<header class="af-system-header" data-portal-function="operations and technical process">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Productivity Compliance Board</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">PHREAKS · BLUE</span>
-    <span class="af-system-header__receipt">teacherbot@green · operations and technical process</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Productivity Compliance Board"
+        data-clearance="PHREAKS · BLUE"
+        data-receipt="teacherbot@green · operations and technical process"
+        data-function="operations and technical process"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="phreaks" data-semantic-clearance="BLUE">
     <!-- Loyalty Tracker -->
     <div class="loyalty-tracker">

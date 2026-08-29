@@ -26,7 +26,7 @@
    CRT reading survives without the movement.
    ============================================================ */
 
-@import url("design-system/styles.css");
+@import url("shell.css");   /* -> design-system/styles.css */
 
 /* -- Band accent, SCREEN column. One line per band. -------- */
 body[data-clearance="infrared"] { --band: var(--scr-infrared); }
@@ -55,7 +55,7 @@ body[data-clearance="gray"]     { --band: var(--term-phosphor-dim); }
    --band-knockout is the reverse problem: text sitting ON a solid
    band fill. Measured per band, ink wins on red/orange/yellow/green
    and paper wins on infrared/blue/indigo/violet/uv. */
-:root { --band-ink: var(--band); --band-knockout: var(--term-bg); }
+/* --band-ink / --band-knockout defaults live on body in shell.css. */
 
 body[data-clearance="gray"],
 body[data-clearance="infrared"],
@@ -67,18 +67,11 @@ body[data-clearance="uv"] {
   --band-knockout: var(--paper);
 }
 
-:root {
-  /* Derived band tints — color-mix keeps these tied to --band
-     instead of hard-coding an rgba() per band, which is what the
-     old sheets did (six copies of the same value, six hexes). */
-  --band-wash: color-mix(in srgb, var(--band) 15%, transparent);
-  --band-wash-soft: color-mix(in srgb, var(--band) 10%, transparent);
-  --band-quiet: color-mix(in srgb, var(--band) 45%, var(--term-bg));
-}
+/* --band-wash / --band-wash-soft / --band-quiet are declared on body
+   in shell.css, for the reason documented there. */
 
 /* -- Terminal substrate ------------------------------------ */
 body {
-  --band: var(--term-phosphor); /* fallback when no band declared */
   margin: 0;
   padding: 0;
   font-family: var(--font-mono);
@@ -821,143 +814,9 @@ h4 {
 .monolith-icon.is-acknowledged .eye { background: var(--term-amber); }
 .monolith-icon.is-acknowledged .eye::before { background: var(--term-bg); }
 
-/* ============================================================
-   SYSTEM HEADER — Terminal stratum, v0.2 tokens.
-
-   The clearance tree previously drew this from
-   static/portal-shell.css, which @imports the older
-   "Algocratic Futures Design System" (navy/gold/Michroma).
-   Loading both meant two token systems defined --link,
-   --surface-page and --text-body on the same page, and the
-   older one won on load order. This re-implementation lets the
-   tree drop that import and resolve exactly one system.
-   ============================================================ */
-.af-system-header {
-  position: relative;
-  z-index: 10000;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: var(--space-18);
-  align-items: center;
-  width: min(var(--measure-guide), calc(100% - var(--space-28)));
-  margin: 0 auto;
-  padding: var(--space-14) var(--space-20);
-  color: var(--paper);
-  background: var(--term-bg);
-  border-bottom: 4px solid var(--band);
-}
-
-.af-system-header__home {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-10);
-  color: var(--paper);
-  text-decoration: none;
-}
-
-.af-system-header__mark {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
-.af-system-header__brand {
-  font-family: var(--font-condensed);
-  font-weight: 700;
-  font-size: var(--text-label);
-  text-transform: uppercase;
-  letter-spacing: .12em;
-}
-
-.af-system-header__home:hover .af-system-header__brand { color: var(--band-ink); }
-
-.af-system-header__label {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-eyebrow);
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: var(--text-meta);
-}
-
-.af-system-header__name {
-  margin: var(--space-2) 0 0;
-  font-family: var(--font-condensed);
-  font-weight: 600;
-  font-size: clamp(1rem, 2.2vw, 1.3rem);
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--band-ink);
-}
-
-.af-system-header__meta { text-align: right; }
-
-.af-system-header__clearance {
-  display: inline-block;
-  padding: var(--space-4) var(--space-8);
-  font-family: var(--font-condensed);
-  font-weight: 700;
-  font-size: var(--text-eyebrow);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--paper);
-  border: 1px solid var(--band);
-}
-
-.af-system-header__receipt {
-  display: block;
-  margin-top: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--text-eyebrow);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--text-meta);
-}
-
-@media (max-width: 760px) {
-  .af-system-header {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-    text-align: left;
-  }
-  .af-system-header__meta { text-align: left; }
-}
-
-/* -- Terminal frame -------------------------------------------
-   Also inherited from portal-shell.css. The original painted a
-   repeating-linear-gradient scanline overlay and a drop shadow;
-   v0.2 permits neither, so this is the flat equivalent. */
-.af-terminal-frame {
-  position: relative;
-  isolation: isolate;
-  width: min(var(--measure-guide), calc(100% - var(--space-28)));
-  margin: 0 auto var(--space-44);
-  padding: var(--space-24);
-  overflow: hidden;
-  color: var(--paper);
-  background: var(--term-bg);
-  border: 1px solid var(--band);
-  border-top: 0;
-  font-family: var(--font-mono);
-}
-
-.af-terminal-frame > .container,
-.af-terminal-frame > .terminal-container,
-.af-terminal-frame > .page-container,
-.af-terminal-frame > main {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (max-width: 760px) {
-  .af-terminal-frame {
-    width: min(100% - var(--space-20), var(--measure-guide));
-    margin-bottom: var(--space-20);
-    padding: var(--space-14);
-  }
-}
-
+/* The system header and terminal frame now live in shell.css, which
+   this file imports, so they have one definition shared with the
+   rest of the site. */
 /* -- Band index prose -----------------------------------------
    Used by the GREEN and BLUE index pages, which were written as
    one-off inline-styled documents rather than on the band sheet

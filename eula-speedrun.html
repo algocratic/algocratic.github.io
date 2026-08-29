@@ -16,7 +16,7 @@
         
         .speedrun-header {
             background: rgba(0, 255, 65, 0.1);
-            border: 2px solid #00ff41;
+            border: 2px solid var(--term-phosphor);
             padding: 20px;
             margin-bottom: 20px;
             text-align: center;
@@ -42,7 +42,7 @@
         
         .speedrun-title {
             font-size: 2.5rem;
-            color: #00ff41;
+            color: var(--term-phosphor);
             margin: 0;
             text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
             animation: pulse 2s infinite;
@@ -50,8 +50,8 @@
         
         .timer-display {
             font-size: 3rem;
-            font-family: 'Courier New', monospace;
-            color: #00ff41;
+            font-family: var(--font-mono);
+            color: var(--term-phosphor);
             text-align: center;
             margin: 20px 0;
             text-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
@@ -71,12 +71,12 @@
         }
         
         .metric-label {
-            color: #808080;
+            color: var(--text-meta);
             font-size: 0.9rem;
         }
         
         .metric-value {
-            color: #00ff41;
+            color: var(--term-phosphor);
             font-size: 1.5rem;
             font-weight: bold;
         }
@@ -88,13 +88,13 @@
             height: 400px;
             overflow-y: auto;
             position: relative;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             line-height: 1.8;
         }
         
         .text-highlight {
             background: rgba(0, 255, 65, 0.3);
-            color: #00ff41;
+            color: var(--term-phosphor);
             padding: 2px 4px;
             animation: blink 0.5s;
         }
@@ -110,8 +110,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #1a1a1a;
-            border: 3px solid #ff3030;
+            background: var(--term-grid);
+            border: 3px solid var(--scr-red);
             padding: 30px;
             z-index: 1000;
             box-shadow: 0 0 30px rgba(255, 48, 48, 0.5);
@@ -130,7 +130,7 @@
         }
         
         .quiz-question {
-            color: #ffff00;
+            color: var(--scr-yellow);
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
@@ -142,7 +142,7 @@
         
         .quiz-option {
             background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #666;
+            border: 2px solid var(--text-meta);
             padding: 15px;
             margin: 10px 0;
             cursor: pointer;
@@ -150,17 +150,17 @@
         }
         
         .quiz-option:hover {
-            border-color: #00ff41;
+            border-color: var(--term-phosphor);
             background: rgba(0, 255, 65, 0.1);
         }
         
         .quiz-option.correct {
-            border-color: #00ff00;
+            border-color: var(--term-phosphor);
             background: rgba(0, 255, 0, 0.2);
         }
         
         .quiz-option.incorrect {
-            border-color: #ff0000;
+            border-color: var(--scr-red);
             background: rgba(255, 0, 0, 0.2);
         }
         
@@ -176,7 +176,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00ff41, #00cc33);
+            background: linear-gradient(90deg, var(--term-phosphor), #00cc33);
             width: 0%;
             transition: width 0.3s;
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
@@ -187,7 +187,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #fff;
+            color: var(--paper);
             font-weight: bold;
         }
         
@@ -231,7 +231,7 @@
         }
         
         .leaderboard-title {
-            color: #00ff41;
+            color: var(--term-phosphor);
             font-size: 1.5rem;
             margin-bottom: 15px;
             text-align: center;
@@ -254,12 +254,12 @@
         }
         
         .speedrun-btn {
-            background: #00ff41;
-            color: #000;
+            background: var(--term-phosphor);
+            color: var(--term-bg);
             border: none;
             padding: 15px 30px;
             font-size: 1.2rem;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-weight: bold;
             cursor: pointer;
             margin: 0 10px;
@@ -274,7 +274,7 @@
         }
         
         .speedrun-btn:disabled {
-            background: #666;
+            background: var(--text-meta);
             cursor: not-allowed;
             transform: scale(1);
         }
@@ -286,8 +286,8 @@
         
         .difficulty-btn {
             background: rgba(0, 0, 0, 0.8);
-            color: #00ff41;
-            border: 2px solid #00ff41;
+            color: var(--term-phosphor);
+            border: 2px solid var(--term-phosphor);
             padding: 10px 20px;
             margin: 0 5px;
             cursor: pointer;
@@ -304,8 +304,8 @@
         }
         
         @keyframes glitch {
-            0%, 100% { text-shadow: 2px 2px #ff0000, -2px -2px #0000ff; }
-            50% { text-shadow: -2px 2px #0000ff, 2px -2px #ff0000; }
+            0%, 100% { text-shadow: 2px 2px var(--scr-red), -2px -2px var(--scr-blue); }
+            50% { text-shadow: -2px 2px var(--scr-blue), 2px -2px var(--scr-red); }
         }
         
         /* Mobile optimizations */
@@ -316,23 +316,15 @@
             .quiz-popup { width: 95%; padding: 20px; }
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-bancho">
-<header class="af-system-header" data-portal-function="security and access">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Compliance Speedrun</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">BANCHO · RED</span>
-    <span class="af-system-header__receipt">teacherbot@green · security and access</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Compliance Speedrun"
+        data-clearance="BANCHO · RED"
+        data-receipt="teacherbot@green · security and access"
+        data-function="security and access"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="bancho" data-semantic-clearance="RED">
     <div class="scanline"></div>
     

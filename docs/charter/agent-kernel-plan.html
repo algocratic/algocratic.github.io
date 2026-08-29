@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <title>Agent-Organization Kernel Implementation Plan | Algocratic Futures</title>
-  <link rel="stylesheet" href="../../Algocratic%20Futures%20Design%20System/styles.css">
+  <link rel="stylesheet" href="../../static/shell.css">
   <style>
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -57,7 +57,7 @@
       display: inline-block;
       margin-top: 18px;
       padding: 6px 9px;
-      color: #fff;
+      color: var(--paper);
       background: var(--prism-green);
       border: 1px solid #267f38;
       border-radius: 6px;
@@ -101,7 +101,7 @@
     }
     table { width: 100%; border-collapse: collapse; background: var(--af-paper); }
     th, td { padding: 11px 12px; border: 1px solid var(--af-silver); text-align: left; vertical-align: top; }
-    th { color: #fff; background: var(--af-navy); }
+    th { color: var(--paper); background: var(--af-navy); }
     ul, ol { padding-left: 22px; }
     li + li { margin-top: 5px; }
     dl { display: grid; grid-template-columns: minmax(130px, .5fr) 2fr; gap: 8px 18px; margin: 0; }
@@ -127,7 +127,7 @@
     }
     @media print {
       .local-nav { display: none; }
-      body { background: #fff; }
+      body { background: var(--paper); }
       .page { width: 100%; }
       .card, pre, table { break-inside: avoid; }
     }
@@ -356,7 +356,7 @@ ELSE refuse_and_record</code></pre>
         <dl>
           <dt>Kernel source</dt><dd>Frozen proposed contract, “Implement and test the minimal agent-organization kernel,” supplied as the earlier kernel-contract attachment; reviewed 2026-08-01.</dd>
           <dt>PRISM source</dt><dd><a href="../../the-prism.html">Canonical PRISM framework</a>, Angela Westmoreland, M.Ed., Fayetteville Technical Community College.</dd>
-          <dt>Visual source</dt><dd><a href="../../Algocratic%20Futures%20Design%20System/readme.md">Algocratic Futures™ Design System</a>, including paper-document tokens, typography, receipts, PRISM semantics, and card anatomy.</dd>
+          <dt>Visual source</dt><dd><a href="../../static/design-system/readme.md">Algocratic Futures™ Design System</a>, including paper-document tokens, typography, receipts, PRISM semantics, and card anatomy.</dd>
           <dt>Contract stamp</dt><dd><code>teacherbot@green</code> · frozen and authorized for execution 2026-08-01.</dd>
         </dl>
       </section>

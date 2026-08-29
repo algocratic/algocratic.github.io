@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Automated Testing Plan — Algocratic Futures Portal Charter</title>
-  <link rel="stylesheet" href="../../Algocratic%20Futures%20Design%20System/styles.css">
+  <link rel="stylesheet" href="../../static/shell.css">
   <style>
     * { box-sizing: border-box; }
     html { background: var(--af-paper-2); color: var(--af-ink); }
@@ -16,14 +16,14 @@
     }
     .prism-rail { height: 8px; background: var(--prism-rail); }
     .page { width: min(calc(100% - 32px), var(--page-max)); margin: 0 auto; }
-    header { padding: var(--space-8) 0 var(--space-7); border-bottom: 1px solid var(--af-silver); }
+    header { padding: var(--space-44) 0 var(--space-34); border-bottom: 1px solid var(--af-silver); }
     .eyebrow, .stamp, dt, th, .gate-label {
       font-family: var(--font-mono);
       font-size: var(--text-caption);
       letter-spacing: var(--track-caps);
       text-transform: uppercase;
     }
-    .eyebrow { margin: 0 0 var(--space-3); color: var(--prism-green); font-weight: 700; }
+    .eyebrow { margin: 0 0 var(--space-12); color: var(--prism-green); font-weight: 700; }
     h1, h2, h3 { color: var(--af-navy); line-height: var(--leading-tight); }
     h1 {
       max-width: 18ch;
@@ -34,28 +34,28 @@
       letter-spacing: -.02em;
     }
     h2 {
-      margin: var(--space-9) 0 var(--space-4);
-      padding-bottom: var(--space-2);
+      margin: var(--space-44) 0 var(--space-16);
+      padding-bottom: var(--space-8);
       border-bottom: 2px solid var(--af-navy);
       font-family: var(--font-doc-serif);
       font-size: var(--text-h2);
     }
-    h3 { margin: 0 0 var(--space-2); font-size: var(--text-h3); }
+    h3 { margin: 0 0 var(--space-8); font-size: var(--text-h3); }
     p, ul, ol { max-width: var(--measure); }
     a { color: var(--link); text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
     a:focus-visible { outline: 3px solid var(--af-gold); outline-offset: 3px; }
     .lede {
       max-width: 66ch;
-      margin: var(--space-5) 0 0;
+      margin: var(--space-20) 0 0;
       font-family: var(--font-doc-serif);
       font-size: 19px;
       color: var(--af-slate);
     }
     .stamp {
       display: inline-block;
-      margin-top: var(--space-5);
-      padding: var(--space-2) var(--space-3);
+      margin-top: var(--space-20);
+      padding: var(--space-8) var(--space-12);
       border: 1px solid var(--prism-green);
       border-left-width: 5px;
       color: var(--prism-green);
@@ -65,11 +65,11 @@
     .summary-grid, .gate-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-4);
-      margin: var(--space-5) 0;
+      gap: var(--space-16);
+      margin: var(--space-20) 0;
     }
     .card, .gate {
-      padding: var(--space-5);
+      padding: var(--space-20);
       border: 1px solid var(--af-silver);
       border-left: 4px solid var(--prism-green);
       border-radius: var(--radius-xs);
@@ -77,15 +77,15 @@
       box-shadow: var(--shadow-card);
     }
     .card p, .gate p { margin: 0; }
-    .gate-label { display: block; margin-bottom: var(--space-2); color: var(--prism-green); font-weight: 700; }
+    .gate-label { display: block; margin-bottom: var(--space-8); color: var(--prism-green); font-weight: 700; }
     .table-wrap { overflow-x: auto; border: 1px solid var(--af-silver); }
     table { width: 100%; min-width: 720px; border-collapse: collapse; background: var(--af-paper); }
-    th, td { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--af-silver); text-align: left; vertical-align: top; }
+    th, td { padding: var(--space-12) var(--space-16); border-bottom: 1px solid var(--af-silver); text-align: left; vertical-align: top; }
     th { color: var(--af-navy); background: var(--af-paper-2); }
     tr:last-child td { border-bottom: 0; }
     code { font-family: var(--font-mono); font-size: .9em; background: var(--af-paper-2); }
     .sequence { counter-reset: phase; padding: 0; list-style: none; }
-    .sequence li { position: relative; max-width: var(--measure); margin: 0 0 var(--space-4); padding-left: 44px; }
+    .sequence li { position: relative; max-width: var(--measure); margin: 0 0 var(--space-16); padding-left: 44px; }
     .sequence li::before {
       counter-increment: phase;
       content: counter(phase, decimal-leading-zero);
@@ -96,17 +96,17 @@
       color: var(--prism-green);
       font-weight: 700;
     }
-    .notice { margin: var(--space-6) 0; padding: var(--space-4) var(--space-5); border-left: 5px solid var(--af-gold); background: #fff9e8; }
-    dl { display: grid; grid-template-columns: 150px 1fr; gap: var(--space-2) var(--space-5); max-width: 780px; }
+    .notice { margin: var(--space-24) 0; padding: var(--space-16) var(--space-20); border-left: 5px solid var(--af-gold); background: #fff9e8; }
+    dl { display: grid; grid-template-columns: 150px 1fr; gap: var(--space-8) var(--space-20); max-width: 780px; }
     dt { color: var(--af-slate); }
     dd { margin: 0; }
-    footer { margin-top: var(--space-10); padding: var(--space-6) 0 var(--space-8); border-top: 1px solid var(--af-silver); color: var(--af-slate); font-size: var(--text-small); }
+    footer { margin-top: var(--space-64); padding: var(--space-24) 0 var(--space-44); border-top: 1px solid var(--af-silver); color: var(--af-slate); font-size: var(--text-small); }
     footer p { margin: 0; }
     @media (max-width: 680px) {
       .summary-grid, .gate-grid { grid-template-columns: 1fr; }
       dl { grid-template-columns: 1fr; gap: 0; }
-      dd { margin-bottom: var(--space-3); }
-      header { padding-top: var(--space-7); }
+      dd { margin-bottom: var(--space-12); }
+      header { padding-top: var(--space-34); }
     }
     @media print {
       html { background: white; }
@@ -248,7 +248,7 @@
           <dt>Status</dt><dd>Plan only; frozen charter iteration; testing stack not implemented.</dd>
           <dt>Stamp</dt><dd><code>teacherbot@green</code></dd>
           <dt>Timestamp</dt><dd><time datetime="2026-08-01T16:55:49-04:00">2026-08-01 16:55:49 EDT</time></dd>
-          <dt>Sources</dt><dd><a href="../../Algocratic%20Futures%20Design%20System/styles.css">Algocratic Futures Design System stylesheet</a>; <a href="../../the-prism.html">canonical PRISM source</a>; frozen portal-charter contract.</dd>
+          <dt>Sources</dt><dd><a href="../../static/design-system/styles.css">Algocratic Futures Design System stylesheet</a>; <a href="../../the-prism.html">canonical PRISM source</a>; frozen portal-charter contract.</dd>
           <dt>Assumptions</dt><dd>The charter index and named companion pages will exist beside this file; reviewers have filesystem access; modern browser fallbacks can render the document if remote fonts are unavailable; GitHub Actions remains the intended CI environment.</dd>
           <dt>Known limits</dt><dd>No tests or dependencies are installed here. Existing portal navigation and deployment may remain broken. Automated accessibility checks are incomplete by nature. Browser support versions, retention duration, exact manifest, and review ownership remain implementation decisions.</dd>
         </dl>

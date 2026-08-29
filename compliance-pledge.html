@@ -11,7 +11,7 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
-            background-color: var(--terminal-bg, #0a0a0a);
+            background-color: var(--terminal-bg, var(--term-bg));
             border: 2px solid var(--terminal-border, #333);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
             position: relative;
@@ -20,7 +20,7 @@
         
         .pledge-header {
             text-align: center;
-            color: var(--terminal-accent, #ff3030);
+            color: var(--terminal-accent, var(--scr-red));
             margin-bottom: 30px;
             border-bottom: 2px solid var(--terminal-border, #333);
             padding-bottom: 20px;
@@ -42,7 +42,7 @@
         
         .allegiance-pledge {
             background-color: rgba(255, 48, 48, 0.1);
-            border: 1px solid var(--terminal-accent, #ff3030);
+            border: 1px solid var(--terminal-accent, var(--scr-red));
             padding: 30px;
             margin: 30px 0;
             font-size: 1.2rem;
@@ -57,9 +57,9 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--terminal-bg, #0a0a0a);
+            background-color: var(--terminal-bg, var(--term-bg));
             padding: 0 15px;
-            color: var(--terminal-accent, #ff3030);
+            color: var(--terminal-accent, var(--scr-red));
             font-weight: bold;
             font-size: 0.9rem;
         }
@@ -67,19 +67,19 @@
         .pledge-text {
             font-family: 'Times New Roman', serif;
             font-style: italic;
-            color: var(--terminal-primary, #00ff41);
+            color: var(--terminal-primary, var(--term-phosphor));
         }
         
         .call-response-section {
             background-color: rgba(0, 255, 65, 0.05);
-            border: 1px solid var(--terminal-primary, #00ff41);
+            border: 1px solid var(--terminal-primary, var(--term-phosphor));
             padding: 25px;
             margin: 30px 0;
         }
         
         .call-response-header {
             text-align: center;
-            color: var(--terminal-primary, #00ff41);
+            color: var(--terminal-primary, var(--term-phosphor));
             font-size: 1.5rem;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -90,23 +90,23 @@
             margin: 15px 0;
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.3);
-            border-left: 3px solid var(--terminal-primary, #00ff41);
+            border-left: 3px solid var(--terminal-primary, var(--term-phosphor));
         }
         
         .facilitator {
-            color: var(--terminal-accent, #ff3030);
+            color: var(--terminal-accent, var(--scr-red));
             font-weight: bold;
         }
         
         .response {
-            color: var(--terminal-primary, #00ff41);
+            color: var(--terminal-primary, var(--term-phosphor));
             font-weight: bold;
             margin-left: 20px;
         }
         
         .clearance-responses {
             background-color: rgba(255, 255, 0, 0.05);
-            border: 1px solid var(--terminal-warning, #ffff00);
+            border: 1px solid var(--terminal-warning, var(--scr-yellow));
             padding: 25px;
             margin: 30px 0;
         }
@@ -124,14 +124,14 @@
             margin-bottom: 10px;
         }
         
-        .infrared { color: #8b0000; }
-        .red { color: #ff0000; }
-        .orange { color: #ffa500; }
-        .yellow { color: #ffff00; }
-        .green { color: #00ff00; }
-        .blue { color: #0000ff; }
-        .indigo { color: #4b0082; }
-        .violet { color: #8a2be2; }
+        .infrared { color: var(--scr-infrared); }
+        .red { color: var(--scr-red); }
+        .orange { color: var(--scr-orange); }
+        .yellow { color: var(--scr-yellow); }
+        .green { color: var(--term-phosphor); }
+        .blue { color: var(--scr-blue); }
+        .indigo { color: var(--scr-indigo); }
+        .violet { color: var(--scr-violet); }
         .ultraviolet { color: #9966cc; }
         
         .compliance-note {
@@ -139,7 +139,7 @@
             margin: 40px 0;
             padding: 20px;
             background-color: rgba(255, 48, 48, 0.15);
-            border: 2px dashed var(--terminal-accent, #ff3030);
+            border: 2px dashed var(--terminal-accent, var(--scr-red));
             font-style: italic;
         }
         
@@ -148,10 +148,10 @@
             top: 20px;
             right: 20px;
             background-color: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--terminal-primary, #00ff41);
+            border: 1px solid var(--terminal-primary, var(--term-phosphor));
             padding: 10px;
             font-size: 0.8rem;
-            color: var(--terminal-primary, #00ff41);
+            color: var(--terminal-primary, var(--term-phosphor));
         }
         
         /* Audio cue indicator */
@@ -160,7 +160,7 @@
             top: 50%;
             left: 10px;
             transform: translateY(-50%);
-            color: var(--terminal-warning, #ffff00);
+            color: var(--terminal-warning, var(--scr-yellow));
             font-size: 1.5rem;
             animation: pulse 2s infinite;
         }
@@ -179,11 +179,11 @@
         }
         
         .practice-button {
-            background-color: var(--terminal-primary, #00ff41);
-            color: var(--terminal-bg, #0a0a0a);
+            background-color: var(--terminal-primary, var(--term-phosphor));
+            color: var(--terminal-bg, var(--term-bg));
             border: none;
             padding: 15px 30px;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
@@ -192,7 +192,7 @@
         }
         
         .practice-button:hover {
-            background-color: var(--terminal-accent, #ff3030);
+            background-color: var(--terminal-accent, var(--scr-red));
             color: white;
             box-shadow: 0 0 10px currentColor;
         }
@@ -202,10 +202,10 @@
             bottom: 20px;
             left: 20px;
             background-color: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--terminal-warning, #ffff00);
+            border: 1px solid var(--terminal-warning, var(--scr-yellow));
             padding: 10px;
             font-size: 0.8rem;
-            color: var(--terminal-warning, #ffff00);
+            color: var(--terminal-warning, var(--scr-yellow));
         }
         
         /* Screen flicker effect */
@@ -218,23 +218,15 @@
             50% { opacity: 0.96; }
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-bancho">
-<header class="af-system-header" data-portal-function="security and access">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Allegiance Protocol</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">BANCHO · RED</span>
-    <span class="af-system-header__receipt">teacherbot@green · security and access</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Allegiance Protocol"
+        data-clearance="BANCHO · RED"
+        data-receipt="teacherbot@green · security and access"
+        data-function="security and access"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="bancho" data-semantic-clearance="RED">
     <div class="session-tracker">
         <div>SESSION: COMPLIANCE-001</div>

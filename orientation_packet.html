@@ -9,14 +9,12 @@
         /* Orientation packet specific styles */
         :root {
             --primary-color: #10ff10; /* AlgoCratic terminal green */
-            --dark-bg: #0a0a0a;
+            --dark-bg: var(--term-bg);
             --medium-bg: #161616;
             --light-bg: #242424;
-            --accent-color: #ff3030; /* Warning red */
-            --secondary-accent: #ffcc00; /* Alert yellow */
-            --text-color: #f0f0f0;
-            --font-mono: 'Share Tech Mono', monospace;
-            --font-sans: 'Roboto', sans-serif;
+            --accent-color: var(--scr-red); /* Warning red */
+            --secondary-accent: var(--scr-yellow); /* Alert yellow */
+            --text-color: var(--paper);
         }
         
         body {
@@ -167,18 +165,18 @@
         }
         
         .ultraviolet { background-color: #9966cc; }
-        .violet { background-color: #8a2be2; }
-        .indigo { background-color: #4b0082; }
-        .blue { background-color: #0000ff; }
-        .green { background-color: #00ff00; }
-        .yellow { background-color: #ffff00; }
-        .orange { background-color: #ffa500; }
+        .violet { background-color: var(--scr-violet); }
+        .indigo { background-color: var(--scr-indigo); }
+        .blue { background-color: var(--scr-blue); }
+        .green { background-color: var(--term-phosphor); }
+        .yellow { background-color: var(--scr-yellow); }
+        .orange { background-color: var(--scr-orange); }
         .red { 
-            background-color: #ff0000;
-            box-shadow: 0 0 10px #ff0000;
+            background-color: var(--scr-red);
+            box-shadow: 0 0 10px var(--scr-red);
         }
-        .infrared { background-color: #8b0000; }
-        .gray { background-color: #808080; }
+        .infrared { background-color: var(--scr-infrared); }
+        .gray { background-color: var(--text-meta); }
         
         .you-are-here {
             display: inline-block;
@@ -287,7 +285,7 @@
         }
         
         .redacted {
-            background-color: #000;
+            background-color: var(--term-bg);
             color: transparent;
             user-select: none;
             cursor: not-allowed;
@@ -396,24 +394,15 @@
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-fuzzies">
-<header class="af-system-header" data-portal-function="personnel and onboarding">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Orientation Packet</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
-    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Orientation Packet"
+        data-clearance="FUZZIES · YELLOW"
+        data-receipt="teacherbot@green · personnel and onboarding"
+        data-function="personnel and onboarding"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
     <div class="terminal-container">
         <div class="scanlines"></div>

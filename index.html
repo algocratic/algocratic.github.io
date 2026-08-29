@@ -7,10 +7,10 @@
     <style>
         /* Minimal Terminal Aesthetic */
         :root {
-            --bg-primary: #0a0a0a;
-            --text-primary: #00ff41;
-            --text-secondary: #e0e0e0;
-            --text-muted: #808080;
+            --bg-primary: var(--term-bg);
+            --text-primary: var(--term-phosphor);
+            --text-secondary: var(--paper);
+            --text-muted: var(--text-meta);
             --border-color: #333333;
         }
 
@@ -23,7 +23,7 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 16px;
             line-height: 1.6;
             min-height: 100vh;
@@ -172,23 +172,15 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-fuzzies">
-<header class="af-system-header" data-portal-function="personnel and onboarding">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Citizen Entry System</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
-    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Citizen Entry System"
+        data-clearance="FUZZIES · YELLOW"
+        data-receipt="teacherbot@green · personnel and onboarding"
+        data-function="personnel and onboarding"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
     <div class="container">
         <!-- Header -->

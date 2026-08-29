@@ -17,7 +17,7 @@
      colour swap on hover and nothing else.
    ============================================================ */
 
-@import url("design-system/styles.css");
+@import url("shell.css");   /* -> design-system/styles.css */
 
 :root {
   --atlas-panel: color-mix(in srgb, var(--term-grid) 55%, var(--term-bg));

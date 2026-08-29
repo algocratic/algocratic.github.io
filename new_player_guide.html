@@ -4,23 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Player's Guide | AlgoCratic Futures™</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/styles.css">
     <style>
         /* New player guide specific styles */
         :root {
             --primary-color: #10ff10; /* Out-of-character green */
-            --dark-bg: #0a0a0a;
+            --dark-bg: var(--term-bg);
             --medium-bg: #161616;
             --light-bg: #242424;
-            --accent-color: #ff3030; /* Warning red */
-            --secondary-accent: #ffcc00; /* Alert yellow */
-            --text-color: #f0f0f0;
-            --font-mono: 'Share Tech Mono', monospace;
-            --font-sans: 'Roboto', sans-serif;
+            --accent-color: var(--scr-red); /* Warning red */
+            --secondary-accent: var(--scr-yellow); /* Alert yellow */
+            --text-color: var(--paper);
             --highlight: #cc00cc; /* Highlighting for safety mechanisms */
         }
         
@@ -143,23 +137,15 @@
             font-size: 0.9rem;
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-fuzzies">
-<header class="af-system-header" data-portal-function="personnel and onboarding">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">New Operative Guide</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
-    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="New Operative Guide"
+        data-clearance="FUZZIES · YELLOW"
+        data-receipt="teacherbot@green · personnel and onboarding"
+        data-function="personnel and onboarding"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
     <div class="container">
         <div class="header">

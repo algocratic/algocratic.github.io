@@ -17,7 +17,7 @@
         
         .metric-card {
             background-color: rgba(0, 255, 0, 0.05);
-            border: 2px solid #00ff00;
+            border: 2px solid var(--term-phosphor);
             padding: 20px;
             text-align: center;
             position: relative;
@@ -38,8 +38,8 @@
         .metric-value {
             font-size: 3em;
             font-weight: bold;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--term-phosphor);
+            text-shadow: 0 0 10px var(--term-phosphor);
         }
         
         .metric-label {
@@ -57,26 +57,26 @@
         
         .status-optimal {
             background-color: rgba(0, 255, 0, 0.2);
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid var(--term-phosphor);
+            color: var(--term-phosphor);
         }
         
         .status-acceptable {
             background-color: rgba(255, 255, 0, 0.2);
-            border: 1px solid #ffff00;
-            color: #ffff00;
+            border: 1px solid var(--scr-yellow);
+            color: var(--scr-yellow);
         }
         
         .status-concerning {
             background-color: rgba(255, 0, 0, 0.2);
-            border: 1px solid #ff0000;
-            color: #ff0000;
+            border: 1px solid var(--scr-red);
+            color: var(--scr-red);
             animation: pulse-red 1s infinite;
         }
         
         .surveillance-notice {
             background-color: rgba(255, 0, 0, 0.1);
-            border: 2px solid #ff0000;
+            border: 2px solid var(--scr-red);
             padding: 15px;
             margin: 20px 0;
             text-align: center;
@@ -87,12 +87,12 @@
             width: 100%;
             height: 200px;
             background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid #00ff00;
+            border: 1px solid var(--term-phosphor);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #008800;
-            font-family: monospace;
+            font-family: var(--font-mono);
         }
         
         @keyframes scan {
@@ -117,23 +117,15 @@
             margin: 20px 0;
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-memory-core">
-<header class="af-system-header" data-portal-function="records and reporting">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Performance Metrics</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">MEMORY CORE · GREEN</span>
-    <span class="af-system-header__receipt">teacherbot@green · records and reporting</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Performance Metrics"
+        data-clearance="MEMORY CORE · GREEN"
+        data-receipt="teacherbot@green · records and reporting"
+        data-function="records and reporting"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="memory-core" data-semantic-clearance="GREEN">
     <div class="container">
         <header>

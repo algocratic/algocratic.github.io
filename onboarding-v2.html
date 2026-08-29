@@ -9,20 +9,20 @@
     <style>
         /* Enhanced Terminal Aesthetic */
         :root {
-            --bg-primary: #0a0a0a;
-            --text-primary: #00ff41;
-            --text-secondary: #e0e0e0;
-            --text-muted: #808080;
+            --bg-primary: var(--term-bg);
+            --text-primary: var(--term-phosphor);
+            --text-secondary: var(--paper);
+            --text-muted: var(--text-meta);
             --border-color: #333333;
-            --warning-color: #ffff00;
-            --error-color: #ff3030;
-            --success-color: #00ff00;
+            --warning-color: var(--scr-yellow);
+            --error-color: var(--scr-red);
+            --success-color: var(--term-phosphor);
         }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -55,8 +55,8 @@
 
         @keyframes glitch {
             0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
-            25% { text-shadow: -2px 0 #ff3030, 2px 0 #00ffff; }
-            50% { text-shadow: 2px 0 #ff3030, -2px 0 #00ffff; }
+            25% { text-shadow: -2px 0 var(--scr-red), 2px 0 #00ffff; }
+            50% { text-shadow: 2px 0 var(--scr-red), -2px 0 #00ffff; }
             75% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
         }
 
@@ -72,7 +72,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00ff41, #00ffff);
+            background: linear-gradient(90deg, var(--term-phosphor), #00ffff);
             width: 0%;
             transition: width 0.5s ease;
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
@@ -295,7 +295,7 @@
 
         /* Interactive Terminal */
         .terminal-window {
-            background: #000;
+            background: var(--term-bg);
             border: 2px solid #333;
             border-radius: 5px;
             margin: 20px 0;
@@ -326,7 +326,7 @@
 
         .terminal-body {
             padding: 20px;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             color: var(--text-primary);
             min-height: 200px;
         }
@@ -388,23 +388,15 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-fuzzies">
-<header class="af-system-header" data-portal-function="personnel and onboarding">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Initiation Protocol</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
-    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Initiation Protocol"
+        data-clearance="FUZZIES · YELLOW"
+        data-receipt="teacherbot@green · personnel and onboarding"
+        data-function="personnel and onboarding"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
     <div class="scanline"></div>
     

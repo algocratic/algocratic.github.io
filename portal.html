@@ -7,14 +7,14 @@
     <style>
         /* Console/Terminal Aesthetic */
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #00ff41;
-            --text-secondary: #e0e0e0;
-            --text-muted: #808080;
+            --bg-primary: var(--term-bg);
+            --bg-secondary: var(--term-grid);
+            --text-primary: var(--term-phosphor);
+            --text-secondary: var(--paper);
+            --text-muted: var(--text-meta);
             --border-color: #333333;
-            --error-color: #ff0000;
-            --warning-color: #ffff00;
+            --error-color: var(--scr-red);
+            --warning-color: var(--scr-yellow);
         }
 
         * {
@@ -26,7 +26,7 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-size: 14px;
             line-height: 1.6;
             overflow-x: hidden;
@@ -158,12 +158,12 @@
             border: 1px solid;
         }
 
-        .clearance-red { color: #ff0000; border-color: #ff0000; }
-        .clearance-orange { color: #ffa500; border-color: #ffa500; }
-        .clearance-yellow { color: #ffff00; border-color: #ffff00; }
-        .clearance-green { color: #00ff00; border-color: #00ff00; }
-        .clearance-blue { color: #0000ff; border-color: #0000ff; }
-        .clearance-gray { color: #808080; border-color: #808080; }
+        .clearance-red { color: var(--scr-red); border-color: var(--scr-red); }
+        .clearance-orange { color: var(--scr-orange); border-color: var(--scr-orange); }
+        .clearance-yellow { color: var(--scr-yellow); border-color: var(--scr-yellow); }
+        .clearance-green { color: var(--term-phosphor); border-color: var(--term-phosphor); }
+        .clearance-blue { color: var(--scr-blue); border-color: var(--scr-blue); }
+        .clearance-gray { color: var(--text-meta); border-color: var(--text-meta); }
 
         .footer {
             margin-top: 30px;
@@ -230,23 +230,15 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-phreaks">
-<header class="af-system-header" data-portal-function="operations and technical process">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Employee Resource System</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">PHREAKS · BLUE</span>
-    <span class="af-system-header__receipt">teacherbot@green · operations and technical process</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Employee Resource System"
+        data-clearance="PHREAKS · BLUE"
+        data-receipt="teacherbot@green · operations and technical process"
+        data-function="operations and technical process"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="phreaks" data-semantic-clearance="BLUE">
     <div class="binary-bg" id="binaryBg"></div>
 

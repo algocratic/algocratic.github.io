@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A crosswalk between the canonical PRISM progression and the Algocratic Futures Design System, aligning clearance semantics with audience complexity.">
   <title>PRISM × Design System Crosswalk · Algocratic Futures</title>
-  <link rel="stylesheet" href="../../Algocratic%20Futures%20Design%20System/styles.css">
+  <link rel="stylesheet" href="../../static/shell.css">
   <style>
     :root { color-scheme: light; }
     * { box-sizing: border-box; }
@@ -23,7 +23,7 @@
     .page {
       width: min(calc(100% - 32px), 1000px);
       margin: 24px auto;
-      background: var(--surface-page, #fff);
+      background: var(--surface-page, var(--paper));
       border: 1px solid var(--border-hairline, #e2e1dd);
       box-shadow: var(--shadow-card, 0 1px 2px rgba(13, 27, 42, .06));
     }
@@ -48,7 +48,7 @@
       padding: 20px;
       border: 1px solid var(--border-hairline, #e2e1dd);
       border-radius: var(--radius-lg, 12px);
-      background: var(--surface-page, #fff);
+      background: var(--surface-page, var(--paper));
       box-shadow: var(--shadow-card);
     }
     .lens.warm { border-left: 5px solid var(--prism-orange, #e8590c); }
@@ -69,14 +69,14 @@
     .table-wrap { overflow-x: auto; border: 1px solid var(--border-hairline, #e2e1dd); border-radius: var(--radius-md, 9px); }
     table { width: 100%; border-collapse: collapse; min-width: 780px; font-size: 14px; }
     caption { padding: 12px 14px; text-align: left; color: var(--text-secondary, #53565a); font-family: var(--font-mono, monospace); font-size: 11px; }
-    th { padding: 11px 12px; background: var(--af-navy, #16305f); color: #fff; text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    th { padding: 11px 12px; background: var(--af-navy, #16305f); color: var(--paper); text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
     td { padding: 12px; border-top: 1px solid var(--border-hairline, #e2e1dd); vertical-align: top; }
     tbody tr:hover { background: var(--surface-tint, #faf9f6); }
-    .band { display: inline-block; min-width: 104px; padding: 4px 8px; border-radius: var(--radius-sm, 6px); color: #fff; font-weight: 600; font-size: 11px; letter-spacing: .055em; text-align: center; }
+    .band { display: inline-block; min-width: 104px; padding: 4px 8px; border-radius: var(--radius-sm, 6px); color: var(--paper); font-weight: 600; font-size: 11px; letter-spacing: .055em; text-align: center; }
     .band.yellow { color: #3a2d00; }
     .band.edge { border: 2px dashed rgba(255, 255, 255, .72); }
     .rule-list { display: grid; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
-    .rule-list li { position: relative; padding: 14px 16px 14px 46px; border: 1px solid var(--border-hairline, #e2e1dd); border-radius: var(--radius-md, 9px); background: var(--surface-page, #fff); }
+    .rule-list li { position: relative; padding: 14px 16px 14px 46px; border: 1px solid var(--border-hairline, #e2e1dd); border-radius: var(--radius-md, 9px); background: var(--surface-page, var(--paper)); }
     .rule-list li::before { content: attr(data-rule); position: absolute; top: 15px; left: 14px; color: var(--text-secondary, #53565a); font-family: var(--font-mono, monospace); font-size: 11px; }
     .rule-list strong { color: var(--text-heading, #16305f); }
     .decision { padding: 20px 22px; border: 1px solid var(--prism-green, #2f9e44); border-left-width: 5px; border-radius: var(--radius-md, 9px); background: #f4fbf6; }
@@ -97,7 +97,7 @@
       .lens-grid, .receipts { grid-template-columns: 1fr; }
     }
     @media print {
-      body { background: #fff; }
+      body { background: var(--paper); }
       .page { width: 100%; margin: 0; border: 0; box-shadow: none; }
       .prism-rail, .band, .hinge::before, th, footer { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
       section, .lens, .decision, .receipt, tr { break-inside: avoid; }
@@ -108,7 +108,7 @@
   <article class="page">
     <header class="masthead">
       <div class="identity">
-        <img src="../../Algocratic%20Futures%20Design%20System/assets/brand/AF_Logo_Eye.svg" alt="Algocratic Futures">
+        <img src="../../static/design-system/assets/AF_Logo_Eye.svg" alt="Algocratic Futures">
         <div class="stamp">CHARTER ARTIFACT 01<br>teacherbot@green<br>2026-08-01 16:56 EDT</div>
       </div>
       <p class="eyebrow">PRISM cross-reference · audience alignment</p>
@@ -191,8 +191,8 @@
             <h3>Sources reviewed</h3>
             <ul>
               <li><a href="../../the-prism.html">Canonical PRISM framework</a>, Angela Westmoreland, M.Ed., FTCC.</li>
-              <li><a href="../../Algocratic%20Futures%20Design%20System/readme.md">Algocratic Futures Design System README</a>.</li>
-              <li><a href="../../Algocratic%20Futures%20Design%20System/styles.css">Design-system stylesheet entry</a> and token files.</li>
+              <li><a href="../../static/design-system/readme.md">Algocratic Futures Design System README</a>.</li>
+              <li><a href="../../static/design-system/styles.css">Design-system stylesheet entry</a> and token files.</li>
               <li>Design-system brand, color, type, spacing, component, document-kit, and Teacherbot guidance present on disk.</li>
             </ul>
           </article>

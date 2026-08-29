@@ -1,0 +1,327 @@
+/* ============================================================
+   ALGOCRATIC SITE SHELL — v0.2
+   STRATUM=TERMINAL/198X · COLUMN=SCREEN · TOKENS=v0.2
+
+   Replaces static/portal-shell.css, whose first line imported the
+   older "Algocratic Futures Design System" (navy / gold / Michroma).
+   Loading both meant two token systems defining --link,
+   --surface-page and --text-body on the same page, with the older
+   one winning on load order.
+
+   Layering:
+       design-system/styles.css   tokens
+         -> shell.css             site chrome (this file)
+              -> clearance.css    clearance band components
+
+   So the system header and terminal frame have exactly one
+   definition, shared by the clearance tree and the rest of the site.
+   The header markup itself comes from static/chrome.js.
+   ============================================================ */
+
+@import url("design-system/styles.css");
+
+/* -- Compatibility aliases ------------------------------------
+   Names the existing page-level CSS already refers to. Mapping
+   them here means those pages resolve v0.2 values without every
+   inline block having to be rewritten at once. --font-sans has no
+   v0.2 equivalent by that name; v0.2 calls it --font-body. */
+:root {
+  --font-sans: var(--font-body);
+  --text-color: var(--paper);
+  --text-primary: var(--paper);
+  --text-secondary: var(--text-meta);
+  --text-muted: var(--text-meta);
+}
+
+/* -- Band tokens ----------------------------------------------
+   Declared on body, NOT on :root. --band itself is set on body —
+   by [data-clearance] in clearance.css, or by a society class
+   below. A derived token declared on :root resolves var(--band)
+   against :root's value and then inherits that fixed result, so
+   every page would silently get the default band. Declaring them
+   on the same element as --band lets the cascade settle --band
+   first, and the derived values follow the page's actual band. */
+body {
+  --band: var(--term-phosphor);
+  --band-ink: var(--band);
+  --band-knockout: var(--term-bg);
+  --band-wash: color-mix(in srgb, var(--band) 15%, transparent);
+  --band-wash-soft: color-mix(in srgb, var(--band) 10%, transparent);
+  --band-quiet: color-mix(in srgb, var(--band) 45%, var(--term-bg));
+}
+
+/* -- Shell body ----------------------------------------------- */
+body.portal-shell {
+  display: block;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: var(--paper);
+  background: var(--term-bg);
+  font-family: var(--font-mono);
+  line-height: var(--leading-body);
+}
+
+body.portal-shell::before,
+body.portal-shell::after { display: none !important; }
+
+/* -- System header --------------------------------------------
+   Injected by static/chrome.js. Was hand-copied into every page
+   that carried it, in two drifting dialects. */
+.af-system-header {
+  position: relative;
+  z-index: 10000;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--space-18);
+  align-items: center;
+  width: min(var(--measure-guide), calc(100% - var(--space-28)));
+  margin: 0 auto;
+  padding: var(--space-14) var(--space-20);
+  color: var(--paper);
+  background: var(--term-bg);
+  border-bottom: 4px solid var(--band);
+}
+
+.af-system-header__home {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.af-system-header__mark { width: 32px; height: 32px; object-fit: contain; }
+
+.af-system-header__brand {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.af-system-header__home:hover .af-system-header__brand { color: var(--band-ink); }
+
+.af-system-header__label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--text-meta);
+}
+
+.af-system-header__name {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--band-ink);
+}
+
+.af-system-header__meta { text-align: right; }
+
+.af-system-header__clearance {
+  display: inline-block;
+  padding: var(--space-4) var(--space-8);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--paper);
+  border: 1px solid var(--band);
+}
+
+.af-system-header__receipt {
+  display: block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-meta);
+}
+
+/* The noscript fallback each page carries next to the chrome tag. */
+body > noscript a {
+  display: inline-block;
+  padding: var(--space-10) var(--space-16);
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--band-ink);
+}
+
+/* -- Terminal frame -------------------------------------------
+   The original painted a repeating-linear-gradient scanline and a
+   drop shadow; v0.2 permits neither. */
+.af-terminal-frame {
+  position: relative;
+  isolation: isolate;
+  width: min(var(--measure-guide), calc(100% - var(--space-28)));
+  margin: 0 auto var(--space-44);
+  padding: var(--space-24);
+  overflow: hidden;
+  color: var(--paper);
+  background: var(--term-bg);
+  border: 1px solid var(--band);
+  border-top: 0;
+  font-family: var(--font-mono);
+}
+
+.af-terminal-frame > .container,
+.af-terminal-frame > .terminal-container,
+.af-terminal-frame > .page-container,
+.af-terminal-frame > main {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* -- Societies -------------------------------------------------
+   Each underground society kept its own five-value palette. They
+   resolve from the SCREEN column now; the terminal ground is
+   shared, and the society reads as its band accent. */
+body.portal-society-bancho         { --band: var(--scr-red); }
+body.portal-society-memory-core    { --band: var(--scr-green); }
+body.portal-society-phreaks        { --band: var(--scr-blue); }
+body.portal-society-deep-algorithm { --band: var(--scr-violet); }
+body.portal-society-fuzzies        { --band: var(--scr-yellow); }
+
+/* SCREEN values that fail WCAG on the terminal ground get the same
+   lifted derivative used in clearance.css: hue preserved, value
+   raised 50% toward paper. */
+body.portal-society-phreaks,
+body.portal-society-deep-algorithm {
+  --band-ink: color-mix(in srgb, var(--band) 50%, var(--paper));
+  --band-knockout: var(--paper);
+}
+
+@media (max-width: 720px) {
+  .af-system-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    width: min(100% - var(--space-20), var(--measure-guide));
+    padding: var(--space-14);
+  }
+  .af-system-header__meta { text-align: left; }
+
+  .af-terminal-frame {
+    width: min(100% - var(--space-20), var(--measure-guide));
+    margin-bottom: var(--space-20);
+    padding: var(--space-14);
+  }
+}
+
+/* ============================================================
+   LEGACY TOKEN SHIM
+
+   The retired "Algocratic Futures Design System" (navy / gold /
+   Michroma) is gone, but ~440 references to its token names remain
+   across the charter docs, static/the-prism.css, static/styles.css
+   and some underground pages. Rather than rewrite all of them at
+   once, each old name resolves to its nearest v0.2 equivalent here.
+   Those pages therefore render v0.2 values today, and can be moved
+   onto v0.2 names page by page without a flag day.
+
+   The old --space-N scale is NOT aliased. It collided badly with
+   v0.2's: old --space-10 was 72px where v0.2's is 10px, and old
+   --space-4 was 16px where v0.2's is 4px. Those references were
+   rewritten by value instead, so nothing silently shrank.
+   ============================================================ */
+:root {
+  /* Paper and ink */
+  --af-ink: var(--ink);
+  --af-charcoal: var(--ink-soft);
+  --af-navy: var(--ink);
+  --af-navy-deep: var(--ink);
+  --af-slate: var(--gray);
+  --af-silver: var(--hairline);
+  --af-cream: var(--paper-aged);
+  --af-paper: var(--surface-card);
+  --af-paper-2: var(--paper);
+  --af-gold: var(--accent-amber);
+
+  /* PRISM band names -> the v0.2 SCREEN column */
+  --prism-infrared: var(--scr-infrared);
+  --prism-red: var(--scr-red);
+  --prism-orange: var(--scr-orange);
+  --prism-yellow: var(--scr-yellow);
+  --prism-green: var(--scr-green);
+  --prism-blue: var(--scr-blue);
+  --prism-indigo: var(--scr-indigo);
+  --prism-violet: var(--scr-violet);
+  --prism-ultraviolet: var(--scr-uv);
+  --prism-gray: var(--gray);
+  /* Was a nine-stop linear-gradient. v0.2 permits no gradients, so
+     the rail is a flat rule where it is still used. */
+  --prism-rail: var(--hairline);
+  --stripe-rail-h: 8px;
+
+  /* Semantic aliases the old system defined */
+  --text-heading: var(--ink);
+  --text-inverse: var(--paper);
+  --surface-tint: var(--tint);
+  --surface-dark: var(--ink);
+  --border-hairline: var(--hairline);
+  --accent: var(--accent-amber);
+
+  /* Typefaces. The old doc faces (Source Serif 4 / Source Sans 3)
+     are not part of v0.2's five; both resolve to the body face. */
+  --font-doc-serif: var(--font-body);
+  --font-doc-sans: var(--font-body);
+
+  /* Scales v0.2 does not name */
+  --radius-xs: 4px; --radius-sm: 6px; --radius-md: 9px;
+  --radius-lg: 12px; --radius-pill: 999px;
+  --measure: var(--measure-body);
+  --page-max: var(--measure-app);
+  --dash-max: 960px;
+  --text-display: clamp(34px, 6vw, 56px);
+  --text-h1: clamp(26px, 4vw, 36px);
+  --text-h2: 22px;
+  --text-h3: 16px;
+  --text-small: 13px;
+  --text-caption: 11.5px;
+  --leading-tight: 1.15;
+  --leading-caption: 1.4;
+  --track-caps: .13em;
+  --track-display: .02em;
+
+  /* v0.2 reserves shadow for lifting produced badge artifacts. */
+  --shadow-card: none;
+  --shadow-pop: none;
+
+  /* v0.2: "animation: effectively none". Durations resolve to zero
+     so any transition still declared in legacy CSS is inert. */
+  --dur-fast: 0s;
+  --dur-med: 0s;
+  --ease-brand: linear;
+
+  /* Ops dashboard palette -> terminal substrate */
+  --ops-bg: var(--term-bg);
+  --ops-panel: var(--term-grid);
+  --ops-panel-2: var(--term-grid);
+  --ops-line: var(--hairline);
+  --ops-ink: var(--paper);
+  --ops-ink-2: var(--text-meta);
+  --ops-ink-3: var(--text-meta);
+  --ops-series-1: var(--scr-blue);
+  --ops-series-2: var(--scr-orange);
+  --ops-crit: var(--scr-red);
+  --ops-warn: var(--accent-amber);
+  --ops-ok: var(--accent-green);
+  --ops-urgent-wash: color-mix(in srgb, var(--scr-red) 10%, transparent);
+
+  /* Retro stripe set */
+  --stripe-1: var(--scr-infrared);
+  --stripe-2: var(--scr-red);
+  --stripe-3: var(--scr-orange);
+  --stripe-4: var(--scr-green);
+  --stripe-5: var(--scr-blue);
+  --stripe-gap: var(--paper-aged);
+}

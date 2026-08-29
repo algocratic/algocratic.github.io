@@ -16,14 +16,14 @@
         
         .compliance-title {
             font-size: 2.5rem;
-            color: #00ff41;
+            color: var(--term-phosphor);
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
             animation: pulse 2s infinite;
         }
         
         .compliance-subtitle {
-            color: #ff3030;
+            color: var(--scr-red);
             font-size: 1.2rem;
             margin-bottom: 30px;
             text-transform: uppercase;
@@ -60,11 +60,11 @@
         
         .puzzle-hint {
             background-color: rgba(255, 255, 0, 0.1);
-            border: 1px solid #ffff00;
+            border: 1px solid var(--scr-yellow);
             padding: 15px;
             margin: 20px 0;
-            color: #ffff00;
-            font-family: 'Courier New', monospace;
+            color: var(--scr-yellow);
+            font-family: var(--font-mono);
             font-size: 14px;
             animation: flicker 3s infinite;
         }
@@ -76,22 +76,22 @@
         .unlock-section {
             margin: 30px 0;
             padding: 20px;
-            border: 2px solid #ff3030;
+            border: 2px solid var(--scr-red);
             background-color: rgba(255, 48, 48, 0.1);
             position: relative;
         }
         
         .unlock-section h3 {
-            color: #ff3030;
+            color: var(--scr-red);
             margin-bottom: 15px;
             text-transform: uppercase;
         }
         
         .unlock-input {
             background-color: rgba(0, 0, 0, 0.8);
-            border: 2px solid #ff3030;
-            color: #ff3030;
-            font-family: 'Courier New', monospace;
+            border: 2px solid var(--scr-red);
+            color: var(--scr-red);
+            font-family: var(--font-mono);
             font-size: 18px;
             padding: 15px;
             width: 200px;
@@ -103,17 +103,17 @@
         .unlock-input:focus {
             outline: none;
             box-shadow: 0 0 15px rgba(255, 48, 48, 0.5);
-            border-color: #00ff41;
-            color: #00ff41;
+            border-color: var(--term-phosphor);
+            color: var(--term-phosphor);
         }
         
         .unlock-button {
             background-color: transparent;
-            border: 2px solid #ff3030;
-            color: #ff3030;
+            border: 2px solid var(--scr-red);
+            color: var(--scr-red);
             padding: 15px 30px;
             margin-left: 15px;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
@@ -121,8 +121,8 @@
         }
         
         .unlock-button:hover {
-            background-color: #ff3030;
-            color: #000;
+            background-color: var(--scr-red);
+            color: var(--term-bg);
             box-shadow: 0 0 15px rgba(255, 48, 48, 0.7);
         }
         
@@ -136,27 +136,27 @@
             margin: 20px 0;
             padding: 10px 20px;
             background-color: rgba(0, 255, 65, 0.1);
-            border: 1px solid #00ff41;
-            color: #00ff41;
+            border: 1px solid var(--term-phosphor);
+            color: var(--term-phosphor);
             text-decoration: none;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono);
             transition: all 0.3s;
             animation: glow 2s ease-in-out infinite alternate;
         }
         
         .privacy-link:hover {
-            background-color: #00ff41;
-            color: #000;
+            background-color: var(--term-phosphor);
+            color: var(--term-bg);
             transform: scale(1.05);
         }
         
         .success-message {
             display: none;
             background-color: rgba(0, 255, 0, 0.2);
-            border: 2px solid #00ff00;
+            border: 2px solid var(--term-phosphor);
             padding: 20px;
             margin: 20px 0;
-            color: #00ff00;
+            color: var(--term-phosphor);
             text-align: center;
             animation: successPulse 1s ease-out;
         }
@@ -172,8 +172,8 @@
         }
         
         @keyframes glow {
-            from { box-shadow: 0 0 5px #00ff41; }
-            to { box-shadow: 0 0 20px #00ff41; }
+            from { box-shadow: 0 0 5px var(--term-phosphor); }
+            to { box-shadow: 0 0 20px var(--term-phosphor); }
         }
         
         @keyframes successPulse {
@@ -183,29 +183,21 @@
         }
         
         .error-message {
-            color: #ff3030;
-            font-family: 'Courier New', monospace;
+            color: var(--scr-red);
+            font-family: var(--font-mono);
             margin-top: 10px;
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-bancho">
-<header class="af-system-header" data-portal-function="security and access">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Compliance Verification</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">BANCHO · RED</span>
-    <span class="af-system-header__receipt">teacherbot@green · security and access</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Compliance Verification"
+        data-clearance="BANCHO · RED"
+        data-receipt="teacherbot@green · security and access"
+        data-function="security and access"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="bancho" data-semantic-clearance="RED">
     <div class="scanline"></div>
     

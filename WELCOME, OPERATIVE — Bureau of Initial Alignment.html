@@ -107,7 +107,7 @@ h3{margin:0 0 8px;font-size:17px;color:var(--navy)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .card{
-  border:1px solid var(--silver);border-radius:10px;padding:18px;background:#fff;
+  border:1px solid var(--silver);border-radius:10px;padding:18px;background:var(--paper);
 }
 .card p:last-child{margin-bottom:0}
 .label{font:700 11px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gray)}
@@ -116,7 +116,7 @@ h3{margin:0 0 8px;font-size:17px;color:var(--navy)}
   font-family:Georgia,"Times New Roman",serif;font-size:23px;line-height:1.35;
 }
 .big-rule strong{font-family:var(--display);font-size:.8em;letter-spacing:.03em;text-transform:uppercase}
-table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
+table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px}
 th,td{padding:12px 11px;border:1px solid var(--silver);vertical-align:top;text-align:left}
 th{background:var(--navy);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 tr:nth-child(even) td{background:#f7f3e9}
@@ -130,14 +130,14 @@ tr:nth-child(even) td{background:#f7f3e9}
 }
 .time{font:700 12px var(--mono);letter-spacing:.06em;color:var(--navy)}
 .directory{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.office{position:relative;border:1px solid var(--silver);border-radius:10px;padding:18px 18px 18px 23px;background:#fff}
+.office{position:relative;border:1px solid var(--silver);border-radius:10px;padding:18px 18px 18px 23px;background:var(--paper)}
 .office::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--office,var(--gold));border-radius:10px 0 0 10px}
 .office .code{font:700 11px var(--mono);letter-spacing:.08em;color:var(--gray)}
 .office h3{font-size:16px;margin:6px 0 7px}
 .flow{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:10px}
 .node{
   width:min(100%,620px);padding:16px 18px;border:1px solid var(--silver);border-radius:9px;
-  background:#fff;text-align:center;
+  background:var(--paper);text-align:center;
 }
 .node.decision{border:2px solid var(--navy);background:var(--cream)}
 .arrow{font:700 18px var(--mono);color:var(--navy)}
@@ -148,16 +148,16 @@ tr:nth-child(even) td{background:#f7f3e9}
 .field{margin:12px 0}
 .field label{display:block;margin-bottom:6px;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
 .line{height:34px;border-bottom:1px solid var(--navy)}
-.box{min-height:92px;border:1px solid var(--silver);background:#fff}
+.box{min-height:92px;border:1px solid var(--silver);background:var(--paper)}
 .checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px}
-.square{flex:0 0 16px;height:16px;border:1px solid var(--navy);margin-top:2px;background:#fff}
+.square{flex:0 0 16px;height:16px;border:1px solid var(--navy);margin-top:2px;background:var(--paper)}
 .no-appeal{
   margin:20px 0;padding:15px 18px;background:var(--navy);color:var(--cream);
   font:700 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;
 }
 .certificate{
-  margin-top:46px;padding:44px 42px;border:8px double var(--navy);background:#fff;text-align:center;
+  margin-top:46px;padding:44px 42px;border:8px double var(--navy);background:var(--paper);text-align:center;
 }
 .certificate .seal{width:115px;margin:0 auto 18px;color:var(--navy)}
 .certificate h2{font-size:43px}
@@ -203,7 +203,7 @@ tr:nth-child(even) td{background:#f7f3e9}
 }
 .callout{
   margin:22px 0;padding:16px 18px;border:1px dashed var(--navy);
-  background:#fff;font-family:Georgia,"Times New Roman",serif;font-size:18px;
+  background:var(--paper);font-family:Georgia,"Times New Roman",serif;font-size:18px;
 }
 .smallcaps{font-family:var(--display);font-size:.82em;text-transform:uppercase;letter-spacing:.03em}
 @media (max-width:760px){
@@ -217,30 +217,22 @@ tr:nth-child(even) td{background:#f7f3e9}
 }
 @media print{
   @page{size:Letter;margin:0}
-  body{background:#fff}
+  body{background:var(--paper)}
   .screenbar{display:none}
   .packet{width:auto;margin:0;padding:0}
   .page{width:8.5in;height:11in;min-height:11in;margin:0;box-shadow:none}
   .page-inner{min-height:11in}
 }
 </style>
-    <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/shell.css">
 </head>
 <body class="portal-shell portal-society-fuzzies">
-<header class="af-system-header" data-portal-function="personnel and onboarding">
-  <a class="af-system-header__home" href="index.html">
-    <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
-    <span class="af-system-header__brand">Algocratic Futures™</span>
-  </a>
-  <div>
-    <p class="af-system-header__label">System being accessed</p>
-    <p class="af-system-header__name">Bureau of Initial Alignment</p>
-  </div>
-  <div class="af-system-header__meta">
-    <span class="af-system-header__clearance">FUZZIES · YELLOW</span>
-    <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
-  </div>
-</header>
+<script src="static/chrome.js"
+        data-system="Bureau of Initial Alignment"
+        data-clearance="FUZZIES · YELLOW"
+        data-receipt="teacherbot@green · personnel and onboarding"
+        data-function="personnel and onboarding"></script>
+<noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
 <header class="screenbar">
   <div>BIA / CITIZEN ORIENTATION / REV. 08.01.26</div>
