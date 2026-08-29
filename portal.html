@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoCratic Employee Portal v3.51</title>
+    <link rel="icon" type="image/svg+xml" href="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg">
     <style>
         /* Console/Terminal Aesthetic */
         :root {
@@ -386,9 +387,9 @@
         function accessResource(resource) {
             const routes = {
                 'orientation': 'orientation_packet.html',
-                'clearance': 'website/clearance/index.html',
+                'clearance': 'clearance/index.html',
                 'forms': 'forms/index.html',
-                'design': 'website/clearance/gray/index.html'
+                'design': 'clearance/gray/index.html'
             };
             
             if (routes[resource]) {
@@ -405,7 +406,7 @@
                     currentUser.sessionActive = false;
                     localStorage.setItem('algocratic_user', JSON.stringify(currentUser));
                 }
-                window.location.href = 'INDEX.HTM';
+                window.location.href = 'index.html';
             }
         }
 

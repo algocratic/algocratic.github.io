@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GRAY Clearance | Department of Design Compliance</title>
+    <link rel="icon" type="image/svg+xml" href="../../Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg">
     <link rel="stylesheet" href="styles.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,10 +133,13 @@
 
         // Loading animation
         let progress = 0;
-        const loadingInterval = setInterval(() => {
-            progress = (progress + 1) % 100;
-            document.querySelector('.loading-progress').style.width = progress + '%';
-        }, 50);
+        const loadingProgress = document.querySelector('.loading-progress, .compliance-bar');
+        if (loadingProgress) {
+            setInterval(() => {
+                progress = (progress + 1) % 100;
+                loadingProgress.style.width = progress + '%';
+            }, 50);
+        }
     </script>
   </div>
 </body>

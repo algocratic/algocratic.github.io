@@ -3,178 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlgoCratic Futures™ | Learn CS Through Corporate Dystopia</title>
-    <style>
-        /* Minimal Terminal Aesthetic */
-        :root {
-            --bg-primary: #0a0a0a;
-            --text-primary: #00ff41;
-            --text-secondary: #e0e0e0;
-            --text-muted: #808080;
-            --border-color: #333333;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Header */
-        .header {
-            margin-bottom: 60px;
-        }
-
-        .site-title {
-            font-size: 28px;
-            color: var(--text-primary);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* Primary CTA */
-        .primary-cta {
-            margin-bottom: 60px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 20px 40px;
-            background-color: transparent;
-            color: var(--text-primary);
-            text-decoration: none;
-            border: 2px solid var(--text-primary);
-            font-size: 18px;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .cta-button:hover {
-            background-color: var(--text-primary);
-            color: var(--bg-primary);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-        }
-
-        .cta-button::before {
-            content: '→ ';
-            position: absolute;
-            left: 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .cta-button:hover::before {
-            opacity: 1;
-        }
-
-        .cta-description {
-            margin-top: 15px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* Secondary Options */
-        .secondary-options {
-            margin-bottom: 60px;
-        }
-
-        .options-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .option-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 10px 20px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-            display: inline-block;
-        }
-
-        .option-link:hover {
-            color: var(--text-primary);
-            border-color: var(--text-primary);
-        }
-
-        /* Footer */
-        .footer {
-            color: var(--text-muted);
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .footer a {
-            color: var(--text-muted);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Simple scan line effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.05),
-                rgba(0, 0, 0, 0.05) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .site-title {
-                font-size: 22px;
-            }
-            
-            .cta-button {
-                padding: 15px 30px;
-                font-size: 16px;
-            }
-        }
-    </style>
+    <meta name="description" content="Public entry system for Algocratic Futures. Complete compliance, explore the initiation protocol, or continue to the employee portal.">
+    <title>Citizen Entry System | Algocratic Futures™</title>
+    <link rel="icon" type="image/svg+xml" href="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg">
     <link rel="stylesheet" href="static/portal-shell.css">
+    <link rel="stylesheet" href="static/entry-flow.css">
 </head>
-<body class="portal-shell portal-society-fuzzies">
+<body class="portal-shell portal-society-fuzzies entry-flow">
+<a class="skip-link" href="#main-content">Skip to entry menu</a>
+
 <header class="af-system-header" data-portal-function="personnel and onboarding">
   <a class="af-system-header__home" href="index.html">
     <img class="af-system-header__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="">
@@ -189,106 +26,184 @@
     <span class="af-system-header__receipt">teacherbot@green · personnel and onboarding</span>
   </div>
 </header>
+
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="site-title">ALGOCRATIC FUTURES™</h1>
-            <p class="tagline">Learn CS Through Corporate Dystopia</p>
-        </header>
-
-        <!-- Primary CTA -->
-        <section class="primary-cta" id="primary-cta">
-            <a href="compliance-check.html" class="cta-button" id="compliance-cta">
-                BEGIN COMPLIANCE PROCESS
-            </a>
-            <p class="cta-description">
-                All new employees must complete mandatory documentation
-            </p>
-        </section>
-        
-        <!-- Full Site Content (Hidden until compliance) -->
-        <section class="primary-cta" id="full-site-cta" style="display: none;">
-            <a href="clearance/" class="cta-button">
-                START CLEARANCE TRAINING
-            </a>
-            <p class="cta-description">
-                Begin your journey through our algorithmic hierarchy
-            </p>
-        </section>
-
-        <!-- Secondary Options -->
-        <nav class="secondary-options" id="secondary-options">
-            <ul class="options-list">
-                <li><a href="compliance-check.html" class="option-link">Compliance Documentation</a></li>
-                <li><a href="the-algorithm.html" class="option-link">About The Algorithm</a></li>
-                <li><a href="https://github.com/norrisaftcc/algocratic" class="option-link">GitHub Repository</a></li>
-                <li style="margin-top: 20px; font-size: 0.8em; color: #808080;">
-                    <span>Already compliant? </span>
-                    <a href="#" class="option-link" onclick="showFullSite()">Employee Portal</a>
-                </li>
-            </ul>
-        </nav>
-        
-        <!-- Full Navigation (Hidden until compliance) -->
-        <nav class="secondary-options" id="full-navigation" style="display: none;">
-            <ul class="options-list">
-                <li><a href="clearance/" class="option-link">View All Clearance Levels</a></li>
-                <li><a href="compliance-pledge.html" class="option-link">🔻 Allegiance Protocol</a></li>
-                <li><a href="metrics.html" class="option-link">Performance Metrics</a></li>
-                <li><a href="portal.html" class="option-link">Employee Portal</a></li>
-                <li><a href="the-algorithm.html" class="option-link">About The Algorithm</a></li>
-                <li><a href="new_player_guide.html" class="option-link">New Player Guide</a></li>
-                <li><a href="https://github.com/norrisaftcc/algocratic" class="option-link">GitHub Repository</a></li>
-            </ul>
-        </nav>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>MIT+xyzzy | The Algorithm Is Watching</p>
-        </footer>
+  <main class="entry-main entry-home" id="main-content">
+    <div class="crt-toolbar" aria-label="System context">
+      <span class="crt-toolbar__path">/public/entry/citizen-menu</span>
+      <span class="crt-toolbar__state" id="compliance-status" role="status" aria-live="polite">STATUS: COMPLIANCE REQUIRED</span>
     </div>
 
-    <script>
-        // Check compliance status and show appropriate content
-        function checkComplianceStatus() {
-            const isCompliant = localStorage.getItem('eula_complete') === 'true';
-            
-            if (isCompliant) {
-                // Show full site
-                document.getElementById('primary-cta').style.display = 'none';
-                document.getElementById('secondary-options').style.display = 'none';
-                document.getElementById('full-site-cta').style.display = 'block';
-                document.getElementById('full-navigation').style.display = 'block';
-                
-                console.log('%c✅ Compliance verified - Full site access granted', 'color: #00ff00;');
-            } else {
-                // Show compliance funnel
-                console.log('%c⚠️ Compliance required - Redirecting to documentation', 'color: #ffff00;');
-            }
-        }
-        
-        // Allow manual override for returning users
-        function showFullSite() {
-            const confirmed = confirm('Are you sure you have completed the compliance documentation?');
-            if (confirmed) {
-                localStorage.setItem('eula_complete', 'true');
-                localStorage.setItem('eula_completion_time', new Date().toISOString());
-                checkComplianceStatus();
-            }
-        }
-        
-        // Initialize on page load
+    <div class="entry-main-grid">
+      <section class="landing-hero" aria-labelledby="page-title">
+        <img class="landing-hero__mark" src="Algocratic%20Futures%20Design%20System/assets/brand/AF_A_Eye.svg" alt="" aria-hidden="true">
+        <p class="entry-kicker">Public-facing orientation terminal · Yellow clearance</p>
+        <h1 class="site-title" id="page-title">Algocratic Futures™</h1>
+        <p class="tagline">Learn computer science through a corporate dystopia that has been carefully calibrated for your personal growth.</p>
+
+        <dl class="landing-hero__manifest" aria-label="Entry system facts">
+          <div class="manifest-cell">
+            <dt>Purpose</dt>
+            <dd>Initiate learning access</dd>
+          </div>
+          <div class="manifest-cell">
+            <dt>Method</dt>
+            <dd>Pattern recognition</dd>
+          </div>
+          <div class="manifest-cell">
+            <dt>Promise</dt>
+            <dd>The Algorithm provides</dd>
+          </div>
+          <div class="manifest-cell">
+            <dt>Required</dt>
+            <dd>One honest attempt</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="entry-menu-panel" aria-labelledby="entry-menu-title">
+        <div class="menu-heading">
+          <h2 id="entry-menu-title">Citizen Entry Menu</h2>
+          <span class="menu-code">AF-ENTRY-01</span>
+        </div>
+
+        <section class="entry-action-card" id="primary-cta" aria-labelledby="compliance-action-title">
+          <a href="compliance-check.html" class="cta-button" id="compliance-cta">
+            Begin compliance process
+          </a>
+          <p class="cta-description" id="compliance-action-title">Required before protected learning systems become visible.</p>
+        </section>
+
+        <nav class="secondary-options" id="secondary-options" aria-label="Public entry routes">
+          <ul class="options-list">
+            <li>
+              <a href="onboarding-v2.html" class="option-link">
+                <span class="flow-link__copy">
+                  <span class="flow-link__title">Initiation protocol</span>
+                  <span class="flow-link__description">Preview the orientation sequence and pattern assessment.</span>
+                </span>
+                <span class="flow-link__route">onboarding-v2.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="the-algorithm.html" class="option-link">
+                <span class="flow-link__copy">
+                  <span class="flow-link__title">About The Algorithm</span>
+                  <span class="flow-link__description">Read the doctrine behind the educational machinery.</span>
+                </span>
+                <span class="flow-link__route">the-algorithm.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="new_player_guide.html" class="option-link">
+                <span class="flow-link__copy">
+                  <span class="flow-link__title">New player guide</span>
+                  <span class="flow-link__description">Get the practical orientation before you begin.</span>
+                </span>
+                <span class="flow-link__route">new_player_guide.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/norrisaftcc/algocratic" class="option-link">
+                <span class="flow-link__copy">
+                  <span class="flow-link__title">GitHub repository</span>
+                  <span class="flow-link__description">Inspect the open-source machinery yourself.</span>
+                </span>
+                <span class="flow-link__route">external</span>
+              </a>
+            </li>
+          </ul>
+          <p class="manual-access">Already compliant? <button type="button" class="text-link" onclick="showFullSite()">Reveal employee routes</button></p>
+        </nav>
+
+        <section class="entry-action-card" id="full-site-cta" hidden aria-labelledby="clearance-action-title">
+          <a href="clearance/" class="cta-button">
+            Start clearance training
+          </a>
+          <p class="cta-description" id="clearance-action-title">Your compliance record is accepted. Proceed to the competency ladder.</p>
+        </section>
+
+        <nav class="secondary-options" id="full-navigation" hidden aria-label="Employee routes">
+          <ul class="options-list">
+            <li>
+              <a href="clearance/" class="option-link">
+                <span class="flow-link__copy"><span class="flow-link__title">View all clearance levels</span></span>
+                <span class="flow-link__route">clearance/</span>
+              </a>
+            </li>
+            <li>
+              <a href="portal.html" class="option-link">
+                <span class="flow-link__copy"><span class="flow-link__title">Employee portal</span></span>
+                <span class="flow-link__route">portal.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="register.html" class="option-link">
+                <span class="flow-link__copy"><span class="flow-link__title">Account provisioning</span></span>
+                <span class="flow-link__route">register.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="compliance-pledge.html" class="option-link">
+                <span class="flow-link__copy"><span class="flow-link__title">Allegiance protocol</span></span>
+                <span class="flow-link__route">compliance-pledge.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="metrics.html" class="option-link">
+                <span class="flow-link__copy"><span class="flow-link__title">Performance metrics</span></span>
+                <span class="flow-link__route">metrics.html</span>
+              </a>
+            </li>
+            <li>
+              <a href="eula-speedrun.html" class="option-link">
+                <span class="flow-link__copy"><span class="flow-link__title">Speedrun documentation</span></span>
+                <span class="flow-link__route">eula-speedrun.html</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p class="entry-receipt">VERIFIED: local entry route · SOURCE: AF public access manifest · RECORD: MIT+xyzzy</p>
+      <p class="entry-fine">Underwritten by the Office of Strategic Scarcity Operations. Availability subject to algorithmic whim; one satisfaction per operative; emotional autonomy may be requested in writing and will be reviewed after the next fiscal quarter.</p>
+    </footer>
+  </main>
+
+  <script>
+    function checkComplianceStatus() {
+      const isCompliant = localStorage.getItem('eula_complete') === 'true';
+      const primaryCta = document.getElementById('primary-cta');
+      const secondaryOptions = document.getElementById('secondary-options');
+      const fullSiteCta = document.getElementById('full-site-cta');
+      const fullNavigation = document.getElementById('full-navigation');
+      const status = document.getElementById('compliance-status');
+
+      primaryCta.hidden = isCompliant;
+      secondaryOptions.hidden = isCompliant;
+      fullSiteCta.hidden = !isCompliant;
+      fullNavigation.hidden = !isCompliant;
+      status.textContent = isCompliant
+        ? 'STATUS: COMPLIANCE VERIFIED'
+        : 'STATUS: COMPLIANCE REQUIRED';
+    }
+
+    function showFullSite() {
+      const confirmed = confirm('Are you sure you have completed the compliance documentation?');
+      if (confirmed) {
+        localStorage.setItem('eula_complete', 'true');
+        localStorage.setItem('eula_completion_time', new Date().toISOString());
         checkComplianceStatus();
-        
-        // Console easter egg
-        console.log('%c🏢 ALGOCRATIC FUTURES™ SYSTEM', 'color: #00ff41; font-weight: bold; font-size: 16px;');
-        console.log('%cThe Algorithm welcomes you to our corporate ecosystem', 'color: #00ff41;');
-        
-        if (localStorage.getItem('eula_complete') !== 'true') {
-            console.log('%c📋 Compliance documentation required before system access', 'color: #ffff00;');
-        }
-    </script>
-  </div>
+        document.querySelector('#full-site-cta .cta-button').focus();
+      }
+    }
+
+    checkComplianceStatus();
+    console.log('[AF] CITIZEN ENTRY SYSTEM READY');
+    console.log('[AF] Compliance status is stored locally for this browser.');
+  </script>
+</div>
 </body>
 </html>

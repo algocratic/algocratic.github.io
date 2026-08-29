@@ -77,7 +77,7 @@ def xyzzy():
     z = 2  # Variable sequence: x y z z = 7492
     return "A hollow voice says 'fool'"
     # Or maybe:
-    # return "🎮 Nothing happens here... yet."
+    # return "[DELIGHT] Nothing happens here... yet."
     # Or even:
     # unlock_secret_tutorial()
 ```
@@ -138,7 +138,7 @@ def accept_agreement():
     By running this function, you accept the MIT License.
     Also, you become part of the xyzzy conspiracy.
     """
-    print("Welcome to the Open Source Resistance. 🎮")
+    print("Welcome to the Open Source Resistance. [DELIGHT]")
     print("Your spell has been learned: xyzzy")
     print("Your license: MIT+xyzzy")
     return "LET'S LEARN PYTHON (FREELY)!"
