@@ -120,17 +120,15 @@ body.portal-shell::after { display: none !important; }
 
 .af-system-header__home:hover .af-system-header__brand { color: var(--band-ink); }
 
-.af-system-header__label {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-eyebrow);
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: var(--text-meta);
-}
+/* The frame names what it is showing and, when the material is
+   older than the frame, that it is an archive view. Two lines where
+   there used to be four: the SYSTEM BEING ACCESSED label said less
+   than the stratum line does, and the receipt moved to the footer,
+   which is where provenance belongs. */
+.af-system-header__what { min-width: 0; }
 
 .af-system-header__name {
-  margin: var(--space-2) 0 0;
+  margin: 0;
   font-family: var(--font-condensed);
   font-weight: 600;
   font-size: clamp(1rem, 2.2vw, 1.3rem);
@@ -140,29 +138,69 @@ body.portal-shell::after { display: none !important; }
   color: var(--band-ink);
 }
 
-.af-system-header__meta { text-align: right; }
+.af-system-header__stratum {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--text-meta);
+}
 
-.af-system-header__clearance {
-  display: inline-block;
+/* The society chip is a doorway into the underground, not a label.
+   It is the one route from the live site into that tree, so it has
+   to read as clickable. */
+.af-system-header__society {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
   padding: var(--space-4) var(--space-8);
+  border: 1px solid var(--band);
+  color: var(--paper);
   font-family: var(--font-condensed);
   font-weight: 700;
   font-size: var(--text-eyebrow);
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--paper);
-  border: 1px solid var(--band);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.af-system-header__receipt {
-  display: block;
-  margin-top: var(--space-4);
+.af-system-header__society:hover,
+.af-system-header__society:focus-visible {
+  color: var(--band-knockout);
+  background: var(--band);
+}
+
+.af-system-header__society-go { opacity: .7; }
+
+.af-system-header__home:focus-visible,
+.af-system-header__society:focus-visible {
+  outline: 2px solid var(--band-ink);
+  outline-offset: 2px;
+}
+
+/* -- System footer --------------------------------------------
+   Also injected by chrome.js. Pages that already carry a
+   provenance footer get the receipt appended to it instead. */
+.af-system-footer {
+  width: min(var(--measure-guide), calc(100% - var(--space-28)));
+  margin: var(--space-44) auto 0;
+  padding: var(--space-16) var(--space-20) var(--space-28);
+  border-top: 1px solid var(--hairline);
+  box-sizing: border-box;
+}
+
+.af-system-receipt {
+  margin: var(--space-8) 0 0;
   font-family: var(--font-mono);
   font-size: var(--text-eyebrow);
   text-transform: uppercase;
-  letter-spacing: .06em;
+  letter-spacing: .1em;
   color: var(--text-meta);
 }
+
+.af-system-footer .af-system-receipt:first-child { margin-top: 0; }
 
 /* The noscript fallback each page carries next to the chrome tag. */
 body > noscript a {
@@ -225,7 +263,8 @@ body.portal-society-deep-algorithm {
     width: min(100% - var(--space-20), var(--measure-guide));
     padding: var(--space-14);
   }
-  .af-system-header__meta { text-align: left; }
+  /* The chip sits inline under the name rather than stretching. */
+  .af-system-header__society { justify-self: start; }
 
   .af-terminal-frame {
     width: min(100% - var(--space-20), var(--measure-guide));
