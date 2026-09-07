@@ -146,9 +146,6 @@ This comprehensive testing checklist is designed to systematically verify all ex
   - [ ] Loads correctly
   - [ ] Terminal theme applies
   - [ ] Responsive design works
-- [ ] **Terminal UI (static/terminal-ui.css)**:
-  - [ ] Components render correctly
-  - [ ] Animations function
 - [ ] **Individual clearance stylesheets**:
   - [ ] Each clearance level's styles.css loads
   - [ ] Theme consistency maintained

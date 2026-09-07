@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Initiation Protocol | AlgoCratic Futures™</title>
     <link rel="stylesheet" href="static/styles.css">
-    <link rel="stylesheet" href="static/terminal-ui.css">
     <style>
         /* Enhanced Terminal Aesthetic */
         :root {
@@ -49,7 +48,7 @@
         .progress-bar {
             width: 100%;
             height: 4px;
-            background: #222;
+            background: var(--term-grid);
             margin: 30px 0;
             position: relative;
             overflow: hidden;
@@ -82,7 +81,7 @@
         /* Interactive Preview Section */
         .preview-section {
             background: var(--term-grid);
-            border: 1px solid #333;
+            border: 1px solid var(--hairline);
             padding: 30px;
             margin: 30px 0;
             position: relative;
@@ -155,7 +154,7 @@
             margin: 40px auto;
             padding: 30px;
             background: var(--term-bg);
-            border: 2px solid #333;
+            border: 2px solid var(--hairline);
             position: relative;
         }
 
@@ -265,17 +264,19 @@
         /* Interactive Terminal */
         .terminal-window {
             background: var(--term-bg);
-            border: 2px solid #333;
+            border: 2px solid var(--hairline);
             border-radius: 5px;
             margin: 20px 0;
             overflow: hidden;
         }
 
         .terminal-header {
-            background: #222;
+            background: var(--term-grid);
             padding: 5px 10px;
             display: flex;
             align-items: center;
+            /* terminal-ui.css supplied this hairline before it was dropped. */
+            border-bottom: 1px solid var(--hairline);
         }
 
         .terminal-dots {
@@ -444,11 +445,11 @@
         </p>
 
         <!-- Mini EULA with obvious puzzle -->
-        <div style="background: #000; border: 1px solid #333; padding: 20px; margin: 20px 0; max-height: 300px; overflow-y: auto;">
+        <div style="background: var(--term-bg); border: 1px solid var(--hairline); padding: 20px; margin: 20px 0; max-height: 300px; overflow-y: auto;">
             <h3 style="color: var(--term-phosphor);">PRODUCTIVITY AGREEMENT v2.0</h3>
             <p style="margin: 15px 0;">Welcome to AlgoCratic Futures™, where algorithmic efficiency meets human potential. Your intellectual contribution is valued.</p>
             
-            <pre style="color: var(--term-phosphor); background: #111; padding: 10px; margin: 15px 0;">
+            <pre style="color: var(--term-phosphor); background: var(--term-bg); padding: 10px; margin: 15px 0;">
 // Initialization Protocol for New Assets
 function establishAccess() {
     let x = 7;  // Cognitive priority level
@@ -481,7 +482,7 @@ function establishAccess() {
         <!-- Input Section -->
         <div style="margin: 30px 0; text-align: center;">
             <input type="text" id="puzzleInput" maxlength="4" placeholder="Enter 4-digit code" 
-                   style="padding: 15px; font-size: 1.2rem; width: 200px; background: #000; 
+                   style="padding: 15px; font-size: 1.2rem; width: 200px; background: var(--term-bg); 
                           border: 2px solid var(--term-phosphor); color: var(--term-phosphor); text-align: center;">
             <button onclick="checkCode()" style="padding: 15px 30px; margin-left: 10px; 
                     background: transparent; border: 2px solid var(--term-phosphor); color: var(--term-phosphor); 

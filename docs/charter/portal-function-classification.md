@@ -31,7 +31,6 @@ BANCHO guards defined boundaries and handles bounded security incidents. Registr
 
 - `portal.html` — Employee Resource System
 - `kanban.html` — Productivity Compliance Board
-- `docs/terminal-components.html` — Terminal Component Library
 
 PHREAKS maintains shared technical process and clears infrastructure blockers.
 
