@@ -11,61 +11,61 @@
 
 /* === Core Variables === */
 :root {
-    /* Primary brand colors */
-    --primary-dark: #0a0a1a;
-    --primary-medium: #0f0f2d;
-    --primary-light: #1a1a4d;
-    
-    /* Accent colors */
-    --accent-red: #ff3030;
-    --accent-green: #10ff10;
-    --accent-blue: #2080ff;
-    --accent-yellow: #ffcc00;
-    
-    /* Text colors */
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --text-muted: #888888;
-    
-    /* Clearance level colors */
-    --ultraviolet: #9966cc;
-    --violet: #8a2be2;
-    --indigo: #4b0082;
-    --blue: #0000ff;
-    --green: #00ff00;
-    --yellow: #ffff00;
-    --orange: #ffa500;
-    --red: #ff0000;
-    --infrared: #8b0000;
-    --gray: #808080;
-    
+    /* Legacy names kept so no page markup has to change; every value
+       now resolves from the v0.2 token set that shell.css imports.
+
+       Six names this file used to declare are omitted deliberately --
+       --accent-green, --font-mono, --gray, --text-primary,
+       --text-secondary and --text-muted are all v0.2 token names. This
+       file declared them with different values, and whichever
+       stylesheet loaded last won. They are v0.2's to define; usages
+       below point at the correct v0.2 token instead. */
+
+    /* Grounds -> terminal substrate */
+    --primary-dark: var(--term-bg);
+    --primary-medium: var(--term-grid);
+    --primary-light: color-mix(in srgb, var(--term-grid) 55%, var(--scr-indigo));
+
+    /* Accents */
+    --accent-red: var(--scr-red);
+    --accent-yellow: var(--scr-yellow);
+    /* SCREEN blue fails AA on the terminal ground, so it takes the
+       same lift shell.css gives the phreaks band. */
+    --accent-blue: color-mix(in srgb, var(--scr-blue) 50%, var(--paper));
+
+    /* Clearance levels -> the v0.2 SCREEN column */
+    --ultraviolet: var(--scr-uv);
+    --violet: var(--scr-violet);
+    --indigo: var(--scr-indigo);
+    --blue: var(--scr-blue);
+    --green: var(--scr-green);
+    --yellow: var(--scr-yellow);
+    --orange: var(--scr-orange);
+    --red: var(--scr-red);
+    --infrared: var(--scr-infrared);
+
     /* Fonts */
-    --font-primary: 'Roboto', Arial, sans-serif;
-    --font-secondary: 'Roboto Condensed', Arial, sans-serif;
-    --font-mono: 'Roboto Mono', monospace;
-    
-    /* Spacing */
+    --font-primary: var(--font-body);
+    --font-secondary: var(--font-condensed);
+
+    /* Spacing -- rem scale, no v0.2 equivalent by these names */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 2rem;
     --space-xl: 4rem;
-    
+
     /* Borders */
     --border-thin: 1px;
     --border-medium: 2px;
     --border-thick: 4px;
-    
-    /* Shadows */
-    --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.2);
-    --shadow-strong: 0 8px 16px rgba(0, 0, 0, 0.3);
-    
-    /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-medium: 0.3s ease;
-    --transition-slow: 0.5s ease;
-    
+
+    /* Transitions resolve to zero under v0.2 ("animation:
+       effectively none"), so anything still declared is inert. */
+    --transition-fast: var(--dur-fast) linear;
+    --transition-medium: var(--dur-med) linear;
+    --transition-slow: var(--dur-med) linear;
+
     /* Z-indices */
     --z-background: -1;
     --z-default: 1;
@@ -104,7 +104,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-dark) 100%);
+    background: var(--primary-dark);
     opacity: 0.8;
     z-index: var(--z-background);
     pointer-events: none;
@@ -118,13 +118,7 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(10, 10, 26, 0.03) 2px,
-        rgba(10, 10, 26, 0.03) 4px
-    );
+    background: var(--term-bg);
     pointer-events: none;
     z-index: var(--z-background);
 }
@@ -136,7 +130,7 @@ a {
 }
 
 a:hover {
-    color: var(--accent-green);
+    color: var(--term-phosphor);
 }
 
 img {
@@ -153,7 +147,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 2.5rem;
-    background: linear-gradient(90deg, var(--text-primary), var(--accent-blue));
+    background: var(--accent-blue);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -174,12 +168,12 @@ h2::after {
     left: 0;
     width: 100px;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-blue), transparent);
+    background: var(--accent-blue);
 }
 
 h3 {
     font-size: 1.5rem;
-    color: var(--accent-green);
+    color: var(--term-phosphor);
 }
 
 h4 {
@@ -192,7 +186,7 @@ p {
 }
 
 .highlight {
-    color: var(--accent-green);
+    color: var(--term-phosphor);
     font-weight: 700;
 }
 
@@ -206,16 +200,6 @@ p {
 }
 
 /* === Hero Clearance Section === */
-
-@keyframes flash {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
-    to { text-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6); }
-}
 
 /* === Layout === */
 .container {
@@ -239,11 +223,10 @@ p {
 /* === Header & Navigation === */
 header {
     background-color: var(--primary-medium);
-    box-shadow: var(--shadow-medium);
     position: sticky;
     top: 0;
     z-index: var(--z-floating);
-    border-bottom: var(--border-thin) solid rgba(32, 128, 255, 0.3);
+    border-bottom: var(--border-thin) solid color-mix(in srgb, var(--accent-blue) 30%, transparent);
 }
 
 .logo-container {
@@ -309,7 +292,7 @@ nav a::after {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
     transition: width var(--transition-medium);
 }
 
@@ -326,7 +309,7 @@ nav a:hover::after {
 }
 
 .login-btn:hover {
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
     color: var(--primary-dark);
 }
 
@@ -367,7 +350,7 @@ nav a:hover::after {
 }
 
 .btn-primary:hover {
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
     color: var(--primary-dark);
 }
 
@@ -396,14 +379,13 @@ nav a:hover::after {
     background-color: var(--primary-medium);
     border-radius: 8px;
     overflow: hidden;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    transition: transform var(--transition-medium);
     position: relative;
-    border: var(--border-thin) solid rgba(255, 255, 255, 0.1);
+    border: var(--border-thin) solid color-mix(in srgb, var(--paper) 10%, transparent);
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(32, 128, 255, 0.2);
 }
 
 .product-icon {
@@ -412,7 +394,7 @@ nav a:hover::after {
     align-items: center;
     justify-content: center;
     height: 100px;
-    background-color: rgba(32, 128, 255, 0.1);
+    background-color: color-mix(in srgb, var(--accent-blue) 10%, transparent);
 }
 
 .product-info {
@@ -448,7 +430,7 @@ nav a:hover::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 26, 0.8);
+    background-color: color-mix(in srgb, var(--term-bg) 80%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -461,7 +443,7 @@ nav a:hover::after {
 
 .clearance-level {
     padding: var(--space-md);
-    background-color: rgba(10, 10, 26, 0.5);
+    background-color: color-mix(in srgb, var(--term-bg) 50%, transparent);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -478,12 +460,6 @@ nav a:hover::after {
     width: 4px;
 }
 
-@keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
-
 .clearance-level.ultraviolet::before { background-color: var(--ultraviolet); }
 .clearance-level.violet::before { background-color: var(--violet); }
 .clearance-level.indigo::before { background-color: var(--indigo); }
@@ -493,7 +469,6 @@ nav a:hover::after {
 .clearance-level.orange::before { background-color: var(--orange); }
 .clearance-level.red::before { 
     background-color: var(--red);
-    box-shadow: 0 0 10px var(--red);
 }
 .clearance-level.infrared::before { background-color: var(--infrared); }
 .clearance-level.gray::before { background-color: var(--gray); }
@@ -501,11 +476,11 @@ nav a:hover::after {
 /* === About Section === */
 
 .metric {
-    background-color: rgba(10, 10, 26, 0.5);
+    background-color: color-mix(in srgb, var(--term-bg) 50%, transparent);
     padding: var(--space-md);
     border-radius: 8px;
     text-align: center;
-    border: var(--border-thin) solid rgba(32, 128, 255, 0.3);
+    border: var(--border-thin) solid color-mix(in srgb, var(--accent-blue) 30%, transparent);
 }
 
 .metric-value {
@@ -552,8 +527,8 @@ cite {
 .form-group textarea {
     width: 100%;
     padding: var(--space-sm);
-    background-color: rgba(10, 10, 26, 0.5);
-    border: var(--border-thin) solid rgba(32, 128, 255, 0.3);
+    background-color: color-mix(in srgb, var(--term-bg) 50%, transparent);
+    border: var(--border-thin) solid color-mix(in srgb, var(--accent-blue) 30%, transparent);
     color: var(--text-primary);
     border-radius: 4px;
 }
@@ -628,7 +603,7 @@ footer {
 .footer-bottom {
     text-align: center;
     padding-top: var(--space-md);
-    border-top: var(--border-thin) solid rgba(255, 255, 255, 0.1);
+    border-top: var(--border-thin) solid color-mix(in srgb, var(--paper) 10%, transparent);
 }
 
 .copyright {
@@ -650,7 +625,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 26, 0.8);
+    background-color: color-mix(in srgb, var(--term-bg) 80%, transparent);
     z-index: var(--z-modal);
     justify-content: center;
     align-items: center;
@@ -666,13 +641,6 @@ footer {
     max-width: 500px;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--shadow-strong);
-    animation: modal-in 0.3s ease-out forwards;
-}
-
-@keyframes modal-in {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .modal-header {
@@ -690,7 +658,7 @@ footer {
 .modal-footer {
     padding: var(--space-md);
     text-align: center;
-    border-top: var(--border-thin) solid rgba(255, 255, 255, 0.1);
+    border-top: var(--border-thin) solid color-mix(in srgb, var(--paper) 10%, transparent);
 }
 
 .loyalty-adjustment {
@@ -715,7 +683,7 @@ footer {
 }
 
 .modal button:hover {
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
 }
 
 /* === Notification === */
@@ -726,21 +694,14 @@ footer {
     background-color: var(--primary-medium);
     padding: var(--space-sm) var(--space-md);
     border-radius: 4px;
-    box-shadow: var(--shadow-medium);
     display: none;
     align-items: center;
     z-index: var(--z-floating);
-    animation: notification-in 0.3s ease-out forwards;
     border-left: var(--border-thick) solid var(--accent-blue);
 }
 
 .notification.active {
     display: flex;
-}
-
-@keyframes notification-in {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
 }
 
 .notification-icon {
@@ -783,7 +744,7 @@ footer {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: rgba(10, 10, 26, 0.8);
+    background-color: color-mix(in srgb, var(--term-bg) 80%, transparent);
     border: var(--border-thin) solid var(--accent-blue);
     padding: var(--space-sm);
     border-radius: 4px;
@@ -801,7 +762,7 @@ footer {
 
 .loyalty-progress {
     height: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: color-mix(in srgb, var(--paper) 10%, transparent);
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: var(--space-xs);
@@ -810,7 +771,7 @@ footer {
 .loyalty-bar {
     height: 100%;
     width: 75%;
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
     transition: width var(--transition-slow);
 }
 
@@ -826,11 +787,11 @@ footer {
 
 .testimonial {
     padding: var(--space-lg);
-    background-color: rgba(10, 10, 26, 0.5);
+    background-color: color-mix(in srgb, var(--term-bg) 50%, transparent);
     border-radius: 8px;
     margin-bottom: var(--space-lg);
     position: relative;
-    border: var(--border-thin) solid rgba(32, 128, 255, 0.3);
+    border: var(--border-thin) solid color-mix(in srgb, var(--accent-blue) 30%, transparent);
 }
 
 .testimonial::before {
@@ -841,7 +802,7 @@ footer {
     font-size: 5rem;
     line-height: 1;
     font-family: Georgia, serif;
-    color: rgba(32, 128, 255, 0.2);
+    color: color-mix(in srgb, var(--accent-blue) 20%, transparent);
 }
 
 /* === Responsive === */
@@ -900,7 +861,7 @@ footer {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: color-mix(in srgb, var(--term-bg) 80%, transparent);
     backdrop-filter: blur(3px);
 }
 
@@ -912,19 +873,6 @@ footer {
     border-radius: 8px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 0 30px rgba(255, 48, 48, 0.5);
-    animation: modalAppear 0.3s ease-out;
-}
-
-@keyframes modalAppear {
-    from {
-        opacity: 0;
-        transform: translateY(-50px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
 }
 
 .modal-header {
@@ -939,7 +887,6 @@ footer {
     margin: 0;
     font-family: var(--font-mono);
     font-size: 1.2rem;
-    animation: pulse 1s infinite;
 }
 
 .modal-body {
@@ -968,7 +915,7 @@ footer {
 }
 
 .modal-footer button {
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
     color: var(--primary-dark);
     border: none;
     padding: var(--space-md) var(--space-lg);
@@ -998,7 +945,7 @@ footer {
 }
 
 .btn-primary {
-    background-color: var(--accent-green);
+    background-color: var(--term-phosphor);
     color: var(--primary-dark);
 }
 
@@ -1024,7 +971,7 @@ footer {
     top: 20px;
     right: 20px;
     background-color: var(--primary-medium);
-    border: 1px solid var(--accent-green);
+    border: 1px solid var(--term-phosphor);
     border-radius: 4px;
     padding: var(--space-md);
     display: flex;
@@ -1035,7 +982,6 @@ footer {
     transition: all var(--transition-medium);
     z-index: var(--z-floating);
     max-width: 300px;
-    box-shadow: var(--shadow-medium);
 }
 
 .notification.show {
@@ -1057,29 +1003,13 @@ footer {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(16, 255, 16, 0.2);
 }
 
 .product-card.locked:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 48, 48, 0.3);
 }
 
 /* Enhanced Animations */
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
-@keyframes glow {
-    0%, 100% { 
-        text-shadow: 0 0 5px currentColor;
-    }
-    50% { 
-        text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
-    }
-}
-
 /* Loyalty Bar Enhancements */
 .loyalty-bar {
     transition: all var(--transition-medium);
@@ -1094,13 +1024,7 @@ footer {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
+    background: color-mix(in srgb, var(--paper) 30%, transparent);
 }
 
 /* Form Enhancements */
@@ -1111,8 +1035,7 @@ footer {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: var(--accent-green);
-    box-shadow: 0 0 10px rgba(16, 255, 16, 0.3);
+    border-color: var(--term-phosphor);
     outline: none;
 }
 
@@ -1133,7 +1056,7 @@ footer {
 
 .hero-subtitle {
     font-size: 1.1rem;
-    color: var(--accent-green);
+    color: var(--term-phosphor);
     font-style: italic;
     margin-bottom: var(--space-xl);
 }
@@ -1155,7 +1078,7 @@ footer {
 .metric-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--accent-green);
+    color: var(--term-phosphor);
     font-family: var(--font-mono);
 }
 
