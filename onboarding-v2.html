@@ -12,7 +12,7 @@
             --bg-primary: var(--term-bg);
             --text-primary: var(--term-phosphor);
             --text-secondary: var(--paper);
-            --border-color: #333333;
+            --border-color: var(--hairline);
             --warning-color: var(--scr-yellow);
             --error-color: var(--scr-red);
             --success-color: var(--term-phosphor);
@@ -36,27 +36,13 @@
             margin: 0 auto;
             padding: 40px 20px;
             text-align: center;
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .glitch-title {
             font-size: 3rem;
             color: var(--text-primary);
             position: relative;
-            animation: glitch 2s infinite;
             margin-bottom: 20px;
-        }
-
-        @keyframes glitch {
-            0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
-            25% { text-shadow: -2px 0 var(--scr-red), 2px 0 #00ffff; }
-            50% { text-shadow: 2px 0 var(--scr-red), -2px 0 #00ffff; }
-            75% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
         }
 
         /* Progress Tracker */
@@ -71,10 +57,9 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--term-phosphor), #00ffff);
+            background: var(--band);
             width: 0%;
-            transition: width 0.5s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            transition: width var(--dur-med) linear;
         }
 
         .progress-steps {
@@ -86,7 +71,7 @@
         .progress-step {
             font-size: 0.8rem;
             color: var(--text-muted);
-            transition: color 0.3s;
+            transition: color var(--dur-fast) linear;
         }
 
         .progress-step.active {
@@ -96,7 +81,7 @@
 
         /* Interactive Preview Section */
         .preview-section {
-            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05), rgba(0, 0, 0, 0.8));
+            background: var(--term-grid);
             border: 1px solid #333;
             padding: 30px;
             margin: 30px 0;
@@ -111,13 +96,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            background: var(--band-wash-soft);
         }
 
         .preview-title {
@@ -137,18 +116,17 @@
         }
 
         .preview-card {
-            background: rgba(0, 0, 0, 0.8);
+            background: var(--term-bg);
             border: 1px solid var(--text-primary);
             padding: 15px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: background-color var(--dur-fast) linear;
             position: relative;
             overflow: hidden;
         }
 
         .preview-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
             border-color: var(--success-color);
         }
 
@@ -159,7 +137,7 @@
             right: 5px;
             font-size: 0.7rem;
             color: var(--error-color);
-            background: rgba(255, 48, 48, 0.2);
+            background: color-mix(in srgb, var(--scr-red) 20%, transparent);
             padding: 2px 5px;
             border: 1px solid var(--error-color);
         }
@@ -167,7 +145,7 @@
         .preview-card.unlocked::after {
             content: 'PREVIEW';
             color: var(--success-color);
-            background: rgba(0, 255, 0, 0.2);
+            background: var(--band-wash);
             border-color: var(--success-color);
         }
 
@@ -176,7 +154,7 @@
             max-width: 700px;
             margin: 40px auto;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.9);
+            background: var(--term-bg);
             border: 2px solid #333;
             position: relative;
         }
@@ -205,13 +183,12 @@
             padding: 10px 20px;
             cursor: pointer;
             font-family: inherit;
-            transition: all 0.3s;
+            transition: background-color var(--dur-fast) linear;
             margin-right: 10px;
         }
 
         .hint-button:hover {
-            background: rgba(255, 255, 0, 0.1);
-            box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+            background: color-mix(in srgb, var(--scr-yellow) 12%, transparent);
         }
 
         .hint-button:disabled {
@@ -222,27 +199,21 @@
         .hint-display {
             margin-top: 15px;
             padding: 15px;
-            background: rgba(255, 255, 0, 0.05);
+            background: color-mix(in srgb, var(--scr-yellow) 6%, transparent);
             border-left: 3px solid var(--warning-color);
             display: none;
         }
 
         .hint-display.active {
             display: block;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
         }
 
         /* Alternative Path Options */
         .alternative-paths {
             margin-top: 40px;
             padding: 20px;
-            background: rgba(0, 100, 255, 0.05);
-            border: 1px solid #0064ff;
+            background: color-mix(in srgb, var(--scr-blue) 8%, transparent);
+            border: 1px solid var(--scr-blue);
             text-align: center;
         }
 
@@ -251,17 +222,16 @@
             margin: 10px;
             padding: 12px 25px;
             background: transparent;
-            border: 1px solid #0064ff;
-            color: #0064ff;
+            border: 1px solid var(--scr-blue);
+            color: var(--scr-blue);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: background-color var(--dur-fast) linear;
             cursor: pointer;
         }
 
         .skip-option:hover {
-            background: rgba(0, 100, 255, 0.1);
+            background: color-mix(in srgb, var(--scr-blue) 14%, transparent);
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 100, 255, 0.3);
         }
 
         /* Achievement Notifications */
@@ -269,11 +239,11 @@
             position: fixed;
             top: 20px;
             right: -400px;
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 0, 0, 0.9));
+            background: var(--term-grid);
             border: 2px solid var(--success-color);
             padding: 20px;
             min-width: 300px;
-            transition: right 0.5s ease;
+            transition: right var(--dur-med) linear;
             z-index: 1000;
         }
 
@@ -319,9 +289,9 @@
             border-radius: 50%;
         }
 
-        .terminal-dot.red { background: #ff5f56; }
-        .terminal-dot.yellow { background: #ffbd2e; }
-        .terminal-dot.green { background: #27c93f; }
+        .terminal-dot.red { background: var(--scr-red); }
+        .terminal-dot.yellow { background: var(--scr-yellow); }
+        .terminal-dot.green { background: var(--scr-green); }
 
         .terminal-body {
             padding: 20px;
@@ -332,12 +302,6 @@
 
         .terminal-line {
             margin: 5px 0;
-            animation: typingEffect 0.5s steps(40, end);
-        }
-
-        @keyframes typingEffect {
-            from { width: 0; }
-            to { width: 100%; }
         }
 
         .terminal-cursor {
@@ -345,12 +309,6 @@
             width: 10px;
             height: 20px;
             background: var(--text-primary);
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
         }
 
         /* Quick Access Mode */
@@ -358,7 +316,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.95);
+            background: var(--term-bg);
             border: 2px solid var(--text-primary);
             padding: 15px;
             border-radius: 5px;
@@ -368,12 +326,6 @@
 
         .quick-access.active {
             display: block;
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         /* Responsive Design */
@@ -388,8 +340,10 @@
         }
     </style>
     <link rel="stylesheet" href="static/shell.css">
+    <link rel="stylesheet" href="static/entry.css">
 </head>
 <body class="portal-shell portal-society-fuzzies">
+<a class="entry-skip" href="#phase1">Skip to onboarding</a>
 <script src="static/chrome.js"
         data-system="Initiation Protocol"
         data-clearance="FUZZIES · YELLOW"
@@ -397,8 +351,11 @@
         data-function="personnel and onboarding"></script>
 <noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="fuzzies" data-semantic-clearance="YELLOW">
-    <div class="scanline"></div>
-    
+    <div class="entry-toolbar">
+        <span class="entry-toolbar__path">/public/entry/initiation-protocol</span>
+        <span class="entry-toolbar__state" id="phaseState">Clearance: yellow · phase 1 of 4</span>
+    </div>
+
     <!-- Progress Bar -->
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
@@ -413,7 +370,7 @@
     <!-- Phase 1: Welcome Screen with Hook -->
     <div class="welcome-screen" id="phase1">
         <h1 class="glitch-title">WELCOME, PROMISING CANDIDATE</h1>
-        <p style="color: #00ff41; font-size: 1.2rem; margin: 20px 0;">
+        <p style="color: var(--term-phosphor); font-size: 1.2rem; margin: 20px 0;">
             The Algorithm has registered your digital signature and finds it... acceptable.
         </p>
         
@@ -422,23 +379,23 @@
             <h2 class="preview-title">🔍 PREVIEW: Your Productivity Enhancement Menu</h2>
             <div class="preview-grid">
                 <div class="preview-card unlocked" onclick="showPreview('sorting')">
-                    <h3 style="color: #00ff41;">Sorting Algorithms</h3>
+                    <h3 style="color: var(--term-phosphor);">Sorting Algorithms</h3>
                     <p style="font-size: 0.9rem;">Transform chaotic data into harmonious order</p>
-                    <div style="margin-top: 10px; color: #ffff00;">
+                    <div style="margin-top: 10px; color: var(--scr-yellow);">
                         <small>⚡ Real-time efficiency demonstrations</small>
                     </div>
                 </div>
                 <div class="preview-card unlocked" onclick="showPreview('dystopia')">
-                    <h3 style="color: #00ff41;">Corporate Learning Modules</h3>
+                    <h3 style="color: var(--term-phosphor);">Corporate Learning Modules</h3>
                     <p style="font-size: 0.9rem;">Educational content with character</p>
-                    <div style="margin-top: 10px; color: #ffff00;">
+                    <div style="margin-top: 10px; color: var(--scr-yellow);">
                         <small>🎮 Engagement through gamification</small>
                     </div>
                 </div>
                 <div class="preview-card" onclick="showLockedMessage()">
-                    <h3 style="color: #00ff41;">Advanced Protocols</h3>
+                    <h3 style="color: var(--term-phosphor);">Advanced Protocols</h3>
                     <p style="font-size: 0.9rem;">Earned through demonstrated loyalty</p>
-                    <div style="margin-top: 10px; color: #808080;">
+                    <div style="margin-top: 10px; color: var(--text-meta);">
                         <small>🔒 Compliance verification required</small>
                     </div>
                 </div>
@@ -453,12 +410,12 @@
                     <div class="terminal-dot yellow"></div>
                     <div class="terminal-dot green"></div>
                 </div>
-                <span style="margin-left: 10px; color: #808080;">algorithm.exe</span>
+                <span style="margin-left: 10px; color: var(--text-meta);">algorithm.exe</span>
             </div>
             <div class="terminal-body" id="terminalDemo">
                 <div class="terminal-line">$ Evaluating candidate compatibility...</div>
-                <div class="terminal-line" style="color: #ffff00;">⚠ Unregistered neural pattern detected</div>
-                <div class="terminal-line" style="color: #00ff41;">✓ Exceptional learning coefficients identified</div>
+                <div class="terminal-line" style="color: var(--scr-yellow);">⚠ Unregistered neural pattern detected</div>
+                <div class="terminal-line" style="color: var(--term-phosphor);">✓ Exceptional learning coefficients identified</div>
                 <div class="terminal-line">$ Preparing personalized integration sequence...</div>
                 <span class="terminal-cursor"></span>
             </div>
@@ -466,10 +423,10 @@
 
         <!-- Call to Action -->
         <div style="margin-top: 30px;">
-            <button onclick="startJourney()" class="hint-button" style="font-size: 1.2rem; padding: 15px 40px; border-color: #00ff41; color: #00ff41;">
+            <button onclick="startJourney()" class="hint-button" style="font-size: 1.2rem; padding: 15px 40px; border-color: var(--term-phosphor); color: var(--term-phosphor);">
                 INITIATE COMPLIANCE PROTOCOL
             </button>
-            <p style="margin-top: 10px; color: #808080;">
+            <p style="margin-top: 10px; color: var(--text-meta);">
                 <small>⏱ Projected duration: 120 seconds of your valuable existence</small>
             </p>
         </div>
@@ -478,20 +435,20 @@
     <!-- Phase 2: Gamified Puzzle -->
     <div class="puzzle-container" id="phase2" style="display: none;">
         <div class="puzzle-header">
-            <h2 style="color: #00ff41;">PATTERN RECOGNITION ASSESSMENT</h2>
+            <h2 style="color: var(--term-phosphor);">PATTERN RECOGNITION ASSESSMENT</h2>
             <div class="puzzle-timer" id="timer">--:--</div>
         </div>
 
-        <p style="color: #ffff00; margin-bottom: 20px;">
+        <p style="color: var(--scr-yellow); margin-bottom: 20px;">
             The Algorithm must verify your cognitive compatibility. Locate the embedded access sequence within the documentation below.
         </p>
 
         <!-- Mini EULA with obvious puzzle -->
         <div style="background: #000; border: 1px solid #333; padding: 20px; margin: 20px 0; max-height: 300px; overflow-y: auto;">
-            <h3 style="color: #00ff41;">PRODUCTIVITY AGREEMENT v2.0</h3>
+            <h3 style="color: var(--term-phosphor);">PRODUCTIVITY AGREEMENT v2.0</h3>
             <p style="margin: 15px 0;">Welcome to AlgoCratic Futures™, where algorithmic efficiency meets human potential. Your intellectual contribution is valued.</p>
             
-            <pre style="color: #00ff41; background: #111; padding: 10px; margin: 15px 0;">
+            <pre style="color: var(--term-phosphor); background: #111; padding: 10px; margin: 15px 0;">
 // Initialization Protocol for New Assets
 function establishAccess() {
     let x = 7;  // Cognitive priority level
@@ -525,9 +482,9 @@ function establishAccess() {
         <div style="margin: 30px 0; text-align: center;">
             <input type="text" id="puzzleInput" maxlength="4" placeholder="Enter 4-digit code" 
                    style="padding: 15px; font-size: 1.2rem; width: 200px; background: #000; 
-                          border: 2px solid #00ff41; color: #00ff41; text-align: center;">
+                          border: 2px solid var(--term-phosphor); color: var(--term-phosphor); text-align: center;">
             <button onclick="checkCode()" style="padding: 15px 30px; margin-left: 10px; 
-                    background: transparent; border: 2px solid #00ff41; color: #00ff41; 
+                    background: transparent; border: 2px solid var(--term-phosphor); color: var(--term-phosphor); 
                     cursor: pointer; font-size: 1.2rem;">
                 SUBMIT
             </button>
@@ -535,7 +492,7 @@ function establishAccess() {
 
         <!-- Alternative Paths -->
         <div class="alternative-paths">
-            <p style="color: #0064ff; margin-bottom: 15px;">The Algorithm recognizes diverse learning preferences. Select your optimal pathway:</p>
+            <p style="color: var(--scr-blue); margin-bottom: 15px;">The Algorithm recognizes diverse learning preferences. Select your optimal pathway:</p>
             <button class="skip-option" onclick="speedrunMode()">
                 ⚡ VELOCITY OPTIMIZATION
                 <small style="display: block; margin-top: 5px;">For efficiency enthusiasts and returning users</small>
@@ -559,11 +516,16 @@ function establishAccess() {
 
     <!-- Quick Access Panel -->
     <div class="quick-access" id="quickAccess">
-        <h3 style="color: #00ff41; margin-bottom: 10px;">EXPEDITED ACCESS</h3>
-        <p style="font-size: 0.9rem; color: #808080;">Recognized neural pattern detected. Enter bypass code:</p>
+        <h3 style="color: var(--term-phosphor); margin-bottom: 10px;">EXPEDITED ACCESS</h3>
+        <p style="font-size: 0.9rem; color: var(--text-meta);">Recognized neural pattern detected. Enter bypass code:</p>
         <input type="text" id="quickCode" placeholder="7492" style="padding: 5px; margin-top: 5px;">
         <button onclick="quickUnlock()" style="margin-top: 10px; padding: 5px 15px;">Authenticate</button>
     </div>
+
+    <footer class="entry-footer">
+        <p class="entry-receipt">Verified: local onboarding progress · Source: AF initiation protocol v2 · Record: completion flag set on assessment</p>
+        <p class="entry-fine">Underwritten by the Directorate of Enthusiastic Consent. Assessment difficulty is calibrated to your perceived potential, which is calibrated to your assessment difficulty. The Algorithm finds this arrangement satisfactory.</p>
+    </footer>
 
     <script>
         // Game state
@@ -749,11 +711,6 @@ function establishAccess() {
         // Add shake animation
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
         `;
         document.head.appendChild(style);
 
@@ -762,7 +719,7 @@ function establishAccess() {
             const terminal = document.getElementById('terminalDemo');
             const newLine = document.createElement('div');
             newLine.className = 'terminal-line';
-            newLine.style.color = '#00ff41';
+            newLine.style.color = 'var(--term-phosphor)';
             newLine.textContent = '$ Integration protocols activated. Awaiting user confirmation...';
             terminal.insertBefore(newLine, terminal.querySelector('.terminal-cursor'));
         }, 3000);
@@ -778,9 +735,9 @@ function establishAccess() {
         });
 
         // Console easter eggs
-        console.log('%c🎮 ALGOCRATIC FUTURES™ - PRODUCTIVITY DIVISION', 'color: #00ff41; font-size: 20px; font-weight: bold;');
-        console.log('%cDeveloper detected: The pattern recognition challenge is more accessible than it appears. Variables hold secrets.', 'color: #ffff00;');
-        console.log('%cHidden feature: Press ESC for expedited access protocols', 'color: #0064ff;');
+        console.log('%c🎮 ALGOCRATIC FUTURES™ - PRODUCTIVITY DIVISION', 'color: var(--term-phosphor); font-size: 20px; font-weight: bold;');
+        console.log('%cDeveloper detected: The pattern recognition challenge is more accessible than it appears. Variables hold secrets.', 'color: var(--scr-yellow);');
+        console.log('%cHidden feature: Press ESC for expedited access protocols', 'color: var(--scr-blue);');
     </script>
   </div>
 </body>

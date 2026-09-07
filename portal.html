@@ -11,7 +11,7 @@
             --bg-secondary: var(--term-grid);
             --text-primary: var(--term-phosphor);
             --text-secondary: var(--paper);
-            --border-color: #333333;
+            --border-color: var(--hairline);
             --error-color: var(--scr-red);
             --warning-color: var(--scr-yellow);
         }
@@ -37,24 +37,6 @@
         }
 
         /* Scan lines effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 1;
-        }
-
         .terminal-container {
             position: relative;
             z-index: 2;
@@ -62,7 +44,6 @@
             max-width: 800px;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
             padding: 20px;
         }
 
@@ -116,13 +97,13 @@
         .menu-item {
             padding: 8px 0;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background-color var(--dur-fast) linear;
             display: flex;
             align-items: center;
         }
 
         .menu-item:hover {
-            background-color: rgba(0, 255, 65, 0.1);
+            background-color: var(--band-wash);
             padding-left: 10px;
         }
 
@@ -131,7 +112,7 @@
             color: var(--text-primary);
             margin-right: 10px;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity var(--dur-fast) linear;
         }
 
         .menu-item:hover::before {
@@ -180,12 +161,6 @@
             border: 1px solid var(--error-color);
             color: var(--error-color);
             text-align: center;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
         }
 
         /* Cursor animation */
@@ -194,13 +169,7 @@
             width: 10px;
             height: 16px;
             background-color: var(--text-primary);
-            animation: cursor-blink 1s infinite;
             margin-left: 2px;
-        }
-
-        @keyframes cursor-blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
         }
 
         /* Binary decoration */
@@ -212,7 +181,8 @@
             bottom: 0;
             overflow: hidden;
             font-size: 10px;
-            color: rgba(0, 255, 65, 0.05);
+            color: var(--band);
+            opacity: .045;
             white-space: pre;
             pointer-events: none;
             z-index: 0;
@@ -230,8 +200,10 @@
         }
     </style>
     <link rel="stylesheet" href="static/shell.css">
+    <link rel="stylesheet" href="static/entry.css">
 </head>
 <body class="portal-shell portal-society-phreaks">
+<a class="entry-skip" href="#portal-menu">Skip to portal menu</a>
 <script src="static/chrome.js"
         data-system="Employee Resource System"
         data-clearance="PHREAKS · BLUE"
@@ -239,9 +211,14 @@
         data-function="operations and technical process"></script>
 <noscript><a href="index.html">Algocratic Futures™ — home</a></noscript>
 <div class="af-terminal-frame" data-society="phreaks" data-semantic-clearance="BLUE">
-    <div class="binary-bg" id="binaryBg"></div>
+    <div class="entry-binary" id="binaryBg" aria-hidden="true"></div>
 
-    <div class="terminal-container">
+    <div class="entry-toolbar">
+        <span class="entry-toolbar__path">/employee/portal/resource-system</span>
+        <span class="entry-toolbar__state">Clearance: blue · session active</span>
+    </div>
+
+    <div class="terminal-container" id="portal-menu">
         <div class="terminal-header">
             <h1 class="terminal-title">ALGOCRATIC EMPLOYEE PORTAL<span class="cursor"></span></h1>
             <div class="terminal-subtitle">v3.51 - CLASSIFIED ACCESS TERMINAL</div>
@@ -306,11 +283,10 @@
             THE ALGORITHM IS WATCHING YOUR PRODUCTIVITY
         </div>
 
-        <div class="footer">
-            AlgoCratic Futures™ - Where The Algorithm Provides<br>
-            Unauthorized access is punishable by immediate termination<br>
-            <small>Session ID: <span id="sessionId"></span></small>
-        </div>
+        <footer class="entry-footer">
+            <p class="entry-receipt">Verified: local session · Source: AF employee resource system v3.51 · Session ID: <span id="sessionId"></span></p>
+            <p class="entry-fine">AlgoCratic Futures™, where The Algorithm provides. Unauthorized access is punishable by immediate termination; authorized access is punishable by gradual assimilation. Both outcomes are recorded as engagement.</p>
+        </footer>
     </div>
 
     <script>
@@ -369,7 +345,7 @@
             // Set clearance from user data
             setTimeout(() => {
                 document.getElementById('userClearance').textContent = currentUser.clearanceLevel || 'RED';
-                document.getElementById('userClearance').style.color = '#ff0000';
+                document.getElementById('userClearance').style.color = 'var(--scr-red)';
             }, 2000);
         }
 

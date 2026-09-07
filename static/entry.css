@@ -320,3 +320,290 @@
   .entry-panel { padding: var(--space-14); }
   .entry-cta { font-size: var(--text-tier-sub); }
 }
+
+/* ============================================================
+   FORM + DOCUMENT VOCABULARY
+   Shared by the rest of the entry flow: account provisioning,
+   compliance verification, authentication. Same lineage as the
+   components above -- composition from the codex reference,
+   colour and doctrine from v0.2.
+   ============================================================ */
+
+/* -- Page heads ------------------------------------------------ */
+.entry-pagehead { margin-bottom: var(--space-24); }
+.entry-pagehead h1 {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-wrap: balance;
+}
+/* :not() keeps this off the kicker, which carries its own size and
+   colour. A plain `.entry-pagehead p` outranks `.entry-kicker` on
+   specificity and silently swallowed it. */
+.entry-pagehead p:not(.entry-kicker) {
+  margin: 0;
+  max-width: var(--measure-body);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+.entry-section-title {
+  margin: var(--space-28) 0 var(--space-12);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-card-h);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+/* -- Notices --------------------------------------------------
+   Two weights. `note` is the system speaking; `hint` is the page
+   helping. Both take the band, so they read as one family. */
+.entry-note,
+.entry-hint {
+  display: flex;
+  gap: var(--space-12);
+  padding: var(--space-14) var(--space-16);
+  margin: var(--space-18) 0;
+  background: var(--term-grid);
+  border-left: 3px solid var(--band);
+  border-radius: var(--radius-inset);
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+.entry-note__icon {
+  flex: none;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--band-ink);
+}
+.entry-note__title {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.entry-hint { border-left-color: var(--accent-amber); }
+.entry-hint strong { color: var(--paper); }
+
+/* -- Forms ----------------------------------------------------- */
+.entry-form { margin: var(--space-24) 0 0; }
+.entry-field { margin-bottom: var(--space-20); }
+.entry-label {
+  display: block;
+  margin-bottom: var(--space-6);
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-label);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.entry-help {
+  display: block;
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-meta-size);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.45;
+  color: var(--text-meta);
+}
+.entry-input {
+  display: block;
+  width: 100%;
+  padding: var(--space-12) var(--space-14);
+  background: var(--term-bg);
+  color: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+}
+.entry-input::placeholder { color: var(--ops-ink-3); }
+.entry-input:focus-visible {
+  outline: 2px solid var(--band);
+  outline-offset: 1px;
+  border-color: var(--band);
+}
+.entry-input[aria-invalid="true"] { border-color: var(--scr-red); }
+.entry-input--code {
+  max-width: 9ch;
+  text-align: center;
+  font-size: var(--text-card-h);
+  letter-spacing: .3em;
+  text-indent: .3em;
+}
+
+.entry-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-10);
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.entry-check input { margin-top: 3px; flex: none; accent-color: var(--band); }
+
+.entry-error {
+  margin: var(--space-8) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  color: var(--scr-red);
+}
+.entry-error::before { content: "✕ "; font-family: var(--font-mono); }
+
+.entry-submit {
+  display: inline-block;
+  padding: var(--space-14) var(--space-28);
+  background: var(--band);
+  color: var(--band-knockout);
+  border: 2px solid var(--band);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-tier-sub);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.entry-submit:hover:not(:disabled),
+.entry-submit:focus-visible { background: var(--band-knockout); color: var(--band-ink); }
+.entry-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+.entry-formrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-12);
+}
+
+/* -- Status panels --------------------------------------------
+   `loading` and `success` are the same object at two states, so
+   they share their geometry and differ only in the rule colour. */
+.entry-status,
+.entry-success {
+  padding: var(--space-16) var(--space-18);
+  margin: var(--space-20) 0 0;
+  background: var(--term-grid);
+  border-left: 3px solid var(--text-meta);
+  border-radius: var(--radius-inset);
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  color: var(--text-secondary);
+}
+.entry-success { border-left-color: var(--accent-green); }
+.entry-status p,
+.entry-success p { margin: var(--space-6) 0 0; max-width: var(--measure-body); }
+.entry-success__title,
+.entry-status__title {
+  margin: 0;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-card-h);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.entry-success strong { color: var(--band-ink); font-family: var(--font-mono); }
+
+/* -- Document viewport ----------------------------------------
+   The EULA is loaded into this. It scrolls in its own box so the
+   page does not become a mile long. */
+.entry-document {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: var(--space-16) var(--space-18);
+  background: var(--term-bg);
+  border: var(--border-panel);
+  border-radius: var(--radius-panel);
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+.entry-document h1,
+.entry-document h2,
+.entry-document h3 {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin: var(--space-18) 0 var(--space-8);
+}
+.entry-document h1 { font-size: var(--text-card-h); }
+.entry-document h2 { font-size: var(--text-tier-sub); }
+.entry-document h3 { font-size: var(--text-label); }
+.entry-document strong { color: var(--paper); }
+.entry-document pre {
+  overflow-x: auto;
+  padding: var(--space-12) var(--space-14);
+  background: color-mix(in srgb, var(--term-grid) 70%, var(--term-bg));
+  border: var(--border-panel);
+  border-radius: var(--radius-panel);
+}
+.entry-document code {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta-size);
+  color: var(--band-ink);
+}
+
+/* -- Secondary routes ------------------------------------------ */
+.entry-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10) var(--space-20);
+  margin-top: var(--space-24);
+  padding-top: var(--space-16);
+  border-top: var(--border-panel);
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+}
+.entry-secondary a { color: var(--band-ink); text-decoration: underline; }
+.entry-secondary a:hover { color: var(--paper); }
+
+.entry-help-copy {
+  margin-top: var(--space-24);
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  line-height: var(--leading-body);
+  color: var(--text-meta);
+}
+.entry-help-copy p { margin: 0 0 var(--space-6); max-width: var(--measure-body); }
+
+/* -- Decorative binary field ----------------------------------
+   Kept from the original register page. Purely ornamental, so it
+   is hidden from assistive tech and from reduced-motion users
+   who do not need a texture layer. */
+.entry-binary {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  line-height: 1.2;
+  color: var(--band);
+  opacity: .045;
+  white-space: pre-wrap;
+  word-break: break-all;
+  pointer-events: none;
+  user-select: none;
+}
+.entry-main { position: relative; z-index: 1; }
