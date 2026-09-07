@@ -103,7 +103,6 @@ a { text-underline-offset: 0.18em; }
   border: 1px solid var(--af-silver);
   border-radius: 12px;
   background: var(--af-paper);
-  box-shadow: var(--shadow-card);
 }
 
 .assay-main { padding: clamp(24px, 5vw, 48px); }
@@ -225,7 +224,7 @@ section + section { margin-top: 68px; }
 .band--infrared { --band-color: var(--prism-infrared); }
 .band--red { --band-color: var(--prism-red); }
 .band--orange { --band-color: var(--prism-orange); }
-.band--yellow { --band-color: var(--prism-yellow); color: #3a2d00; }
+.band--yellow { --band-color: var(--prism-yellow); color: color-mix(in srgb, var(--ink) 80%, var(--scr-yellow)); }
 .band--green { --band-color: var(--prism-green); }
 .band--blue { --band-color: var(--prism-blue); }
 .band--indigo { --band-color: var(--prism-indigo); }
@@ -238,11 +237,11 @@ section + section { margin-top: 68px; }
 .scope strong { display: block; color: var(--af-ink); }
 .tags, .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
 .tag, .chip { padding: 3px 8px; border-radius: 6px; font-size: 0.7rem; }
-.tag { color: var(--af-slate); background: #f1f0ec; }
-.chip { color: #1f6b85; background: rgba(66, 152, 181, 0.12); }
+.tag { color: var(--af-slate); background: var(--tint); }
+.chip { color: var(--accent-green); background: color-mix(in srgb, var(--accent-green) 12%, transparent); }
 .chevron { color: var(--af-slate); font-size: 1.4rem; }
 .rung[open] .chevron { transform: rotate(90deg); }
-.rung-detail { padding: 18px 22px 22px calc(160px + 18px); color: #26282b; }
+.rung-detail { padding: 18px 22px 22px calc(160px + 18px); color: var(--ink); }
 .rung-detail p { max-width: 72ch; margin: 0; }
 
 .hinge {
@@ -322,7 +321,6 @@ footer {
   .skip-link, .site-head { display: none; }
   .shell { width: 100%; }
   .hero { padding-top: 0; }
-  .assay, .ladder, .source-card { box-shadow: none; }
   .prism-rail, .band, .hinge::before { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .rung, .lens-card, .source-card { break-inside: avoid; }
 }
