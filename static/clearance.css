@@ -600,7 +600,8 @@ h4 {
 .assignment-card .button:hover {
   color: var(--band-ink);
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--band);
+  outline: 1px solid var(--band);
+  outline-offset: -1px;
 }
 
 .completion-tracker { margin: var(--space-16) 0; }
