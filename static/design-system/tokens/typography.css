@@ -8,7 +8,8 @@
 
   /* Observed scale (from produced artifacts, not rounded) */
   --text-eyebrow: 10px;   /* mono, ls .18em, uppercase */
-  --text-meta: 11px;      /* mono, ls .1-.2em */
+  --text-meta-size: 11px; /* mono, ls .1-.2em. NOT --text-meta: that is a
+                             color in colors.css and the names collided. */
   --text-fine: 11.5px;
   --text-label: 12.5px;   /* condensed 600, ls .08em, uppercase */
   --text-body-size: 15px;

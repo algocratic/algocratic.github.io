@@ -29,8 +29,6 @@
   --font-sans: var(--font-body);
   --text-color: var(--paper);
   --text-primary: var(--paper);
-  --text-secondary: var(--text-meta);
-  --text-muted: var(--text-meta);
 }
 
 /* -- Band tokens ----------------------------------------------
@@ -42,6 +40,15 @@
    on the same element as --band lets the cascade settle --band
    first, and the derived values follow the page's actual band. */
 body {
+  /* Terminal substrate. --text-meta is the print grey (#595959), which
+     lands near 3:1 on --term-bg and fails AA. Same lift the society
+     bands use below: hue preserved, value raised 50% toward paper.
+     Declared on body, NOT :root, so the aliases under it resolve
+     against the lifted value instead of the print one. */
+  --text-meta: color-mix(in srgb, var(--gray) 50%, var(--paper));
+  --text-secondary: var(--text-meta);
+  --text-muted: var(--text-meta);
+
   --band: var(--term-phosphor);
   --band-ink: var(--band);
   --band-knockout: var(--term-bg);
@@ -309,7 +316,7 @@ body.portal-society-deep-algorithm {
   --ops-line: var(--hairline);
   --ops-ink: var(--paper);
   --ops-ink-2: var(--text-meta);
-  --ops-ink-3: var(--text-meta);
+  --ops-ink-3: color-mix(in srgb, var(--text-meta) 72%, var(--term-bg));
   --ops-series-1: var(--scr-blue);
   --ops-series-2: var(--scr-orange);
   --ops-crit: var(--scr-red);

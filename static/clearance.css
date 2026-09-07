@@ -72,6 +72,10 @@ body[data-clearance="uv"] {
 
 /* -- Terminal substrate ------------------------------------ */
 body {
+  /* Terminal ground: lift the print grey so meta text clears AA.
+     Matches the derivative used in shell.css. */
+  --text-meta: color-mix(in srgb, var(--gray) 50%, var(--paper));
+
   margin: 0;
   padding: 0;
   font-family: var(--font-mono);

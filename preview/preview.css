@@ -64,7 +64,7 @@ body[data-stratum="comix"]    { background: var(--paper-aged); }
 }
 .af-meta {
   font-family: var(--font-mono);
-  font-size: var(--text-meta);
+  font-size: var(--text-meta-size);
   color: var(--text-meta);
 }
 .af-fine {
