@@ -75,6 +75,16 @@ body.portal-shell::after { display: none !important; }
 /* -- System header --------------------------------------------
    Injected by static/chrome.js. Was hand-copied into every page
    that carried it, in two drifting dialects. */
+/* Both shell components size themselves with calc(100% - Npx) and
+   then add their own padding. Without border-box that padding lands
+   outside the calc and the document scrolls sideways. Pages used to
+   carry their own inline `* { box-sizing: border-box }`, which hid
+   this; the components should not depend on that. Scoped to the
+   shell so page content inside the frame keeps its own box model. */
+.af-system-header,
+.af-system-header > *,
+.af-terminal-frame { box-sizing: border-box; }
+
 .af-system-header {
   position: relative;
   z-index: 10000;

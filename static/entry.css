@@ -1,0 +1,322 @@
+/* ============================================================
+   ALGOCRATIC — PUBLIC ENTRY FLOW COMPONENTS
+   Component layer for the public-facing entry pages, built on
+   design system v0.2 tokens only.
+
+   Ported by hand from codex/restyle-public-entry-flow, which is a
+   design reference and is never merged. That branch is pinned on
+   origin at 47fda02; its own static/entry-flow.css is the source
+   for the composition below. Differences from it, deliberately:
+
+     - colour comes from --band, set by the society class on body,
+       so these components inherit whatever clearance the page is,
+       instead of the hardcoded yellow the reference used;
+     - no gradients, no box-shadows, no @keyframes. v0.2 permits
+       none of the three, and the reference used all three;
+     - the shared system header stays with chrome.js. The reference
+       hand-rolled a per-page header; ours is injected.
+
+   Terminal substrate. Assumes shell.css is loaded first.
+   ============================================================ */
+
+/* -- Reset -----------------------------------------------------
+   There is no global border-box reset in the token bundle, and the
+   page this replaces carried its own inline one. Scoped to the
+   entry components so it cannot reach anything else. */
+.entry-main,
+.entry-main *,
+.entry-skip { box-sizing: border-box; }
+
+/* -- Skip link ------------------------------------------------- */
+/* Clipped rather than pushed off-canvas: a -9999px offset widens the
+   document and gives the page a horizontal scrollbar. */
+.entry-skip {
+  position: absolute;
+  top: var(--space-8);
+  left: var(--space-8);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  z-index: 10;
+  padding: var(--space-8) var(--space-14);
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--band-knockout);
+  background: var(--band);
+  text-decoration: none;
+}
+.entry-skip:focus {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+}
+
+/* -- Shell ----------------------------------------------------- */
+.entry-main {
+  width: min(100% - var(--space-20), var(--measure-guide));
+  margin: 0 auto;
+  padding: var(--space-24) 0 var(--space-64);
+}
+
+/* -- Context strip --------------------------------------------
+   Path on the left, live status on the right. The status text is
+   rewritten by the compliance check, so it is a live region. */
+.entry-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-8) var(--space-20);
+  padding-bottom: var(--space-10);
+  border-bottom: var(--border-panel);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.entry-toolbar__path { color: var(--text-meta); }
+.entry-toolbar__state { color: var(--band-ink); font-weight: 500; }
+
+/* -- Two-column body ------------------------------------------- */
+.entry-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: var(--space-44);
+  align-items: start;
+  margin-top: var(--space-34);
+}
+
+/* -- Hero ------------------------------------------------------ */
+.entry-kicker {
+  margin: 0 0 var(--space-12);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--band-ink);
+}
+.entry-title {
+  margin: 0 0 var(--space-16);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: .01em;
+  color: var(--paper);
+  text-wrap: balance;
+}
+.entry-lede {
+  margin: 0 0 var(--space-24);
+  max-width: 38ch;
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+
+/* -- Manifest -------------------------------------------------
+   Four facts about the system, as a definition list. Answers
+   "what is this" before the visitor commits to the CTA. */
+.entry-manifest {
+  display: grid;
+  /* Four facts, always two up. auto-fit left one cell alone in a
+     row at some widths. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8);
+  margin: 0;
+}
+.entry-manifest > div {
+  padding: var(--space-10) var(--space-12);
+  background: var(--term-grid);
+  border-left: 3px solid var(--band);
+  border-radius: var(--radius-inset);
+}
+.entry-manifest dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+.entry-manifest dd {
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  color: var(--paper);
+}
+
+/* -- Menu panel ------------------------------------------------ */
+.entry-panel {
+  padding: var(--space-20);
+  background: color-mix(in srgb, var(--term-grid) 55%, var(--term-bg));
+  border: var(--border-panel);
+  border-radius: var(--radius-card);
+}
+.entry-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-8) var(--space-16);
+  padding-bottom: var(--space-10);
+  border-bottom: var(--border-panel);
+  margin-bottom: var(--space-18);
+}
+.entry-panel__head h2 {
+  margin: 0;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-card-h);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.entry-panel__code {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .12em;
+  color: var(--text-meta);
+}
+
+/* -- Primary action -------------------------------------------
+   Filled, not outlined. One unmistakable action per page. */
+.entry-action { margin-bottom: var(--space-18); }
+.entry-cta {
+  display: block;
+  padding: var(--space-16) var(--space-20);
+  background: var(--band);
+  color: var(--band-knockout);
+  border: 2px solid var(--band);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--text-card-h);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+}
+.entry-cta:hover,
+.entry-cta:focus-visible {
+  background: var(--band-knockout);
+  color: var(--band-ink);
+}
+.entry-action__note {
+  margin: var(--space-10) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  color: var(--text-meta);
+  text-align: center;
+}
+
+/* -- Route cards ----------------------------------------------
+   Each destination carries a line saying what it is. The bare
+   link list this replaces told a first-time visitor nothing. */
+.entry-routes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-8);
+}
+.entry-route {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-12);
+  padding: var(--space-12) var(--space-14);
+  background: var(--term-grid);
+  border: 1px solid transparent;
+  border-radius: var(--radius-card);
+  text-decoration: none;
+}
+.entry-route:hover,
+.entry-route:focus-visible { border-color: var(--band); }
+.entry-route__title {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-fine);
+  color: var(--paper);
+}
+.entry-route__desc {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-meta-size);
+  line-height: 1.45;
+  color: var(--text-meta);
+}
+.entry-route__route {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .06em;
+  color: var(--ops-ink-3);
+}
+
+/* -- Reveal ---------------------------------------------------- */
+.entry-reveal {
+  margin: var(--space-16) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--text-fine);
+  color: var(--text-meta);
+  text-align: center;
+}
+.entry-textlink {
+  font: inherit;
+  color: var(--band-ink);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* -- Footer ---------------------------------------------------
+   Provenance line reads as bureaucratic metadata and doubles as
+   the real licence. The fine print is in character. */
+.entry-footer {
+  margin-top: var(--space-44);
+  padding-top: var(--space-16);
+  border-top: var(--border-panel);
+}
+.entry-receipt {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+.entry-fine {
+  margin: var(--space-10) 0 0;
+  max-width: var(--measure-body);
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: var(--text-meta-size);
+  line-height: 1.6;
+  color: var(--ops-ink-3);
+}
+
+/* -- Focus ----------------------------------------------------- */
+.entry-main a:focus-visible,
+.entry-main button:focus-visible,
+.entry-skip:focus-visible {
+  outline: 2px solid var(--band);
+  outline-offset: 2px;
+}
+
+/* -- Responsive ------------------------------------------------ */
+@media (max-width: 860px) {
+  .entry-grid { grid-template-columns: 1fr; gap: var(--space-34); }
+}
+@media (max-width: 600px) {
+  .entry-panel { padding: var(--space-14); }
+  .entry-cta { font-size: var(--text-tier-sub); }
+}
