@@ -25,7 +25,17 @@
 body.algorithm-page {
   margin: 0;
   color: var(--algorithm-ink);
-  background: var(--algorithm-paper);
+  /* DELIBERATE EXCEPTION to v0.2's "no gradients" rule, kept at the
+     owner's decision: this bloom is the Algorithm page's signature and
+     the page reads as flat without it. Scoped to this one selector on
+     this one page -- do not treat it as licence elsewhere, and do not
+     let a doctrine sweep strip it silently. The stop is derived from
+     the palette rather than the #1d5130 literal it replaced. */
+  background:
+    radial-gradient(circle at 85% 0%,
+      color-mix(in srgb, var(--algorithm-line) 55%, var(--algorithm-paper)) 0,
+      transparent 31rem),
+    var(--algorithm-paper);
   font-family: var(--font-sans);
 }
 
